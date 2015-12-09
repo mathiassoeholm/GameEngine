@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include "GLLog.h"
 
 using namespace std;
 
@@ -30,6 +31,8 @@ GLuint createShader(const string& fileName, GLenum shaderType)
 
 int main(int argc, char **argv)
 {
+	restartGlLog();
+
 	if (!glfwInit())
 	{
 		cerr << "Could not start GLFW3!" << endl;
@@ -130,8 +133,6 @@ int main(int argc, char **argv)
 		glUseProgram(shader_program);
 		glBindVertexArray(vao1);
 		glDrawArrays(GL_QUADS, 0, 8);
-
-		
 
 		// update other events like input handling 
 		glfwPollEvents();

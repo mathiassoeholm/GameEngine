@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLLog.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -71,6 +72,9 @@
     <None Include="Shaders\FragmentShader.frag" />
     <None Include="Shaders\FragmentShader2.frag" />
     <None Include="Shaders\VertexShader.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GLLog.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
