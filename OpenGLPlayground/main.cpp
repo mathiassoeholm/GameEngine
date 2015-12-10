@@ -51,6 +51,14 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+
+	// Disables all functionality that has been flagged for removal in future OpenGL versions
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
 	GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", nullptr, nullptr);
 	if (!window)
 	{
@@ -70,20 +78,16 @@ int main(int argc, char **argv)
 	glDepthFunc(GL_LESS);
 
 	float quad_points[] = {
-		-1, -1, 0,
 		-1, 0, 0,
+		-1, -1, 0,
 		0, 0, 0,
-		0, -1, 0,
-		0, 0, 0,
-		0, 1, 0,
-		1, 1, 0,
-		1, 0, 0,
+		0, -1, 0
 	};
 
 	GLuint vbo1 = 0;
 	glGenBuffers(1, &vbo1);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo1);
-	glBufferData(GL_ARRAY_BUFFER, 24 * sizeof (float), quad_points, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof (float), quad_points, GL_STATIC_DRAW);
 
 	GLuint vao1 = 0;
 	glGenVertexArrays(1, &vao1);
@@ -129,14 +133,10 @@ int main(int argc, char **argv)
 	glAttachShader(shader_program_2, vertexShader);
 	glLinkProgram(shader_program_2);
 
-	glPointSize(25);
-	glLineWidth(20);
-
 	while (!glfwWindowShouldClose(window))
 	{
 		// wipe the drawing surface clear
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearColor(0.6f, 0.6f, 0.8f, 1.0f);
 
 		glUseProgram(shader_program_2);
 		glBindVertexArray(vao2);
@@ -144,7 +144,7 @@ int main(int argc, char **argv)
 
 		glUseProgram(shader_program);
 		glBindVertexArray(vao1);
-		glDrawArrays(GL_QUADS, 0, 8);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		// update other events like input handling 
 		glfwPollEvents();
