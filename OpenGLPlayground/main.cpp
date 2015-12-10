@@ -8,6 +8,14 @@
 
 using namespace std;
 
+void glfwErrorCallback(int error, const char* description)
+{
+	stringstream log;
+	log << "GLFW ERROR: code " << error << " msg: " << description << endl;
+
+	glLogErr(log.str());
+}
+
 string readFile(const string& fileName)
 {
 	ifstream t(fileName);
@@ -32,6 +40,10 @@ GLuint createShader(const string& fileName, GLenum shaderType)
 int main(int argc, char **argv)
 {
 	restartGlLog();
+
+	glLog("Starting GLFW:", glfwGetVersionString());
+
+	glfwSetErrorCallback(glfwErrorCallback);
 
 	if (!glfwInit())
 	{
