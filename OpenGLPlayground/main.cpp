@@ -5,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "GLLog.h"
+#include "ShaderUtil.h"
 
 using namespace std;
 
@@ -17,27 +18,6 @@ void glfwErrorCallback(int error, const char* description)
 	log << "GLFW ERROR: code " << error << " msg: " << description << endl;
 
 	glLogErr(log.str());
-}
-
-string readFile(const string& fileName)
-{
-	ifstream t(fileName);
-	stringstream buffer;
-	buffer << t.rdbuf();
-
-	return buffer.str();
-}
-
-GLuint createShader(const string& fileName, GLenum shaderType)
-{
-	string fileString = readFile(fileName);
-	const char* source = fileString.c_str();
-
-	GLuint i = glCreateShader(shaderType);
-	glShaderSource(i, 1, &source, nullptr);
-	glCompileShader(i);
-
-	return i;
 }
 
 void onWindowSizeChanged(GLFWwindow* window, int width, int height)
@@ -169,19 +149,8 @@ int main(int argc, char **argv)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo2);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
-	GLuint vertexShader = createShader("Shaders/VertexShader.vert", GL_VERTEX_SHADER);
-	GLuint fragmentShader1 = createShader("Shaders/FragmentShader.frag", GL_FRAGMENT_SHADER);
-	GLuint fragmentShader2 = createShader("Shaders/FragmentShader2.frag", GL_FRAGMENT_SHADER);
-
-	GLuint shader_program = glCreateProgram();
-	glAttachShader(shader_program, fragmentShader1);
-	glAttachShader(shader_program, vertexShader);
-	glLinkProgram(shader_program);
-
-	GLuint shader_program_2 = glCreateProgram();
-	glAttachShader(shader_program_2, fragmentShader2);
-	glAttachShader(shader_program_2, vertexShader);
-	glLinkProgram(shader_program_2);
+	GLuint shader_program = ShaderUtil::createProgram("Shaders/VertexShader.vert", "Shaders/FragmentShader.frag");
+	GLuint shader_program_2 = ShaderUtil::createProgram("Shaders/VertexShader.vert", "Shaders/FragmentShader2.frag");
 
 	while (!glfwWindowShouldClose(window))
 	{
