@@ -37,6 +37,20 @@ GLuint createShader(const string& fileName, GLenum shaderType)
 	return i;
 }
 
+GLFWwindow* createWindow(bool fullScreen)
+{
+	if (fullScreen)
+	{
+		GLFWmonitor* mon = glfwGetPrimaryMonitor();
+		const GLFWvidmode* vmode = glfwGetVideoMode(mon);
+		return glfwCreateWindow(vmode->width, vmode->height, "OpenGL Playground", mon, nullptr);
+	}
+	else
+	{
+		return glfwCreateWindow(640, 480, "OpenGL Playground", nullptr, nullptr);
+	}
+}
+
 int main(int argc, char **argv)
 {
 	restartGlLog();
@@ -62,7 +76,7 @@ int main(int argc, char **argv)
 	// Anti-Aliasing
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	GLFWwindow* window = glfwCreateWindow(640, 480, "Hello Triangle", nullptr, nullptr);
+	GLFWwindow* window = createWindow(true);
 	if (!window)
 	{
 		cerr << "Could not open window with GLFW3!" << endl;
@@ -154,6 +168,11 @@ int main(int argc, char **argv)
 
 		// put the stuff we've been drawing onto the display
 		glfwSwapBuffers(window);
+
+		if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
+		{
+			glfwSetWindowShouldClose(window, 1);
+		}
 	}
 
 	glfwTerminate();
