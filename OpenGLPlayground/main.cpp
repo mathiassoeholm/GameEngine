@@ -8,6 +8,9 @@
 
 using namespace std;
 
+int currentWindowWidth = 640;
+int currentWindowHeight = 480;
+
 void glfwErrorCallback(int error, const char* description)
 {
 	stringstream log;
@@ -37,6 +40,12 @@ GLuint createShader(const string& fileName, GLenum shaderType)
 	return i;
 }
 
+void onWindowSizeChanged(GLFWwindow* window, int width, int height)
+{
+	currentWindowWidth = width;
+	currentWindowHeight = height;
+}
+
 GLFWwindow* createWindow(bool fullScreen)
 {
 	if (fullScreen)
@@ -47,7 +56,9 @@ GLFWwindow* createWindow(bool fullScreen)
 	}
 	else
 	{
-		return glfwCreateWindow(640, 480, "OpenGL Playground", nullptr, nullptr);
+		GLFWwindow* window = glfwCreateWindow(currentWindowWidth, currentWindowHeight, "OpenGL Playground", nullptr, nullptr);
+		glfwSetWindowSizeCallback(window, onWindowSizeChanged);
+		return window;
 	}
 }
 
@@ -76,7 +87,7 @@ int main(int argc, char **argv)
 	// Anti-Aliasing
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
-	GLFWwindow* window = createWindow(true);
+	GLFWwindow* window = createWindow(false);
 	if (!window)
 	{
 		cerr << "Could not open window with GLFW3!" << endl;
@@ -154,6 +165,7 @@ int main(int argc, char **argv)
 	{
 		// wipe the drawing surface clear
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glViewport(0, 0, currentWindowWidth, currentWindowHeight);
 
 		glUseProgram(shader_program_2);
 		glBindVertexArray(vao2);
