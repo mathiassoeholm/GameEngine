@@ -6,4 +6,5 @@
 namespace ShaderUtil
 {
 	GLuint createProgram(const std::string& vertexShader, const std::string& fragmentShader);
+	void printAll(GLuint programIndex);
 }
