@@ -62,6 +62,26 @@ GLFWwindow* createWindow(bool fullScreen)
 	}
 }
 
+void updateFpsCounter(GLFWwindow* window)
+{
+	static double previousSeconds = glfwGetTime();
+	static int frameCount;
+	double currentSeconds = glfwGetTime();
+	double elapsedSeconds = currentSeconds - previousSeconds;
+
+	if (elapsedSeconds > 0.25)
+	{
+		previousSeconds = currentSeconds;
+		auto fps = static_cast<double>(frameCount) / elapsedSeconds;
+		char tmp[128];
+		sprintf_s(tmp, "opengl @ fps: %.2f", fps);
+		glfwSetWindowTitle(window, tmp);
+		frameCount = 0;
+	}
+
+	frameCount++;
+}
+
 int main(int argc, char **argv)
 {
 	restartGlLog();
@@ -165,6 +185,8 @@ int main(int argc, char **argv)
 
 	while (!glfwWindowShouldClose(window))
 	{
+		updateFpsCounter(window);
+
 		// wipe the drawing surface clear
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, currentWindowWidth, currentWindowHeight);
