@@ -99,6 +99,8 @@ int main(int argc, char **argv)
 	glewExperimental = GL_TRUE;
 	glewInit();
 
+	glLogParams();
+
 	cout << glGetString(GL_RENDERER) << endl;
 	cout << glGetString(GL_VERSION) << endl;
 

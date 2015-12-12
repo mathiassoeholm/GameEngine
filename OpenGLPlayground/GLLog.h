@@ -52,3 +52,5 @@ void glLogErr(T m, Args... args)
 	glLogErr(m);
 	glLogErr(args...);
 }
+
+void glLogParams();
