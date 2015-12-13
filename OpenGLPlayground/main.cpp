@@ -105,9 +105,9 @@ int main(int argc, char **argv)
 	cout << glGetString(GL_RENDERER) << endl;
 	cout << glGetString(GL_VERSION) << endl;
 
-	glEnable(GL_CULL_FACE);
+	/*glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	glFrontFace(GL_CCW);
+	glFrontFace(GL_CCW);*/
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
