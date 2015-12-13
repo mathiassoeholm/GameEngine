@@ -1,8 +1,8 @@
 #include "WarpTest.h"
 #include "ShaderUtil.h"
 
-static const int pointsX = 5;
-static const int pointsY = 10;
+static const int pointsX = 10;
+static const int pointsY = 8;
 
 void WarpTest::initWarpTest()
 {
@@ -18,8 +18,8 @@ void WarpTest::initWarpTest()
 			float yPos = static_cast<float>(y) / (pointsY - 1);
 
 			// x, y, z
-			vertices[index++] = xPos;
-			vertices[index++] = yPos;
+			vertices[index++] = (xPos - 0.5f) * 2;
+			vertices[index++] = (yPos - 0.5f) * 2;
 			vertices[index++] = 0;
 		}
 	}
