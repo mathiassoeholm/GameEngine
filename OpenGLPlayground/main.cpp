@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 	GLuint shader_program = ShaderUtil::createProgram("Shaders/VertexShader.vert", "Shaders/FragmentShader.frag");
 	GLuint shader_program_2 = ShaderUtil::createProgram("Shaders/VertexShader.vert", "Shaders/FragmentShader2.frag");
 
-	ShaderUtil::printAll(shader_program_2);
+	ShaderUtil::printAll(shader_program);
 
 	WarpTest warp;
 	warp.initWarpTest();
