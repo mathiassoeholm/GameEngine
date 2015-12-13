@@ -67,6 +67,7 @@
     <ClCompile Include="GLLog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
+    <ClCompile Include="WarpTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -77,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="GLLog.h" />
     <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="WarpTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

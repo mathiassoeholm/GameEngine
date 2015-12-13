@@ -6,6 +6,7 @@
 #include <sstream>
 #include "GLLog.h"
 #include "ShaderUtil.h"
+#include "WarpTest.h"
 
 using namespace std;
 
@@ -157,6 +158,9 @@ int main(int argc, char **argv)
 
 	ShaderUtil::printAll(shader_program_2);
 
+	WarpTest warp;
+	warp.initWarpTest();
+
 	while (!glfwWindowShouldClose(window))
 	{
 		updateFpsCounter(window);
@@ -165,13 +169,15 @@ int main(int argc, char **argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, currentWindowWidth, currentWindowHeight);
 
-		glUseProgram(shader_program_2);
+	/*	glUseProgram(shader_program_2);
 		glBindVertexArray(vao2);
 		glDrawArrays(GL_LINE_LOOP, 0, 8);
 
 		glUseProgram(shader_program);
 		glBindVertexArray(vao1);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);*/
+
+		warp.runWarpTest();
 
 		// update other events like input handling 
 		glfwPollEvents();
