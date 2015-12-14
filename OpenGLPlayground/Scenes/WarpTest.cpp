@@ -1,7 +1,7 @@
 #include "WarpTest.h"
-#include "ShaderUtil.h"
+#include "../ShaderUtil.h"
 #define STB_IMAGE_IMPLEMENTATION
-#include "stb_image.h"
+#include "../stb_image.h"
 #include <GLFW/glfw3.h>
 
 static const int pointsX = 10;

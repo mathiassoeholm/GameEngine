@@ -24,7 +24,7 @@
     <ClCompile Include="ShaderUtil.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WarpTest.cpp">
+    <ClCompile Include="Scenes\WarpTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,14 +41,14 @@
     <ClInclude Include="ShaderUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WarpTest.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IScene.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\WarpTest.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

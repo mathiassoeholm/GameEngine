@@ -6,7 +6,7 @@
 #include <sstream>
 #include "GLLog.h"
 #include "ShaderUtil.h"
-#include "WarpTest.h"
+#include "Scenes/WarpTest.h"
 
 using namespace std;
 

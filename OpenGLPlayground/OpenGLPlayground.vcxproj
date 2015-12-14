@@ -67,7 +67,7 @@
     <ClCompile Include="GLLog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
-    <ClCompile Include="WarpTest.cpp" />
+    <ClCompile Include="Scenes\WarpTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -80,7 +80,7 @@
     <ClInclude Include="IScene.h" />
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="stb_image.h" />
-    <ClInclude Include="WarpTest.h" />
+    <ClInclude Include="Scenes\WarpTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

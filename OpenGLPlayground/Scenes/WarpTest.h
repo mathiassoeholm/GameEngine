@@ -1,6 +1,6 @@
 #pragma once
 #include <gl/glew.h>
-#include "IScene.h"
+#include "../IScene.h"
 
 class WarpTest : public IScene
 {
