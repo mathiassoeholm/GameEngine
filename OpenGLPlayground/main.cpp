@@ -158,8 +158,8 @@ int main(int argc, char **argv)
 
 	ShaderUtil::printAll(shader_program);
 
-	WarpTest warp;
-	warp.initWarpTest();
+	IScene* scene = new WarpTest();
+	scene->init();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -177,7 +177,7 @@ int main(int argc, char **argv)
 		glBindVertexArray(vao1);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);*/
 
-		warp.runWarpTest();
+		scene->run();
 
 		// update other events like input handling 
 		glfwPollEvents();
@@ -190,6 +190,8 @@ int main(int argc, char **argv)
 			glfwSetWindowShouldClose(window, 1);
 		}
 	}
+
+	delete scene;
 
 	glfwTerminate();
 

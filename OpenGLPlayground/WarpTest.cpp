@@ -7,7 +7,7 @@
 static const int pointsX = 10;
 static const int pointsY = 8;
 
-void WarpTest::initWarpTest()
+void WarpTest::init()
 {
 	float vertices[pointsX * pointsY * 5];
 
@@ -101,7 +101,7 @@ void WarpTest::initWarpTest()
 	
 }
 
-void WarpTest::runWarpTest()
+void WarpTest::run()
 {
 	glUseProgram(_shaderProgram);
 

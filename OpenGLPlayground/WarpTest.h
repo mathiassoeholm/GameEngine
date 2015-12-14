@@ -1,13 +1,13 @@
 #pragma once
 #include <gl/glew.h>
+#include "IScene.h"
 
-class WarpTest
+class WarpTest : public IScene
 {
-private:
 	GLuint _vao;
 	GLuint _shaderProgram;
 	GLuint _timeLocation;
 public:
-	void initWarpTest();
-	void runWarpTest();
+	void init() override;
+	void run() override;
 };
