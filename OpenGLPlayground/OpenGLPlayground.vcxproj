@@ -68,12 +68,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="Scenes\WarpTest.cpp" />
+    <ClCompile Include="Scenes\WorldScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Shaders\FragmentShader.frag" />
     <None Include="Shaders\FragmentShader2.frag" />
     <None Include="Shaders\VertexShader.vert" />
+    <None Include="Shaders\WorldVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLLog.h" />
@@ -81,6 +83,7 @@
     <ClInclude Include="ShaderUtil.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Scenes\WarpTest.h" />
+    <ClInclude Include="Scenes\WorldScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

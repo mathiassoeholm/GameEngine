@@ -2,7 +2,7 @@
 #include <gl/glew.h>
 #include <fstream>
 #include <sstream>
-#include "GLLog.h""
+#include "GLLog.h"
 
 namespace ShaderUtil
 {

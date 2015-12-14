@@ -27,12 +27,16 @@
     <ClCompile Include="Scenes\WarpTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Scenes\WorldScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Shaders\FragmentShader.frag" />
     <None Include="Shaders\FragmentShader2.frag" />
     <None Include="Shaders\VertexShader.vert" />
+    <None Include="Shaders\WorldVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLLog.h">
@@ -49,6 +53,9 @@
     </ClInclude>
     <ClInclude Include="Scenes\WarpTest.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\WorldScene.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
