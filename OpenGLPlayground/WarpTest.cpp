@@ -2,6 +2,7 @@
 #include "ShaderUtil.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
+#include <GLFW/glfw3.h>
 
 static const int pointsX = 10;
 static const int pointsY = 8;
@@ -27,12 +28,8 @@ void WarpTest::initWarpTest()
 			// tex coords
 			vertices[index++] = xPos;
 			vertices[index++] = 1-yPos;
-
-			std::cout << xPos << " ";
 		}
 	}
-
-	std::cout << std::endl;
 
 	unsigned short indeces[(pointsX-1)*(pointsY-1)*6];
 	index = 0;
@@ -58,6 +55,7 @@ void WarpTest::initWarpTest()
 	}
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/VertexShader.vert", "Shaders/FragmentShader.frag");
+	_timeLocation = glGetUniformLocation(_shaderProgram, "time");
 
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
@@ -106,6 +104,12 @@ void WarpTest::initWarpTest()
 void WarpTest::runWarpTest()
 {
 	glUseProgram(_shaderProgram);
+
+	if (_timeLocation != -1)
+	{
+		glUniform1f(_timeLocation, static_cast<float>(glfwGetTime()));
+	}
+
 	glBindVertexArray(_vao);
 	glDrawElements(GL_TRIANGLES, (pointsX - 1)*(pointsY - 1) * 6, GL_UNSIGNED_SHORT, nullptr);
 	glBindVertexArray(0);
