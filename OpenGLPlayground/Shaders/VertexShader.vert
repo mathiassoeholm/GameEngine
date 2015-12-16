@@ -8,9 +8,9 @@ out vec2 tex;
 void main ()
 {
 	gl_Position = vec4 (
-		vp.x + (cos(time * 2) * 0.14)*(1-abs(vp.x)),
-		vp.y,// + (sin(time * 2) * 0.1)*(1-abs(vp.y)),
+		vp.x + (cos(time * 13) * 0.14)*(1-abs(vp.x)),
+		vp.y * 1.1 + sin(time * 13) * 0.1,
 		vp.z,
 		1.0);
-	tex = texcoord;
+	tex = vec2(texcoord.x, texcoord.y);
 }
