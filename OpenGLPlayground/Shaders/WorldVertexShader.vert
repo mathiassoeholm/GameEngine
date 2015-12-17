@@ -3,6 +3,7 @@
 in vec3 vp;
 
 uniform mat4 modelMatrix;
+uniform mat4 viewMatrix;
 
 void main ()
 {
@@ -10,5 +11,5 @@ void main ()
 		vp.x,
 		vp.y,
 		vp.z,
-		1.0) * modelMatrix;
+		1.0) * modelMatrix * viewMatrix;
 }

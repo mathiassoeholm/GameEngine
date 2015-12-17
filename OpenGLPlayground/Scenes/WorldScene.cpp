@@ -3,6 +3,30 @@
 #include "../ShaderUtil.h"
 #include "glm/ext.hpp"
 
+glm::mat4 lookAt(glm::vec3 camPos, glm::vec3 targetPos, glm::vec3 up)
+{
+	glm::mat4 translation(
+		1, 0, 0, camPos[0],
+		0, 1, 0, camPos[1],
+		0, 0, 1, camPos[2],
+		0, 0, 0, 1
+		);
+
+	auto d = targetPos - camPos;
+	auto forward = d / sqrt(d[0]*d[0] + d[1]*d[1] + d[2]*d[2]);
+
+	auto right = cross(forward, up);
+
+	glm::mat4 rotation(
+		right[0], right[1], right[2], 0,
+		up[0], up[1], up[2], 0,
+		-forward[0], -forward[1], -forward[2], 0,
+		0, 0, 0, 1
+		);
+
+	return rotation*translation;
+}
+
 void WorldScene::init()
 {
 	float points[] =
@@ -33,11 +57,31 @@ void WorldScene::init()
 		0, 0, 0, 1
 		);
 
+	auto viewMatrix = lookAt(
+		glm::vec3(0, 0, -2),
+		glm::vec3(0.5, 0, 0),
+		glm::vec3(0, 1, 0)
+		);
+
+	auto CameraMatrix = glm::lookAt(
+			glm::vec3(0, 0, -1),
+			glm::vec3(0.5, 0, 0),
+			glm::vec3(0, 1, 0)
+		);
+
+	std::cout << to_string(viewMatrix) << std::endl;
+
 	glUseProgram(_shaderProgram);
 	GLuint modelMatrixLoc = glGetUniformLocation(_shaderProgram, "modelMatrix");
 	if (modelMatrixLoc != -1)
 	{
 		glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, value_ptr(_modelMatrix));
+	}
+
+	GLuint viewMatrixLoc = glGetUniformLocation(_shaderProgram, "viewMatrix");
+	if (modelMatrixLoc != -1)
+	{
+		glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, value_ptr(CameraMatrix));
 	}
 }
 
