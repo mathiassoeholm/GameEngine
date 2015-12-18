@@ -2,32 +2,39 @@
 #include <gl/glew.h>
 #include "../ShaderUtil.h"
 #include "glm/ext.hpp"
+#include "../GLLog.h"
+
+#define ONE_DEG_IN_RAD 0.017444444
+
+float camSpeed = 1.0f;
+float camYawSpeed = 10.0f;
+float camPos[] = {0.0f, 0.0f, 2.0f};
+float camYaw = 0.0f;
 
 glm::mat4 lookAt(glm::vec3 camPos, glm::vec3 targetPos, glm::vec3 up)
 {
 	glm::mat4 translation(
-		1, 0, 0, camPos[0],
-		0, 1, 0, camPos[1],
-		0, 0, 1, camPos[2],
+		1, 0, 0, -camPos[0],
+		0, 1, 0, -camPos[1],
+		0, 0, 1, -camPos[2],
 		0, 0, 0, 1
 		);
 
-	auto d = targetPos - camPos;
-	auto forward = d / sqrt(d[0]*d[0] + d[1]*d[1] + d[2]*d[2]);
+	auto forward = normalize(targetPos - camPos);
 
-	auto right = cross(forward, up);
+	auto right = normalize(cross(forward, up));
 
 	glm::mat4 rotation(
-		right[0], right[1], right[2], 0,
-		up[0], up[1], up[2], 0,
-		-forward[0], -forward[1], -forward[2], 0,
+		right[0], up[0], -forward[0], 0,
+		right[1], up[1], -forward[1], 0,
+		right[2], up[2], -forward[2], 0,
 		0, 0, 0, 1
 		);
 
-	return rotation*translation;
+	return transpose(rotation*translation);
 }
 
-void WorldScene::init()
+void WorldScene::init(int screenWidth, int screenHeight)
 {
 	float points[] =
 	{
@@ -51,37 +58,52 @@ void WorldScene::init()
 	_shaderProgram = ShaderUtil::createProgram("Shaders/WorldVertexShader.vert", "Shaders/FragmentShader2.frag");
 
 	_modelMatrix = glm::mat4(
-		1, 0, 0, 0.5,
+		1, 0, 0, 0,
 		0, 1, 0, 0,
 		0, 0, 1, 0,
 		0, 0, 0, 1
 		);
 
-	auto viewMatrix = lookAt(
-		glm::vec3(0, 0, -2),
-		glm::vec3(0.5, 0, 0),
-		glm::vec3(0, 1, 0)
-		);
+	auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
+	auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
+	auto viewMatrix = R*T;
 
-	auto CameraMatrix = glm::lookAt(
-			glm::vec3(0, 0, -1),
-			glm::vec3(0.5, 0, 0),
-			glm::vec3(0, 1, 0)
-		);
 
-	std::cout << to_string(viewMatrix) << std::endl;
+	float near = 0.1f;
+	float far = 100.0f;
+	float fov = 67.0f * ONE_DEG_IN_RAD;
+	float aspect = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
 
-	glUseProgram(_shaderProgram);
-	GLuint modelMatrixLoc = glGetUniformLocation(_shaderProgram, "modelMatrix");
-	if (modelMatrixLoc != -1)
+	float range = tan(fov * 0.5f) * near;
+	float Sx = (2.0f * near) / (range * aspect + range * aspect);
+	float Sy = near / range;
+	float Sz = -(far + near) / (far - near);
+	float Pz = -(2.0f * far * near) / (far - near);
+
+	float projMat[] = {
+		Sx, 0, 0, 0,
+		0, Sy, 0, 0,
+		0, 0, Sz, -1,
+		0, 0, Pz, 0
+	};
+
+	//glUseProgram(_shaderProgram);
+	//GLuint modelMatrixLoc = glGetUniformLocation(_shaderProgram, "modelMat");
+	//if (modelMatrixLoc != -1)
+	//{
+	//	glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, value_ptr(_modelMatrix));
+	//}
+
+	GLuint viewMatrixLoc = glGetUniformLocation(_shaderProgram, "viewMat");
+	if (viewMatrixLoc != -1)
 	{
-		glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, value_ptr(_modelMatrix));
+		glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, value_ptr(viewMatrix));
 	}
 
-	GLuint viewMatrixLoc = glGetUniformLocation(_shaderProgram, "viewMatrix");
-	if (modelMatrixLoc != -1)
+	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
+	if (projMatrixLoc != -1)
 	{
-		glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, value_ptr(CameraMatrix));
+		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, projMat);
 	}
 }
 

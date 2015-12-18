@@ -7,7 +7,7 @@
 static const int pointsX = 10;
 static const int pointsY = 8;
 
-void WarpTest::init()
+void WarpTest::init(int screenWidth, int screenHeight)
 {
 	float vertices[pointsX * pointsY * 5];
 

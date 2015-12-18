@@ -8,6 +8,6 @@ class WarpTest : public IScene
 	GLuint _shaderProgram;
 	GLuint _timeLocation;
 public:
-	void init() override;
+	void init(int screenWidth, int screenHeight) override;
 	void run() override;
 };

@@ -114,7 +114,7 @@ int main(int argc, char **argv)
 	glDepthFunc(GL_LESS);
 
 	IScene* scene = new WorldScene();
-	scene->init();
+	scene->init(currentWindowWidth, currentWindowHeight);
 
 	while (!glfwWindowShouldClose(window))
 	{

@@ -2,14 +2,9 @@
 
 in vec3 vp;
 
-uniform mat4 modelMatrix;
-uniform mat4 viewMatrix;
+uniform mat4 viewMat, projMat;
 
 void main ()
 {
-	gl_Position = vec4(
-		vp.x,
-		vp.y,
-		vp.z,
-		1.0) * modelMatrix * viewMatrix;
+	gl_Position = projMat * viewMat * vec4(vp, 1.0);
 }

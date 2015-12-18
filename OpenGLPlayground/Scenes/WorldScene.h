@@ -9,7 +9,7 @@ class WorldScene : public IScene
 	GLuint _shaderProgram;
 	glm::mat4 _modelMatrix;
 public:
-	void init() override;
+	void init(int screenWidth, int screenHeight) override;
 	void run() override;
 };
 
