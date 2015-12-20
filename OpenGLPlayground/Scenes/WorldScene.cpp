@@ -68,11 +68,11 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
 	auto viewMatrix = R*T;
 
-
 	float near = 0.1f;
 	float far = 100.0f;
 	float fov = 67.0f * ONE_DEG_IN_RAD;
 	float aspect = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
+
 
 	float range = tan(fov * 0.5f) * near;
 	float Sx = (2.0f * near) / (range * aspect + range * aspect);
@@ -87,7 +87,7 @@ void WorldScene::init(int screenWidth, int screenHeight)
 		0, 0, Pz, 0
 	};
 
-	//glUseProgram(_shaderProgram);
+	glUseProgram(_shaderProgram);
 	//GLuint modelMatrixLoc = glGetUniformLocation(_shaderProgram, "modelMat");
 	//if (modelMatrixLoc != -1)
 	//{
