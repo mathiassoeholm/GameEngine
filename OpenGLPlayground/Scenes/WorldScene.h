@@ -8,10 +8,18 @@ class WorldScene : public IScene
 {
 	GLuint _vao;
 	GLuint _shaderProgram;
-	glm::mat4 _modelMatrix;
 	GLuint _viewMatLocation;
+	float * _projMatrix;
 public:
+	~WorldScene();
+	WorldScene() : _projMatrix{ nullptr }
+	{
+
+	};
 	void init(int screenWidth, int screenHeight) override;
 	void run(GLFWwindow* window) override;
+	void onWindowSizeChanged(int width, int height) override;
+private:
+	void calculateProjMatrix(int width, int height);
 };
 

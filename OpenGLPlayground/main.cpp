@@ -13,6 +13,7 @@ using namespace std;
 
 int currentWindowWidth = 640;
 int currentWindowHeight = 480;
+IScene* scene;
 
 void glfwErrorCallback(int error, const char* description)
 {
@@ -26,6 +27,7 @@ void onWindowSizeChanged(GLFWwindow* window, int width, int height)
 {
 	currentWindowWidth = width;
 	currentWindowHeight = height;
+	scene->onWindowSizeChanged(width, height);
 }
 
 GLFWwindow* createWindow(bool fullScreen)
@@ -113,7 +115,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	IScene* scene = new WorldScene();
+	scene = new WorldScene();
 	scene->init(currentWindowWidth, currentWindowHeight);
 
 	while (!glfwWindowShouldClose(window))

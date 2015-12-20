@@ -58,42 +58,14 @@ void WorldScene::init(int screenWidth, int screenHeight)
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/WorldVertexShader.vert", "Shaders/FragmentShader2.frag");
 
-	_modelMatrix = glm::mat4(
-		1, 0, 0, 0,
-		0, 1, 0, 0,
-		0, 0, 1, 0,
-		0, 0, 0, 1
-		);
-
 	auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
 	auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
 	auto viewMatrix = R*T;
 
-	float near = 0.1f;
-	float far = 100.0f;
-	float fov = 67.0f * ONE_DEG_IN_RAD;
-	float aspect = static_cast<float>(screenWidth) / static_cast<float>(screenHeight);
-
-
-	float range = tan(fov * 0.5f) * near;
-	float Sx = (2.0f * near) / (range * aspect + range * aspect);
-	float Sy = near / range;
-	float Sz = -(far + near) / (far - near);
-	float Pz = -(2.0f * far * near) / (far - near);
-
-	float projMat[] = {
-		Sx, 0, 0, 0,
-		0, Sy, 0, 0,
-		0, 0, Sz, -1,
-		0, 0, Pz, 0
-	};
+	_projMatrix = new float[4 * 4]{0};
+	calculateProjMatrix(screenWidth, screenHeight);
 
 	glUseProgram(_shaderProgram);
-	//GLuint modelMatrixLoc = glGetUniformLocation(_shaderProgram, "modelMat");
-	//if (modelMatrixLoc != -1)
-	//{
-	//	glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, value_ptr(_modelMatrix));
-	//}
 
 	_viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
 	if (_viewMatLocation != -1)
@@ -104,7 +76,7 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
 	if (projMatrixLoc != -1)
 	{
-		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, projMat);
+		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, _projMatrix);
 	}
 }
 
@@ -159,10 +131,42 @@ void WorldScene::run(GLFWwindow* window)
 
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, value_ptr(viewMatrix));
 	}
-
 	
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	prevTime = currentTime;
+}
+
+void WorldScene::onWindowSizeChanged(int width, int height)
+{
+	calculateProjMatrix(width, height);
+}
+
+void WorldScene::calculateProjMatrix(int width, int height)
+{
+	printf("%d\n", width);
+
+	float near = 0.1f;
+	float far = 100.0f;
+	float fov = 67.0f * static_cast<float>(ONE_DEG_IN_RAD);
+	float aspect = static_cast<float>(width) / static_cast<float>(height);
+
+
+	float range = tan(fov * 0.5f) * near;
+	float Sx = (2.0f * near) / (range * aspect + range * aspect);
+	float Sy = near / range;
+	float Sz = -(far + near) / (far - near);
+	float Pz = -(2.0f * far * near) / (far - near);
+
+	_projMatrix[0] = Sx;
+	_projMatrix[5] = Sy;
+	_projMatrix[10] = Sz;
+	_projMatrix[11] = -1;
+	_projMatrix[14] = Pz;
+}
+
+WorldScene::~WorldScene()
+{
+	delete _projMatrix;
 }
