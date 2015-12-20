@@ -8,5 +8,5 @@ class IScene
 public:
 	virtual ~IScene() {}
 	virtual void init(int screenHeight, int screenWidth) = 0;
-	virtual void run(const GLFWwindow& window) = 0;
+	virtual void run(GLFWwindow* window) = 0;
 };

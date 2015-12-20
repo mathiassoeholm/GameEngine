@@ -8,7 +8,7 @@
 #include <GLFW/glfw3.h>
 
 float camSpeed = 1.0f;
-float camYawSpeed = 10.0f;
+float camYawSpeed = 1.0f;
 float camPos[] = {0.0f, 0.0f, 2.0f};
 float camYaw = 0.0f;
 
@@ -95,10 +95,10 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	//	glUniformMatrix4fv(modelMatrixLoc, 1, GL_FALSE, value_ptr(_modelMatrix));
 	//}
 
-	GLuint viewMatrixLoc = glGetUniformLocation(_shaderProgram, "viewMat");
-	if (viewMatrixLoc != -1)
+	_viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
+	if (_viewMatLocation != -1)
 	{
-		glUniformMatrix4fv(viewMatrixLoc, 1, GL_FALSE, value_ptr(viewMatrix));
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, value_ptr(viewMatrix));
 	}
 
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
@@ -108,15 +108,59 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	}
 }
 
-void WorldScene::run(const GLFWwindow& window)
+void WorldScene::run(GLFWwindow* window)
 {
 	static auto prevTime = static_cast<float>(glfwGetTime());
 
 	auto currentTime = static_cast<float>(glfwGetTime());
 	auto deltaTime = currentTime - prevTime;
 
+	bool camMoved = false;
+	if (glfwGetKey(window, GLFW_KEY_A)) {
+		camPos[0] -= camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_D)) {
+		camPos[0] += camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_PAGE_UP)) {
+		camPos[1] += camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN)) {
+		camPos[1] -= camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_W)) {
+		camPos[2] -= camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_S)) {
+		camPos[2] += camSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT)) {
+		camYaw += camYawSpeed * deltaTime;
+		camMoved = true;
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
+		camYaw -= camYawSpeed * deltaTime;
+		camMoved = true;
+	}
 
 	glUseProgram(_shaderProgram);
+
+	if (camMoved)
+	{
+		auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
+		auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
+		auto viewMatrix = R*T;
+
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, value_ptr(viewMatrix));
+	}
+
+	
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
