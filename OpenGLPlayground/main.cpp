@@ -124,7 +124,7 @@ int main(int argc, char **argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, currentWindowWidth, currentWindowHeight);
 
-		scene->run();
+		scene->run(*window);
 
 		// update other events like input handling 
 		glfwPollEvents();

@@ -5,6 +5,7 @@
 #include "../GLLog.h"
 
 #define ONE_DEG_IN_RAD 0.017444444
+#include <GLFW/glfw3.h>
 
 float camSpeed = 1.0f;
 float camYawSpeed = 10.0f;
@@ -107,9 +108,17 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	}
 }
 
-void WorldScene::run()
+void WorldScene::run(const GLFWwindow& window)
 {
+	static auto prevTime = static_cast<float>(glfwGetTime());
+
+	auto currentTime = static_cast<float>(glfwGetTime());
+	auto deltaTime = currentTime - prevTime;
+
+
 	glUseProgram(_shaderProgram);
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+	prevTime = currentTime;
 }

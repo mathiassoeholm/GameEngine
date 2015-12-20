@@ -101,7 +101,7 @@ void WarpTest::init(int screenWidth, int screenHeight)
 	
 }
 
-void WarpTest::run()
+void WarpTest::run(const GLFWwindow& window)
 {
 	glUseProgram(_shaderProgram);
 
