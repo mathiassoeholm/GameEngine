@@ -11,6 +11,8 @@ float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
 float camPos[] = {0.0f, 0.0f, 2.0f};
 float camYaw = 0.0f;
+float deltaTime;
+int lastPressedKey = -1;
 
 glm::mat4 lookAt(glm::vec3 camPos, glm::vec3 targetPos, glm::vec3 up)
 {
@@ -80,51 +82,50 @@ void WorldScene::init(int screenWidth, int screenHeight)
 	}
 }
 
+void handleInput()
+{
+	switch (lastPressedKey)
+	{
+	case GLFW_KEY_A:
+		camPos[0] -= camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_D:
+		camPos[0] += camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_UP:
+		camPos[1] += camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_DOWN:
+		camPos[1] -= camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_W:
+		camPos[2] -= camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_S:
+		camPos[2] += camSpeed * deltaTime;
+		break;
+	case GLFW_KEY_LEFT:
+		camYaw += camYawSpeed * deltaTime;
+		break;
+	case GLFW_KEY_RIGHT:
+		camYaw -= camYawSpeed * deltaTime;
+		break;
+	}
+}
+
 void WorldScene::run(GLFWwindow* window)
 {
 	static auto prevTime = static_cast<float>(glfwGetTime());
 
 	auto currentTime = static_cast<float>(glfwGetTime());
-	auto deltaTime = currentTime - prevTime;
-
-	bool camMoved = false;
-	if (glfwGetKey(window, GLFW_KEY_A)) {
-		camPos[0] -= camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_D)) {
-		camPos[0] += camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_PAGE_UP)) {
-		camPos[1] += camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_PAGE_DOWN)) {
-		camPos[1] -= camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_W)) {
-		camPos[2] -= camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_S)) {
-		camPos[2] += camSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_LEFT)) {
-		camYaw += camYawSpeed * deltaTime;
-		camMoved = true;
-	}
-	if (glfwGetKey(window, GLFW_KEY_RIGHT)) {
-		camYaw -= camYawSpeed * deltaTime;
-		camMoved = true;
-	}
+	deltaTime = currentTime - prevTime;
 
 	glUseProgram(_shaderProgram);
 
-	if (camMoved)
+	if (lastPressedKey != -1)
 	{
+		handleInput();
+
 		auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
 		auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
 		auto viewMatrix = R*T;
@@ -141,6 +142,20 @@ void WorldScene::run(GLFWwindow* window)
 void WorldScene::onWindowSizeChanged(int width, int height)
 {
 	calculateProjMatrix(width, height);
+}
+
+void WorldScene::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	std::cout << key << std::endl;
+
+	if (action == GLFW_REPEAT || action == GLFW_PRESS)
+	{
+		lastPressedKey = key;
+	}
+	else if (action == GLFW_RELEASE)
+	{
+		lastPressedKey = -1;
+	}
 }
 
 void WorldScene::calculateProjMatrix(int width, int height)

@@ -66,6 +66,11 @@ void updateFpsCounter(GLFWwindow* window)
 	frameCount++;
 }
 
+void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	scene->onKeyEvent(window, key, scancode, action, mods);
+}
+
 int main(int argc, char **argv)
 {
 	restartGlLog();
@@ -100,6 +105,7 @@ int main(int argc, char **argv)
 	}
 
 	glfwMakeContextCurrent(window);
+
 	glewExperimental = GL_TRUE;
 	glewInit();
 
@@ -117,6 +123,8 @@ int main(int argc, char **argv)
 
 	scene = new WorldScene();
 	scene->init(currentWindowWidth, currentWindowHeight);
+
+	glfwSetKeyCallback(window, onKeyEvent);
 
 	while (!glfwWindowShouldClose(window))
 	{
