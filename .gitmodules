@@ -1,0 +1,3 @@
+[submodule "Math-ias"]
+	path = Math-ias
+	url = https://github.com/mathiassoeholm/Math-ias
