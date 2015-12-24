@@ -13,6 +13,7 @@ using namespace std;
 
 int currentWindowWidth = 640;
 int currentWindowHeight = 480;
+IScene* scene;
 
 void glfwErrorCallback(int error, const char* description)
 {
@@ -26,6 +27,7 @@ void onWindowSizeChanged(GLFWwindow* window, int width, int height)
 {
 	currentWindowWidth = width;
 	currentWindowHeight = height;
+	scene->onWindowSizeChanged(width, height);
 }
 
 GLFWwindow* createWindow(bool fullScreen)
@@ -64,6 +66,11 @@ void updateFpsCounter(GLFWwindow* window)
 	frameCount++;
 }
 
+void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	scene->onKeyEvent(window, key, scancode, action, mods);
+}
+
 int main(int argc, char **argv)
 {
 	restartGlLog();
@@ -98,6 +105,7 @@ int main(int argc, char **argv)
 	}
 
 	glfwMakeContextCurrent(window);
+
 	glewExperimental = GL_TRUE;
 	glewInit();
 
@@ -113,8 +121,10 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	IScene* scene = new WorldScene();
-	scene->init();
+	scene = new WorldScene();
+	scene->init(currentWindowWidth, currentWindowHeight);
+
+	glfwSetKeyCallback(window, onKeyEvent);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -124,7 +134,7 @@ int main(int argc, char **argv)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glViewport(0, 0, currentWindowWidth, currentWindowHeight);
 
-		scene->run();
+		scene->run(window);
 
 		// update other events like input handling 
 		glfwPollEvents();
