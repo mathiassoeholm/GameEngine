@@ -88,6 +88,10 @@ void mathTest()
 	Matrix4x4<float> matT = mat.transposed();
 
 	std::cout << "----- transposed:" << std::endl << mat.transposed().toString() << std::endl;
+
+	auto translation = Matrix4x4<float>::translation(Vector3<float>(2, 3, 4));
+
+	std::cout << translation.toString() << std::endl;
 }
 
 int main(int argc, char **argv)
