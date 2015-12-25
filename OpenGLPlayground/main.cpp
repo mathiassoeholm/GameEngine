@@ -76,9 +76,6 @@ void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
 void mathTest()
 {
 	using namespace Math_ias;
-	Vector3<int> test = Vector3<int>(1, 3, 4);
-
-	std::cout << test[1] << std::endl;
 
 	Matrix4x4<float> mat = Matrix4x4<float>(
 		1, 2, 3, 4,
@@ -86,11 +83,11 @@ void mathTest()
 		9, 10, 11, 12,
 		13, 14, 15, 16);
 
-	std::cout << mat.get(0, 1) << std::endl;
+	std::cout << (mat*mat).toString() << std::endl;
 
 	Matrix4x4<float> matT = mat.transposed();
 
-	std::cout << mat.get(0, 1) << std::endl;
+	std::cout << "----- transposed:" << std::endl << mat.transposed().toString() << std::endl;
 }
 
 int main(int argc, char **argv)
