@@ -3,9 +3,12 @@
 #include "../ShaderUtil.h"
 #include "glm/ext.hpp"
 #include "../GLLog.h"
+#include <GLFW/glfw3.h>
+#include "Matrix4x4.h"
 
 #define ONE_DEG_IN_RAD 0.017444444
-#include <GLFW/glfw3.h>
+
+using namespace Math_ias;
 
 float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
@@ -13,29 +16,6 @@ float camPos[] = {0.0f, 0.0f, 2.0f};
 float camYaw = 0.0f;
 float deltaTime;
 int lastPressedKey = -1;
-
-glm::mat4 lookAt(glm::vec3 camPos, glm::vec3 targetPos, glm::vec3 up)
-{
-	glm::mat4 translation(
-		1, 0, 0, -camPos[0],
-		0, 1, 0, -camPos[1],
-		0, 0, 1, -camPos[2],
-		0, 0, 0, 1
-		);
-
-	auto forward = normalize(targetPos - camPos);
-
-	auto right = normalize(cross(forward, up));
-
-	glm::mat4 rotation(
-		right[0], up[0], -forward[0], 0,
-		right[1], up[1], -forward[1], 0,
-		right[2], up[2], -forward[2], 0,
-		0, 0, 0, 1
-		);
-
-	return transpose(rotation*translation);
-}
 
 void WorldScene::init(int screenWidth, int screenHeight)
 {
@@ -129,6 +109,8 @@ void WorldScene::run(GLFWwindow* window)
 		auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
 		auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
 		auto viewMatrix = R*T;
+
+
 
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, value_ptr(viewMatrix));
 	}
