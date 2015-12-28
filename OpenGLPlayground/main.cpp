@@ -10,6 +10,7 @@
 #include "Scenes/WorldScene.h"
 #include "Vector3.h"
 #include "Matrix4x4.h"
+#include "Quaternion.h"
 
 using namespace std;
 

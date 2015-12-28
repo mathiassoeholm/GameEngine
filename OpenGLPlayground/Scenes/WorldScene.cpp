@@ -108,13 +108,11 @@ void WorldScene::run(GLFWwindow* window)
 	{
 		handleInput();
 
-		auto T = translate(glm::mat4(), glm::vec3(-camPos[0], -camPos[1], -camPos[2]));
-		auto R = rotate(glm::mat4(), -camYaw, glm::vec3(0, 1, 0));
+		auto T = Matrix4x4<float>::translation(-camPos[0], -camPos[1], -camPos[2]);
+		auto R = Matrix4x4<float>::rotationY(-camYaw);
 		auto viewMatrix = R*T;
 
-
-
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, value_ptr(viewMatrix));
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, viewMatrix.valuePtr());
 	}
 	
 	glBindVertexArray(_vao);
@@ -130,8 +128,6 @@ void WorldScene::onWindowSizeChanged(int width, int height)
 
 void WorldScene::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	std::cout << key << std::endl;
-
 	if (action == GLFW_REPEAT || action == GLFW_PRESS)
 	{
 		lastPressedKey = key;
