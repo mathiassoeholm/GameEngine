@@ -89,9 +89,11 @@ void mathTest()
 
 	std::cout << "----- transposed:" << std::endl << mat.transposed().toString() << std::endl;
 
-	auto translation = Matrix4x4<float>::translation(Vector3<float>(2, 3, 4));
+	auto translation = Matrix4x4<float>::translation(2, 3, 4);
+	auto translation2 = Matrix4x4<float>::translation(Vector3<float>(5, 5, 5));
 
 	std::cout << translation.toString() << std::endl;
+	std::cout << translation2.toString() << std::endl;
 }
 
 int main(int argc, char **argv)
