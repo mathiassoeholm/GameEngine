@@ -103,8 +103,7 @@ void mathTest()
 
 	cout << q2.toString() << endl;
 
-	cout << (q*q2).getMatrix().toString() << endl;
-	
+	cout << Quaternion<float>::slerp(q, q2, 0.5f).toString() << endl;
 }
 
 int main(int argc, char **argv)
