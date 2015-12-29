@@ -93,6 +93,10 @@ void mathTest()
 	auto test = Matrix4x4<float>::rotationX(0);
 
 	std::cout << test.toString() << std::endl;
+
+	auto q = Quaternion<float>(90, 0, 1, 0);
+
+	cout << q.toString() << endl;
 }
 
 int main(int argc, char **argv)
