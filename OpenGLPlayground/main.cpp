@@ -11,6 +11,7 @@
 #include "Vector3.h"
 #include "Matrix4x4.h"
 #include "Quaternion.h"
+#include "glm/ext.hpp"
 
 using namespace std;
 
@@ -97,6 +98,13 @@ void mathTest()
 	auto q = Quaternion<float>(90, 0, 1, 0);
 
 	cout << q.toString() << endl;
+
+	auto q2 = Quaternion<float>(-90, 0, 1, 0);
+
+	cout << q2.toString() << endl;
+
+	cout << (q*q2).getMatrix().toString() << endl;
+	
 }
 
 int main(int argc, char **argv)
