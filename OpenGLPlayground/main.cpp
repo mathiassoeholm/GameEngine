@@ -102,7 +102,7 @@ void mathTest()
 {
 	using namespace Math_ias;
 
-	Matrix4x4<float> mat = Matrix4x4<float>(
+	auto mat = Matrix4x4f(
 		1, 2, 3, 4,
 		5, 6, 7, 8,
 		9, 10, 11, 12,
@@ -110,23 +110,23 @@ void mathTest()
 
 	std::cout << (mat*mat).toString() << std::endl;
 
-	Matrix4x4<float> matT = mat.transposed();
+	auto matT = mat.transposed();
 
 	std::cout << "----- transposed:" << std::endl << mat.transposed().toString() << std::endl;
 
-	auto test = Matrix4x4<float>::rotationX(0);
+	auto test = Matrix4x4f::rotationX(0);
 
 	std::cout << test.toString() << std::endl;
 
-	auto q = Quaternion<float>(90, 0, 1, 0);
+	auto q = Quaternionf(90, 0, 1, 0);
 
 	cout << q.toString() << endl;
 
-	auto q2 = Quaternion<float>(-90, 0, 1, 0);
+	auto q2 = Quaternionf(-90, 0, 1, 0);
 
 	cout << q2.toString() << endl;
 
-	cout << Quaternion<float>::slerp(q, q2, 0.5f).toString() << endl;
+	cout << Quaternionf::slerp(q, q2, 0.5f).toString() << endl;
 }
 
 int main(int argc, char **argv)
