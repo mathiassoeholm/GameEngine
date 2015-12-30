@@ -9,11 +9,13 @@
 #include "Scenes/WarpTest.h"
 #include "Scenes/WorldScene.h"
 #include "Vector3.h"
+#include "Vector4.h"
 #include "Matrix4x4.h"
 #include "Quaternion.h"
 #include "glm/ext.hpp"
 
 using namespace std;
+using namespace Math_ias;
 
 int currentWindowWidth = 640;
 int currentWindowHeight = 480;
@@ -34,20 +36,41 @@ void onWindowSizeChanged(GLFWwindow* window, int width, int height)
 	scene->onWindowSizeChanged(width, height);
 }
 
+void onMouseClick(GLFWwindow* window, int button, int action, int mods)
+{
+	double mouseX, mouseY;
+	glfwGetCursorPos(window, &mouseX, &mouseY);
+
+	// Get normalized device coordinates
+	auto x = (2.0 * mouseX) / currentWindowWidth - 1.0;
+	auto y = 1.0 - (2.0 * mouseY) / currentWindowHeight;
+	
+	// Get 4D Homogeneous Clip Coordinates
+	auto rayClip = Vector4<float>(x, y, -1.0, 1.0);
+
+	// Get 4D eye (Camera) coordinates
+	// TODO: Do this in the scenes
+}
+
 GLFWwindow* createWindow(bool fullScreen)
 {
+	GLFWwindow* window;
+
 	if (fullScreen)
 	{
 		GLFWmonitor* mon = glfwGetPrimaryMonitor();
 		const GLFWvidmode* vmode = glfwGetVideoMode(mon);
-		return glfwCreateWindow(vmode->width, vmode->height, "OpenGL Playground", mon, nullptr);
+		window = glfwCreateWindow(vmode->width, vmode->height, "OpenGL Playground", mon, nullptr);
 	}
 	else
 	{
-		GLFWwindow* window = glfwCreateWindow(currentWindowWidth, currentWindowHeight, "OpenGL Playground", nullptr, nullptr);
+		window = glfwCreateWindow(currentWindowWidth, currentWindowHeight, "OpenGL Playground", nullptr, nullptr);
 		glfwSetWindowSizeCallback(window, onWindowSizeChanged);
-		return window;
 	}
+
+	glfwSetMouseButtonCallback(window, onMouseClick);
+
+	return window;
 }
 
 void updateFpsCounter(GLFWwindow* window)
