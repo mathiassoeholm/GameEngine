@@ -131,7 +131,7 @@ void mathTest()
 
 int main(int argc, char **argv)
 {
-	mathTest();
+	//mathTest();
 
 	restartGlLog();
 
@@ -182,7 +182,7 @@ int main(int argc, char **argv)
 	glDepthFunc(GL_LESS);
 
 	scene = new WorldScene();
-	scene->init(currentWindowWidth, currentWindowHeight);
+	scene->init(window, currentWindowWidth, currentWindowHeight);
 
 	glfwSetKeyCallback(window, onKeyEvent);
 

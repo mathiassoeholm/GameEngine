@@ -9,6 +9,6 @@ class WarpTest : public IScene
 	GLuint _timeLocation;
 	
 public:
-	void init(int screenWidth, int screenHeight) override;
+	void init(GLFWwindow* window, int screenWidth, int screenHeight) override;
 	void run(GLFWwindow* window) override;
 };

@@ -6,18 +6,19 @@
 #include <GLFW/glfw3.h>
 #include "Matrix4x4.h"
 
+
 #define ONE_DEG_IN_RAD 0.017444444
 
 using namespace Math_ias;
 
 float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
-float camPos[] = {0.0f, 0.0f, 2.0f};
-float camYaw = 0.0f;
+Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
+Quaternionf camRotation = Quaternionf();
 float deltaTime;
 int lastPressedKey = -1;
 
-void WorldScene::init(int screenWidth, int screenHeight)
+void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 {
 	float points[] =
 	{
@@ -40,33 +41,29 @@ void WorldScene::init(int screenWidth, int screenHeight)
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/WorldVertexShader.vert", "Shaders/FragmentShader2.frag");
 
-	auto T = Matrix4x4<float>::translation(-camPos[0], -camPos[1], -camPos[2]);
-	auto R = Matrix4x4<float>::rotationY(-camYaw);
-	auto viewMatrix = R*T;
-
-	std::cout << viewMatrix.toString() << std::endl;
-
-	_projMatrix = new float[4 * 4]{0};
-	calculateProjMatrix(screenWidth, screenHeight);
+	_camera = new Camera(window, camPos, camRotation);
 
 	glUseProgram(_shaderProgram);
+
+	std::cout << _camera->getViewMatrix().toString() << std::endl;
+	std::cout << _camera->getProjMatrix().toString() << std::endl;
 
 	_viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
 	if (_viewMatLocation != -1)
 	{
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, viewMatrix.valuePtr());
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, _camera->getViewMatrix().valuePtr());
 	}
 
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
 	if (projMatrixLoc != -1)
 	{
-		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, _projMatrix);
+		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, _camera->getProjMatrix().valuePtr());
 	}
 }
 
 void handleInput()
 {
-	switch (lastPressedKey)
+	/*switch (lastPressedKey)
 	{
 	case GLFW_KEY_A:
 		camPos[0] -= camSpeed * deltaTime;
@@ -92,7 +89,7 @@ void handleInput()
 	case GLFW_KEY_RIGHT:
 		camYaw -= camYawSpeed * deltaTime;
 		break;
-	}
+	}*/
 }
 
 void WorldScene::run(GLFWwindow* window)
@@ -104,7 +101,7 @@ void WorldScene::run(GLFWwindow* window)
 
 	glUseProgram(_shaderProgram);
 
-	if (lastPressedKey != -1)
+	/*if (lastPressedKey != -1)
 	{
 		handleInput();
 
@@ -113,7 +110,7 @@ void WorldScene::run(GLFWwindow* window)
 		auto viewMatrix = R*T;
 
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, viewMatrix.valuePtr());
-	}
+	}*/
 	
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
@@ -123,7 +120,7 @@ void WorldScene::run(GLFWwindow* window)
 
 void WorldScene::onWindowSizeChanged(int width, int height)
 {
-	calculateProjMatrix(width, height);
+	_camera->calculateProjMatrix();
 }
 
 void WorldScene::onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods)
@@ -138,30 +135,7 @@ void WorldScene::onKeyEvent(GLFWwindow* window, int key, int scancode, int actio
 	}
 }
 
-void WorldScene::calculateProjMatrix(int width, int height)
-{
-	printf("%d\n", width);
-
-	float near = 0.1f;
-	float far = 100.0f;
-	float fov = 67.0f * static_cast<float>(ONE_DEG_IN_RAD);
-	float aspect = static_cast<float>(width) / static_cast<float>(height);
-
-
-	float range = tan(fov * 0.5f) * near;
-	float Sx = (2.0f * near) / (range * aspect + range * aspect);
-	float Sy = near / range;
-	float Sz = -(far + near) / (far - near);
-	float Pz = -(2.0f * far * near) / (far - near);
-
-	_projMatrix[0] = Sx;
-	_projMatrix[5] = Sy;
-	_projMatrix[10] = Sz;
-	_projMatrix[11] = -1;
-	_projMatrix[14] = Pz;
-}
-
 WorldScene::~WorldScene()
 {
-	delete _projMatrix;
+	delete _camera;
 }

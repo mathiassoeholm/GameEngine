@@ -65,6 +65,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GLLog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ShaderUtil.cpp" />
@@ -79,6 +80,7 @@
     <None Include="Shaders\WorldVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="GLLog.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="ShaderUtil.h" />
