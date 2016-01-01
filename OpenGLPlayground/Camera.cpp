@@ -25,6 +25,18 @@ void Camera::calculateProjMatrix()
 		0, 0, -1, 0);
 }
 
+void Camera::setPosition(Vector3f position)
+{
+	_position = position;
+	calculateViewMatrix();
+}
+
+void Camera::setRotationn(Quaternionf rotation)
+{
+	_rotation = rotation;
+	calculateViewMatrix();
+}
+
 void Camera::calculateViewMatrix()
 {
 	auto T = Matrix4x4<float>::translation(-_position);

@@ -13,6 +13,7 @@ using namespace Math_ias;
 
 float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
+float camYaw = 0.0f;
 Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
 Quaternionf camRotation = Quaternionf();
 float deltaTime;
@@ -63,12 +64,12 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 
 void handleInput()
 {
-	/*switch (lastPressedKey)
+	switch (lastPressedKey)
 	{
 	case GLFW_KEY_A:
-		camPos[0] -= camSpeed * deltaTime;
+		camPos = camPos - Vector3f::right() * camSpeed * deltaTime;
 		break;
-	case GLFW_KEY_D:
+	/*case GLFW_KEY_D:
 		camPos[0] += camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_UP:
@@ -88,8 +89,8 @@ void handleInput()
 		break;
 	case GLFW_KEY_RIGHT:
 		camYaw -= camYawSpeed * deltaTime;
-		break;
-	}*/
+		break;*/
+	}
 }
 
 void WorldScene::run(GLFWwindow* window)
@@ -101,16 +102,20 @@ void WorldScene::run(GLFWwindow* window)
 
 	glUseProgram(_shaderProgram);
 
-	/*if (lastPressedKey != -1)
+	if (lastPressedKey != -1)
 	{
 		handleInput();
 
-		auto T = Matrix4x4<float>::translation(-camPos[0], -camPos[1], -camPos[2]);
+		/*auto T = Matrix4x4<float>::translation(-camPos[0], -camPos[1], -camPos[2]);
 		auto R = Matrix4x4<float>::rotationY(-camYaw);
-		auto viewMatrix = R*T;
+		auto viewMatrix = R*T;*/
 
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, viewMatrix.valuePtr());
-	}*/
+		_camera->setPosition(camPos);
+
+		std::cout << _camera->getViewMatrix().toString() << std::endl;
+
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, _camera->getViewMatrix().valuePtr());
+	}
 	
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
