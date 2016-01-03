@@ -14,7 +14,7 @@ using namespace Math_ias;
 float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
 float camYaw = 0.0f;
-Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
+Vector3f camPos = Vector3f(0.0f, 0.0f, -0.5f);
 Quaternionf camRotation = Quaternionf();
 float deltaTime;
 int lastPressedKey = -1;
@@ -52,7 +52,7 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	_viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
 	if (_viewMatLocation != -1)
 	{
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, _camera->getViewMatrix().valuePtr());
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
 	}
 
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
@@ -69,27 +69,27 @@ void handleInput()
 	case GLFW_KEY_A:
 		camPos = camPos - Vector3f::right() * camSpeed * deltaTime;
 		break;
-	/*case GLFW_KEY_D:
-		camPos[0] += camSpeed * deltaTime;
+	case GLFW_KEY_D:
+		camPos = camPos + Vector3f::right() * camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_UP:
-		camPos[1] += camSpeed * deltaTime;
+		camPos = camPos + Vector3f::up() * camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_DOWN:
-		camPos[1] -= camSpeed * deltaTime;
+		camPos = camPos - Vector3f::up() * camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_W:
-		camPos[2] -= camSpeed * deltaTime;
+		camPos = camPos - Vector3f::forward() * camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_S:
-		camPos[2] += camSpeed * deltaTime;
+		camPos = camPos + Vector3f::forward() * camSpeed * deltaTime;
 		break;
 	case GLFW_KEY_LEFT:
 		camYaw += camYawSpeed * deltaTime;
 		break;
 	case GLFW_KEY_RIGHT:
 		camYaw -= camYawSpeed * deltaTime;
-		break;*/
+		break;
 	}
 }
 
@@ -106,15 +106,11 @@ void WorldScene::run(GLFWwindow* window)
 	{
 		handleInput();
 
-		/*auto T = Matrix4x4<float>::translation(-camPos[0], -camPos[1], -camPos[2]);
-		auto R = Matrix4x4<float>::rotationY(-camYaw);
-		auto viewMatrix = R*T;*/
-
 		_camera->setPosition(camPos);
 
 		std::cout << _camera->getViewMatrix().toString() << std::endl;
 
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_FALSE, _camera->getViewMatrix().valuePtr());
+		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
 	}
 	
 	glBindVertexArray(_vao);
