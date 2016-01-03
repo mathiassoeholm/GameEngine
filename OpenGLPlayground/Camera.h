@@ -11,7 +11,9 @@ class Camera
 {
 	GLFWwindow* _window;
 	Matrix4x4f _projMatrix;
+	Matrix4x4f _inverseProjMatrix;
 	Matrix4x4f _viewMatrix;
+	Matrix4x4f _inverseViewMatrix;
 	Vector3f _position;
 	Quaternionf _rotation;
 	
@@ -23,5 +25,9 @@ public:
 	void calculateProjMatrix();
 	void setPosition(Vector3f position);
 	void setRotation(Quaternionf rotation);
+
+	// Returns a ray going from the camera to
+	// the mouse's positioin in world space
+	Vector3f mouseRay() const;
 };
 

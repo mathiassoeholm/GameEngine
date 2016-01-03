@@ -106,10 +106,10 @@ void WorldScene::run(GLFWwindow* window)
 	{
 		handleInput();
 
+		std::cout << _camera->mouseRay().toString() << std::endl;
+
 		_camera->setPosition(camPos);
 		_camera->setRotation(Quaternionf::fromEuler(0, camYaw, 0));
-
-		std::cout << _camera->getViewMatrix().toString() << std::endl;
 
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
 	}

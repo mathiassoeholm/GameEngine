@@ -38,18 +38,7 @@ void onWindowSizeChanged(GLFWwindow* window, int width, int height)
 
 void onMouseClick(GLFWwindow* window, int button, int action, int mods)
 {
-	double mouseX, mouseY;
-	glfwGetCursorPos(window, &mouseX, &mouseY);
-
-	// Get normalized device coordinates
-	auto x = (2.0 * mouseX) / currentWindowWidth - 1.0;
-	auto y = 1.0 - (2.0 * mouseY) / currentWindowHeight;
 	
-	// Get 4D Homogeneous Clip Coordinates
-	auto rayClip = Vector4<float>(x, y, -1.0, 1.0);
-
-	// Get 4D eye (Camera) coordinates
-	// TODO: Do this in the scenes
 }
 
 GLFWwindow* createWindow(bool fullScreen)
