@@ -31,7 +31,7 @@ void Camera::setPosition(Vector3f position)
 	calculateViewMatrix();
 }
 
-void Camera::setRotationn(Quaternionf rotation)
+void Camera::setRotation(Quaternionf rotation)
 {
 	_rotation = rotation;
 	calculateViewMatrix();

@@ -22,6 +22,6 @@ public:
 	Matrix4x4f getViewMatrix() const;
 	void calculateProjMatrix();
 	void setPosition(Vector3f position);
-	void setRotationn(Quaternionf rotation);
+	void setRotation(Quaternionf rotation);
 };
 

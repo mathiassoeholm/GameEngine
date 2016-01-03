@@ -12,7 +12,7 @@
 using namespace Math_ias;
 
 float camSpeed = 1.0f;
-float camYawSpeed = 1.0f;
+float camYawSpeed = 50.0f;
 float camYaw = 0.0f;
 Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
 Quaternionf camRotation = Quaternionf();
@@ -107,6 +107,7 @@ void WorldScene::run(GLFWwindow* window)
 		handleInput();
 
 		_camera->setPosition(camPos);
+		_camera->setRotation(Quaternionf::fromEuler(0, camYaw, 0));
 
 		std::cout << _camera->getViewMatrix().toString() << std::endl;
 

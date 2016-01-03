@@ -127,11 +127,13 @@ void mathTest()
 	cout << q2.toString() << endl;
 
 	cout << Quaternionf::slerp(q, q2, 0.5f).toString() << endl;
+
+	cout << "From Euler: \n" << Quaternionf::fromEuler(0, 90, 0).getMatrix().toString() << endl;;
 }
 
 int main(int argc, char **argv)
 {
-	//mathTest();
+	mathTest();
 
 	restartGlLog();
 
