@@ -14,7 +14,7 @@ using namespace Math_ias;
 float camSpeed = 1.0f;
 float camYawSpeed = 1.0f;
 float camYaw = 0.0f;
-Vector3f camPos = Vector3f(0.0f, 0.0f, -0.5f);
+Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
 Quaternionf camRotation = Quaternionf();
 float deltaTime;
 int lastPressedKey = -1;
@@ -58,7 +58,7 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
 	if (projMatrixLoc != -1)
 	{
-		glUniformMatrix4fv(projMatrixLoc, 1, GL_FALSE, _camera->getProjMatrix().valuePtr());
+		glUniformMatrix4fv(projMatrixLoc, 1, GL_TRUE, _camera->getProjMatrix().valuePtr());
 	}
 }
 

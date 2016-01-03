@@ -46,6 +46,7 @@ void Camera::calculateViewMatrix()
 Camera::Camera(GLFWwindow* window, Vector3f position, Quaternionf rotation) : _window(window), _position(position), _rotation(rotation)
 {
 	calculateViewMatrix();
+	calculateProjMatrix();
 }
 
 Matrix4x4f Camera::getProjMatrix() const
