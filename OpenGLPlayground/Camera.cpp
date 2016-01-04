@@ -50,6 +50,16 @@ void Camera::setRotation(Quaternionf rotation)
 	calculateViewMatrix();
 }
 
+Vector3f Camera::getPosition() const
+{
+	return _position;
+}
+
+Quaternionf Camera::getRotation() const
+{
+	return _rotation;
+}
+
 Vector3f Camera::mouseRay() const
 {
 	double mouseX, mouseY;

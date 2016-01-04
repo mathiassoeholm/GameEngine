@@ -106,8 +106,6 @@ void WorldScene::run(GLFWwindow* window)
 	{
 		handleInput();
 
-		std::cout << _camera->mouseRay().toString() << std::endl;
-
 		_camera->setPosition(camPos);
 		_camera->setRotation(Quaternionf::fromEuler(0, camYaw, 0));
 
@@ -116,6 +114,24 @@ void WorldScene::run(GLFWwindow* window)
 	
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+
+
+	// Plane
+	auto planeNormal = Vector3f(0, 0, -1);
+	auto d = 0.0f;
+
+	// Ray-plane intersection
+	float t = -(_camera->getPosition().dot(planeNormal) + d) / (_camera->mouseRay().dot(planeNormal));
+	auto P = _camera->getPosition() + _camera->mouseRay() * t;
+
+	if(abs(P[0]) <= 0.5 && abs(P[1]) <= 0.5)
+	{
+		if((P[0] < 0 && P[1] <= 2 * P[0] + 0.5)
+			|| (P[0] > 0 && P[1] <= -2 * P[0] + 0.5))
+		{
+			std::cout << "Touching Triangle: " << P.toString() << std::endl;
+		}
+	}
 
 	prevTime = currentTime;
 }

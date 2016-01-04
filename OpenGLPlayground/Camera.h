@@ -25,6 +25,8 @@ public:
 	void calculateProjMatrix();
 	void setPosition(Vector3f position);
 	void setRotation(Quaternionf rotation);
+	Vector3f getPosition() const;
+	Quaternionf getRotation() const;
 
 	// Returns a ray going from the camera to
 	// the mouse's positioin in world space
