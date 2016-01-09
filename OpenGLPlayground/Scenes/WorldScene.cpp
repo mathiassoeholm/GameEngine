@@ -60,6 +60,13 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	{
 		glUniformMatrix4fv(projMatrixLoc, 1, GL_TRUE, _camera->getProjMatrix().valuePtr());
 	}
+
+	_triangleColor = new Vector4f(1, 0, 0, 1);
+	_colorLocation = glGetUniformLocation(_shaderProgram, "color");
+	if (_colorLocation != -1)
+	{
+		glUniform4fv(_colorLocation, 1, _triangleColor->valuePtr());
+	}
 }
 
 void handleInput()
@@ -124,12 +131,31 @@ void WorldScene::run(GLFWwindow* window)
 	float t = -(_camera->getPosition().dot(planeNormal) + d) / (_camera->mouseRay().dot(planeNormal));
 	auto P = _camera->getPosition() + _camera->mouseRay() * t;
 
+	bool hoveringTriangle = false;
+
 	if(abs(P[0]) <= 0.5 && abs(P[1]) <= 0.5)
 	{
 		if((P[0] < 0 && P[1] <= 2 * P[0] + 0.5)
 			|| (P[0] > 0 && P[1] <= -2 * P[0] + 0.5))
 		{
-			std::cout << "Touching Triangle: " << P.toString() << std::endl;
+			hoveringTriangle = true;
+		}
+	}
+
+	if(hoveringTriangle)
+	{
+		_triangleColor = new Vector4f(0, 1, 0, 1);
+		if (_colorLocation != -1)
+		{
+			glUniform4fv(_colorLocation, 1, _triangleColor->valuePtr());
+		}
+	}
+	else
+	{
+		_triangleColor = new Vector4f(1, 0, 0, 1);
+		if (_colorLocation != -1)
+		{
+			glUniform4fv(_colorLocation, 1, _triangleColor->valuePtr());
 		}
 	}
 
