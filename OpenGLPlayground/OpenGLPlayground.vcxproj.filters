@@ -43,6 +43,8 @@
     <None Include="Shaders\FragmentShader2.frag" />
     <None Include="Shaders\VertexShader.vert" />
     <None Include="Shaders\WorldVertexShader.vert" />
+    <None Include="Shaders\SphereFragmentShader.frag" />
+    <None Include="Shaders\SphereVertexShader.vert" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GLLog.h">

@@ -10,8 +10,10 @@ class SphereScene : public IScene
 {
 	SolidSphere _sphere;
 	GLuint _shaderProgram;
+	Camera * _camera;
+	GLuint _vao;
 public:
-	SphereScene() : _sphere(1, 12, 24)
+	SphereScene() : _sphere(1, 12, 24), _shaderProgram(-1), _camera(nullptr)
 	{
 		
 	}

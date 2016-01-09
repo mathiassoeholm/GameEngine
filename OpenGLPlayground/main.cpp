@@ -124,7 +124,7 @@ void mathTest()
 
 int main(int argc, char **argv)
 {
-	mathTest();
+	//mathTest();
 
 	restartGlLog();
 

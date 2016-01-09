@@ -7,13 +7,12 @@
 
 class SolidSphere
 {
-protected:
+public:
 	std::vector<GLfloat> vertices;
 	std::vector<GLfloat> normals;
 	std::vector<GLfloat> texcoords;
 	std::vector<GLushort> indices;
 
-public:
 	SolidSphere(float radius, unsigned int rings, unsigned int sectors)
 	{
 		float const R = 1. / (float)(rings - 1);
