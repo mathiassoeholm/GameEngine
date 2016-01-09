@@ -8,6 +8,8 @@
 #include "ShaderUtil.h"
 #include "Scenes/WarpTest.h"
 #include "Scenes/WorldScene.h"
+#include "Scenes/SphereScene.h"
+#include "SolidSphere.h"
 #include "Vector3.h"
 #include "Vector4.h"
 #include "Matrix4x4.h"
@@ -172,7 +174,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	scene = new WorldScene();
+	scene = new SphereScene();
 	scene->init(window, currentWindowWidth, currentWindowHeight);
 
 	glfwSetKeyCallback(window, onKeyEvent);

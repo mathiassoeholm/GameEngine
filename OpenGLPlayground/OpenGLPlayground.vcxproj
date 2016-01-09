@@ -71,6 +71,7 @@
     <ClCompile Include="ShaderUtil.cpp" />
     <ClCompile Include="Scenes\WarpTest.cpp" />
     <ClCompile Include="Scenes\WorldScene.cpp" />
+    <ClCompile Include="Scenes\SphereScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -84,6 +85,8 @@
     <ClInclude Include="GLLog.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="ShaderUtil.h" />
+    <ClInclude Include="SolidSphere.h" />
+    <ClInclude Include="Scenes\SphereScene.h" />
     <ClInclude Include="stb_image.h" />
     <ClInclude Include="Scenes\WarpTest.h" />
     <ClInclude Include="Scenes\WorldScene.h" />
