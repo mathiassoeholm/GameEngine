@@ -1,3 +1,5 @@
+// Source: http://stackoverflow.com/a/5989676/1157286
+
 #pragma once
 
 #include <gl/glew.h>
