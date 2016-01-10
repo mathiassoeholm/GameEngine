@@ -10,12 +10,14 @@ class WorldScene : public IScene
 	GLuint _vao;
 	GLuint _shaderProgram;
 	GLuint _viewMatLocation;
+	GLuint _modelMatLocation;
 	GLuint _colorLocation;
+	Matrix4x4f _modelMat;
 	Camera * _camera;
 	Vector4f * _triangleColor;
 public:
 	~WorldScene();
-	WorldScene() : _camera{ nullptr }, _triangleColor{ nullptr }
+	WorldScene() : _camera{ nullptr }, _triangleColor{ nullptr }, _modelMat(Matrix4x4f())
 	{
 
 	};

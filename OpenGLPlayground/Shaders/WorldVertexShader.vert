@@ -6,21 +6,16 @@ out vec4 vColor;
 
 uniform mat4 viewMat;
 uniform mat4 projMat;
+uniform mat4 modelMat;
 uniform vec4 color; // Diffuse color
 
-// Light properties
-vec3 lightPosition = vec3(10.0, 10.0, 10.0);
-vec3 spec = vec3(1.0, 1.0, 1.0);
-vec3 diff = vec3(0.7, 0.7, 0.7);
-vec3 amb = vec3(0.2, 0.2, 0.2);
-
-// Surface properties
-vec3 specRefl = vec3(1.0, 1.0, 1.0);
-vec3 ambRefl = vec3(1.0, 1.0, 1.0);
-float specExp = 100.0;
+out vec3 positionEye, normalEye;
 
 void main ()
 {
+	positionEye = vec3(viewMat * modelMat * vec4(vp, 1.0));
+	normalEye = vec3(viewMat * modelMat * vec4(normal, 0.0));
+
 	vColor = color;
-	gl_Position =  projMat * viewMat * vec4(vp, 1.0f);
+	gl_Position =  projMat * vec4(positionEye, 1.0f);
 }

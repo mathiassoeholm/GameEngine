@@ -18,6 +18,7 @@ Vector3f camPos = Vector3f(0.0f, 0.0f, 2.0f);
 Quaternionf camRotation = Quaternionf();
 float deltaTime;
 int lastPressedKey = -1;
+float triRotation = 0;
 
 void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 {
@@ -28,9 +29,9 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 		-0.5f, -0.5f, 0.0f
 	};
 
-	GLuint vbo = 0;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	GLuint verticesVBO = 0;
+	glGenBuffers(1, &verticesVBO);
+	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
 
 	GLfloat normals[] = {
@@ -50,7 +51,7 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 
 	// Vertices
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
 	// Normals
@@ -71,6 +72,12 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	if (_viewMatLocation != -1)
 	{
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
+	}
+
+	_modelMatLocation = glGetUniformLocation(_shaderProgram, "modelMat");
+	if (_modelMatLocation != -1)
+	{
+		glUniformMatrix4fv(_modelMatLocation, 1, GL_TRUE, _modelMat.valuePtr());
 	}
 
 	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
@@ -140,6 +147,12 @@ void WorldScene::run(GLFWwindow* window)
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
+	triRotation = sin(currentTime) * 0.5;
+	_modelMat = Matrix4x4f::rotationY(triRotation);
+	if (_modelMatLocation != -1)
+	{
+		glUniformMatrix4fv(_modelMatLocation, 1, GL_TRUE, _modelMat.valuePtr());
+	}
 
 	// Plane
 	auto planeNormal = Vector3f(0, 0, -1);
