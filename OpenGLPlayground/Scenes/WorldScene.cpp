@@ -47,10 +47,14 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	_vao = 0;
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
+
+	// Vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
-	glEnableVertexAttribArray(0);
+
+	// Normals
+	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, normalsVBO);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
