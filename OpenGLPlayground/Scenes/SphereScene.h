@@ -13,7 +13,7 @@ class SphereScene : public IScene
 	Camera * _camera;
 	GLuint _vao;
 public:
-	SphereScene() : _sphere(1, 12, 24), _shaderProgram(-1), _camera(nullptr)
+	SphereScene() : _sphere(0.5, 4, 8), _shaderProgram(-1), _camera(nullptr)
 	{
 		
 	}

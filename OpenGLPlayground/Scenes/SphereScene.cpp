@@ -13,7 +13,6 @@ void SphereScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, _sphere.vertices.size() * sizeof(float), &_sphere.vertices[0], GL_STATIC_DRAW);
 
-
 	_vao = 0;
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
@@ -23,6 +22,8 @@ void SphereScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/SphereVertexShader.vert", "Shaders/SphereFragmentShader.frag");
 	_camera = new Camera(window, Vector3f(0, 0, 2), Quaternionf());
+
+	glUseProgram(_shaderProgram);
 
 	GLuint viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
 	if (viewMatLocation != -1)
