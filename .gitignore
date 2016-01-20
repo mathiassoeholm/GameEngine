@@ -56,3 +56,4 @@ ipch/
 *.exe
 *.out
 *.app
+.idea/
