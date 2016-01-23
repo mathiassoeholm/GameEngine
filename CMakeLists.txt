@@ -17,6 +17,6 @@ include_directories(glew)
 
 SET(LIBRARIES glfw ${OPENGL_LIBRARY} ${CMAKE_DL_LIBS})
 
-set(SOURCE_FILES main.cpp glew/glew.c)
+set(SOURCE_FILES main.cpp glew/glew.c GLLog.cpp Scenes/WorldScene.cpp)
 add_executable(OpenGLPlayground ${SOURCE_FILES})
 target_link_libraries(OpenGLPlayground ${LIBRARIES})
