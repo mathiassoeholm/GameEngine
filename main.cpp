@@ -73,7 +73,7 @@ void updateFpsCounter(GLFWwindow* window)
 		previousSeconds = currentSeconds;
 		auto fps = static_cast<double>(frameCount) / elapsedSeconds;
 		char tmp[128];
-		printf(tmp, "opengl @ fps: %.2f", fps);
+		sprintf(tmp, "opengl @ fps: %.2f", fps);
 		glfwSetWindowTitle(window, tmp);
 		frameCount = 0;
 	}
