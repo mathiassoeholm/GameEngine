@@ -1,11 +1,10 @@
 #include "WorldScene.h"
-#define GLEW_STATIC
-#include <GL/glew.h>
 #include "../ShaderUtil.h"
 #include "glm/ext.hpp"
 #include "../GLLog.h"
 #include <GLFW/glfw3.h>
 #include "Matrix4x4.h"
+#include "gl/glew.h"
 
 
 #define ONE_DEG_IN_RAD 0.017444444

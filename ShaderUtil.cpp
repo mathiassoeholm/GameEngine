@@ -162,7 +162,7 @@ namespace ShaderUtil
 			if (size > 1) {
 				for (int j = 0; j < size; j++) {
 					char long_name[64];
-					sprintf_s(long_name, "%s[%i]", name, j);
+					printf(long_name, "%s[%i]", name, j);
 					int location = glGetAttribLocation(programIndex, long_name);
 					printf("  %i) type:%s name:%s location:%i\n",
 						i, GL_type_to_string(type), long_name, location);
@@ -195,7 +195,7 @@ namespace ShaderUtil
 			if (size > 1) {
 				for (int j = 0; j < size; j++) {
 					char long_name[64];
-					sprintf_s(long_name, "%s[%i]", name, j);
+					printf(long_name, "%s[%i]", name, j);
 					int location = glGetUniformLocation(programIndex, long_name);
 					printf("  %i) type:%s name:%s location:%i\n",
 						i, GL_type_to_string(type), long_name, location);
