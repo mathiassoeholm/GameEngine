@@ -98,8 +98,6 @@ void mathTest()
 
 	std::cout << (mat*mat).toString() << std::endl;
 
-	auto matT = mat.transposed();
-
 	std::cout << "----- transposed:" << std::endl << mat.transposed().toString() << std::endl;
 
 	auto test = Matrix4x4f::rotationX(0);
@@ -171,7 +169,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	scene = new WorldScene();
+	scene = new WarpTest();
 	scene->init(window, currentWindowWidth, currentWindowHeight);
 
 	glfwSetKeyCallback(window, onKeyEvent);

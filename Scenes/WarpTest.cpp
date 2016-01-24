@@ -3,6 +3,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "../stb_image.h"
 #include <GLFW/glfw3.h>
+#include "../GLLog.h"
 
 static const int pointsX = 10;
 static const int pointsY = 8;
@@ -86,17 +87,22 @@ void WarpTest::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	
 
 	// -------------- Texture
+	int x,y,n;
+	unsigned char *data = stbi_load("Images/gaben.jpg", &x, &y, &n, 0);
+	// NPOT Check
+	if((x & (x-1)) != 0 || (y & (y - 1)) != 0)
+	{
+		glLogErr("WARNING: texture is not power-of-2 dimensions");
+	}
+
 	GLuint tex;
 	glGenTextures(1, &tex);
+	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, tex);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	int x,y,n;
-	unsigned char *data = stbi_load("Images/gaben.jpg", &x, &y, &n, 0);
-
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, x, y, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
 	
 }

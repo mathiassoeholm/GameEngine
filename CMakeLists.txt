@@ -9,6 +9,7 @@ if(NOT OPENGL_FOUND)
 endif(NOT OPENGL_FOUND)
 
 file(COPY Shaders DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY Images DESTINATION ${CMAKE_BINARY_DIR})
 
 add_subdirectory(glfw)
 
