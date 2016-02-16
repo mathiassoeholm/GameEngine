@@ -6,7 +6,7 @@ static const int SEGMENTS = 100;
 
 HeightMapScene::HeightMapScene(GLFWwindow *window, int screenWidth, int screenHeight) : _camera{nullptr}
 {
-	_camera = new Camera(window, Vector3f(), Quaternionf());
+	_camera = new Camera(window, Vector3f(0.5, 1, 1), Quaternionf::fromEuler(10, 0, 0));
 	GLfloat vertices[SEGMENTS * SEGMENTS * 3];
 
 	int x,y,n;
@@ -48,7 +48,8 @@ HeightMapScene::HeightMapScene(GLFWwindow *window, int screenWidth, int screenHe
 		}
 	}
 
-	glUseProgram(ShaderUtil::createProgram("Shaders/BasicVertexShader.vert", "Shaders/BasicFragmentShader.frag"));
+	auto shaderProgram = ShaderUtil::createProgram("Shaders/SphereVertexShader.vert", "Shaders/BasicFragmentShader.frag");
+	glUseProgram(shaderProgram);
 
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
@@ -69,6 +70,18 @@ HeightMapScene::HeightMapScene(GLFWwindow *window, int screenWidth, int screenHe
 
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 	glBindVertexArray(0);
+
+	auto viewMatLocation = glGetUniformLocation(shaderProgram, "viewMat");
+	if (viewMatLocation != -1)
+	{
+		glUniformMatrix4fv(viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
+	}
+
+	auto modelMatLocation = glGetUniformLocation(shaderProgram, "modelMat");
+	if (modelMatLocation != -1)
+	{
+		glUniformMatrix4fv(modelMatLocation, 1, GL_TRUE, Matrix4x4f().valuePtr());
+	}
 }
 
 void HeightMapScene::run(GLFWwindow *window)
@@ -85,5 +98,5 @@ void HeightMapScene::init(GLFWwindow *window, int screenWidth, int screenHeight)
 
 HeightMapScene::~HeightMapScene()
 {
-	//delete _camera;
+	delete _camera;
 }
