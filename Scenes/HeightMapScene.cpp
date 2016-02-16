@@ -4,14 +4,9 @@
 
 static const int SEGMENTS = 100;
 
-HeightMapScene::HeightMapScene() : _camera{0, Vector3f(), Quaternionf()}
+HeightMapScene::HeightMapScene(GLFWwindow *window, int screenWidth, int screenHeight) : _camera{nullptr}
 {
-
-}
-
-void HeightMapScene::init(GLFWwindow *window, int screenWidth, int screenHeight)
-{
-	_camera = Camera(window, Vector3f(), Quaternionf());
+	_camera = new Camera(window, Vector3f(), Quaternionf());
 	GLfloat vertices[SEGMENTS * SEGMENTS * 3];
 
 	int x,y,n;
@@ -72,8 +67,8 @@ void HeightMapScene::init(GLFWwindow *window, int screenWidth, int screenHeight)
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(float), nullptr);
 
-	// Load image
-	// Generate vertices
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+	glBindVertexArray(0);
 }
 
 void HeightMapScene::run(GLFWwindow *window)
@@ -84,3 +79,11 @@ void HeightMapScene::run(GLFWwindow *window)
 }
 
 
+void HeightMapScene::init(GLFWwindow *window, int screenWidth, int screenHeight) {
+
+}
+
+HeightMapScene::~HeightMapScene()
+{
+	//delete _camera;
+}

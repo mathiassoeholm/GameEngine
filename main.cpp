@@ -170,7 +170,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	scene = new HeightMapScene();
+	scene = new HeightMapScene(window, currentWindowWidth, currentWindowHeight);
 	scene->init(window, currentWindowWidth, currentWindowHeight);
 
 	glfwSetKeyCallback(window, onKeyEvent);

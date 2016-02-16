@@ -4,5 +4,5 @@ in vec4 vp;
 
 void main()
 {
-	gl_position = vp;
+	gl_Position = vp;
 }
