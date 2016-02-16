@@ -6,8 +6,10 @@
 
 class HeightMapScene : public IScene
 {
-	Camera camera;
+	Camera _camera;
+	GLuint _vao;
 public:
+	HeightMapScene();
 	void init(GLFWwindow* window, int screenWidth, int screenHeight) override;
 	void run(GLFWwindow* window) override;
 	void onWindowSizeChanged(int width, int height) override;

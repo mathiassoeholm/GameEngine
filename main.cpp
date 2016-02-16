@@ -12,6 +12,7 @@
 #include "Matrix4x4.h"
 #include "Quaternion.h"
 #include "glm/ext.hpp"
+#include "Scenes/HeightMapScene.h"
 
 using namespace std;
 using namespace Math_ias;
@@ -169,7 +170,7 @@ int main(int argc, char **argv)
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LESS);
 
-	scene = new WarpTest();
+	scene = new HeightMapScene();
 	scene->init(window, currentWindowWidth, currentWindowHeight);
 
 	glfwSetKeyCallback(window, onKeyEvent);

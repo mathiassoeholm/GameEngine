@@ -50,8 +50,6 @@ void WarpTest::init(GLFWwindow* window, int screenWidth, int screenHeight)
 			indeces[index++] = i;
 			indeces[index++] = i + 1;
 			indeces[index++] = i + pointsX + 1;
-
-			
 		}
 	}
 
