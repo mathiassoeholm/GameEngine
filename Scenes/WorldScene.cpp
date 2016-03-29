@@ -61,29 +61,17 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	std::cout << _camera->getProjMatrix().toString() << std::endl;
 
 	_viewMatLocation = glGetUniformLocation(_shaderProgram, "viewMat");
-	if (_viewMatLocation != -1)
-	{
-		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
-	}
+	glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
 
 	_modelMatLocation = glGetUniformLocation(_shaderProgram, "modelMat");
-	if (_modelMatLocation != -1)
-	{
-		glUniformMatrix4fv(_modelMatLocation, 1, GL_TRUE, _modelMat.valuePtr());
-	}
+	glUniformMatrix4fv(_modelMatLocation, 1, GL_TRUE, _modelMat.valuePtr());
 
-	GLuint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
-	if (projMatrixLoc != -1)
-	{
-		glUniformMatrix4fv(projMatrixLoc, 1, GL_TRUE, _camera->getProjMatrix().valuePtr());
-	}
+	GLint projMatrixLoc = glGetUniformLocation(_shaderProgram, "projMat");
+	glUniformMatrix4fv(projMatrixLoc, 1, GL_TRUE, _camera->getProjMatrix().valuePtr());
 
 	_triangleColor = new Vector4f(1, 0, 0, 1);
 	_colorLocation = glGetUniformLocation(_shaderProgram, "color");
-	if (_colorLocation != -1)
-	{
-		glUniform4fv(_colorLocation, 1, _triangleColor->valuePtr());
-	}
+	glUniform4fv(_colorLocation, 1, _triangleColor->valuePtr());
 }
 
 void handleInput()
@@ -139,7 +127,7 @@ void WorldScene::run(GLFWwindow* window)
 	glBindVertexArray(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
-	triRotation = sin(currentTime) * 0.5;
+	triRotation = (float)(sin(currentTime) * 0.5f);
 	_modelMat = Matrix4x4f::rotationY(triRotation);
 	if (_modelMatLocation != -1)
 	{

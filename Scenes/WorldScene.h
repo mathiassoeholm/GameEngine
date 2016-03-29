@@ -8,9 +8,9 @@ class WorldScene : public IScene
 {
 	GLuint _vao;
 	GLuint _shaderProgram;
-	GLuint _viewMatLocation;
-	GLuint _modelMatLocation;
-	GLuint _colorLocation;
+	GLint _viewMatLocation;
+	GLint _modelMatLocation;
+	GLint _colorLocation;
 	Matrix4x4f _modelMat;
 	Camera * _camera;
 	Vector4f * _triangleColor;
