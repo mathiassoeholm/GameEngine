@@ -62,7 +62,7 @@ namespace ShaderUtil
 		glShaderSource(shaderIndex, 1, &source, nullptr);
 		glCompileShader(shaderIndex);
 
-		int params = -1;
+		GLint params = -1;
 		glGetShaderiv(shaderIndex, GL_COMPILE_STATUS, &params);
 
 		if (params != GL_TRUE)

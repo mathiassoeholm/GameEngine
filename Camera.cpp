@@ -19,7 +19,7 @@ void Camera::calculateProjMatrix()
 	float fov = 67.0f * static_cast<float>(ONE_DEG_IN_RAD);
 	float aspect = static_cast<float>(windowWidth) / static_cast<float>(windowHeight);
 
-	float range = tan(fov * 0.5f) * near;
+	float range = (float) (tan(fov * 0.5f) * near);
 	float Sx = (2.0f * near) / (range * aspect + range * aspect);
 	float Sy = near / range;
 	float Sz = -(far + near) / (far - near);

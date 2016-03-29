@@ -2,10 +2,7 @@
 #include "../ShaderUtil.h"
 #include "glm/ext.hpp"
 #include "../GLLog.h"
-#include <GLFW/glfw3.h>
-#include "Matrix4x4.h"
-#include "gl/glew.h"
-
+#include "../Vertex.h"
 
 #define ONE_DEG_IN_RAD 0.017444444
 
@@ -22,42 +19,37 @@ float triRotation = 0;
 
 void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 {
-	GLfloat points[] =
+	Vertex vertices[] =
 	{
-		0.0f, 0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		-0.5f, -0.5f, 0.0f
+		glm::vec3(0.0f, 0.5f, 0.0f), // Position
+		glm::vec3(0.0f, 0.0f, 1.0f), // Normal
+		glm::vec3(5.0f, 5.0f, 5.0f), // Color
+
+		glm::vec3(0.5f, -0.5f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 1.0f),
+		glm::vec3(5.0f, 5.0f, 5.0f),
+
+		glm::vec3(-0.5f, -0.5f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 1.0f),
+		glm::vec3(5.0f, 5.0f, 5.0f)
 	};
 
 	GLuint verticesVBO = 0;
 	glGenBuffers(1, &verticesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-
-	GLfloat normals[] = {
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f,
-		0.0f, 0.0f, 1.0f
-	};
-
-	GLuint normalsVBO = 0;
-	glGenBuffers(1, &normalsVBO);
-	glBindBuffer(GL_ARRAY_BUFFER, normalsVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(normals), normals, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	_vao = 0;
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
-
-	// Vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+
+	// Position
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 9, nullptr);
 
 	// Normals
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, normalsVBO);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 9, (const void *)3);
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/WorldVertexShader.vert", "Shaders/FragmentShader2.frag");
 

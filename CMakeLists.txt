@@ -22,6 +22,6 @@ add_definitions(-DGLEW_STATIC)
 
 SET(LIBRARIES glfw ${OPENGL_LIBRARY} ${CMAKE_DL_LIBS})
 
-set(SOURCE_FILES main.cpp glew/glew.c GLLog.cpp Scenes/WorldScene.cpp ShaderUtil.cpp Camera.cpp Scenes/WarpTest.cpp Scenes/HeightMapScene.cpp)
+set(SOURCE_FILES main.cpp glew/glew.c GLLog.cpp Scenes/WorldScene.cpp ShaderUtil.cpp Camera.cpp Scenes/WarpTest.cpp Scenes/HeightMapScene.cpp Vertex.h)
 add_executable(OpenGLPlayground ${SOURCE_FILES})
 target_link_libraries(OpenGLPlayground ${LIBRARIES})

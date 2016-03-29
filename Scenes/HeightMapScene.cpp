@@ -6,7 +6,7 @@ static const int SEGMENTS = 100;
 
 HeightMapScene::HeightMapScene(GLFWwindow *window, int screenWidth, int screenHeight) : _camera{nullptr}
 {
-	_camera = new Camera(window, Vector3f(0.5, 1, 1), Quaternionf::fromEuler(10, 0, 0));
+	_camera = new Camera(window, Vector3f(0.5, 0.5, 1), Quaternionf::fromEuler(0, 0, 0));
 	GLfloat vertices[SEGMENTS * SEGMENTS * 3];
 
 	int x,y,n;
