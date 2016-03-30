@@ -3,6 +3,7 @@
 #include "glm/ext.hpp"
 #include "../GLLog.h"
 #include "../Vertex.h"
+#include "../MeshFactory.h"
 
 #define ONE_DEG_IN_RAD 0.017444444
 
@@ -19,25 +20,12 @@ float triRotation = 0;
 
 void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 {
-	Vertex vertices[] =
-	{
-		glm::vec3(0.0f, 0.5f, 0.0f), // Position
-		glm::vec3(0.0f, 0.0f, 1.0f), // Normal
-		glm::vec3(5.0f, 5.0f, 5.0f), // Color
-
-		glm::vec3(0.5f, -0.5f, 0.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f),
-		glm::vec3(5.0f, 5.0f, 5.0f),
-
-		glm::vec3(-0.5f, -0.5f, 0.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f),
-		glm::vec3(5.0f, 5.0f, 5.0f)
-	};
+	auto triangle = MeshFactory::createTriangle();
 
 	GLuint verticesVBO = 0;
 	glGenBuffers(1, &verticesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, triangle.verticesBufferSize(), triangle.vertices, GL_STATIC_DRAW);
 
 	_vao = 0;
 	glGenVertexArrays(1, &_vao);
@@ -46,10 +34,12 @@ void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
 
 	// Position
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 9, nullptr);
+	glVertexAttribPointer(0, triangle.numVertices, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
 	// Normals
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(GL_FLOAT) * 9, (const void *)3);
+	glVertexAttribPointer(1, triangle.numVertices, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)3);
+
+	triangle.cleanup();
 
 	_shaderProgram = ShaderUtil::createProgram("Shaders/WorldVertexShader.vert", "Shaders/FragmentShader2.frag");
 
