@@ -17,21 +17,29 @@ Quaternionf camRotation = Quaternionf();
 float deltaTime;
 int lastPressedKey = -1;
 float triRotation = 0;
+GLuint numIndices;
 
 void WorldScene::init(GLFWwindow* window, int screenWidth, int screenHeight)
 {
 	auto triangle = MeshFactory::createTriangle();
+	numIndices = triangle.numIndices;
 
 	GLuint verticesVBO = 0;
 	glGenBuffers(1, &verticesVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
 	glBufferData(GL_ARRAY_BUFFER, triangle.verticesBufferSize(), triangle.vertices, GL_STATIC_DRAW);
 
+	GLuint indicesIBO;
+	glGenBuffers(1, &indicesIBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesIBO);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, triangle.indicesBufferSize(), triangle.indices, GL_STATIC_DRAW);
+
 	_vao = 0;
 	glGenVertexArrays(1, &_vao);
 	glBindVertexArray(_vao);
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, verticesVBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indicesIBO);
 
 	// Position
 	glVertexAttribPointer(0, triangle.numVertices, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
@@ -113,9 +121,11 @@ void WorldScene::run(GLFWwindow* window)
 
 		glUniformMatrix4fv(_viewMatLocation, 1, GL_TRUE, _camera->getViewMatrix().valuePtr());
 	}
-	
+
+
+	std::cout << numIndices << std::endl;
 	glBindVertexArray(_vao);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
 
 	triRotation = (float)(sin(currentTime) * 0.5f);
 	_modelMat = Matrix4x4f::rotationY(triRotation);

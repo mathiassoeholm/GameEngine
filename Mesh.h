@@ -30,4 +30,9 @@ struct Mesh
 	{
 		return sizeof(Vertex) * numVertices;
 	}
+
+	GLsizeiptr indicesBufferSize() const
+	{
+		return sizeof(GLushort) * numIndices;
+	}
 };

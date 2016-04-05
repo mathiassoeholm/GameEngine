@@ -6,4 +6,5 @@ class MeshFactory
 {
 public:
 	static Mesh createTriangle();
+	static Mesh createCube();
 };
