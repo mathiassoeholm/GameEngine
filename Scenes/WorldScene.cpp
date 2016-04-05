@@ -123,7 +123,6 @@ void WorldScene::run(GLFWwindow* window)
 	}
 
 
-	std::cout << numIndices << std::endl;
 	glBindVertexArray(_vao);
 	glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
 
