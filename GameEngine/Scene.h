@@ -14,5 +14,6 @@ namespace GameEngine
 	public:
 		Scene();
 		void addGameObject(GameObject gameObject);
+		virtual void onMouseClick(int button, int action, int mods){};
 	};
 }
