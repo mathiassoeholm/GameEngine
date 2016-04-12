@@ -13,6 +13,7 @@
 #include "Quaternion.h"
 #include "glm/ext.hpp"
 #include "Scenes/HeightMapScene.h"
+#include "GameEngine/Engine.h"
 
 using namespace std;
 using namespace Math_ias;
@@ -118,8 +119,18 @@ void mathTest()
 	cout << "From Euler: \n" << Quaternionf::fromEuler(0, 90, 0).getMatrix().toString() << endl;;
 }
 
+void engineTest()
+{
+	GameEngine::Engine* e = new GameEngine::Engine("Test", nullptr, 0);
+
+	delete e;
+}
+
 int main(int argc, char **argv)
 {
+	engineTest();
+	return 0;
+
 	//mathTest();
 
 	restartGlLog();

@@ -6,11 +6,22 @@ namespace GameEngine
 	const static int DEFAULT_SCREEN_WIDTH = 1024;
 	const static int DEFAULT_SCREEN_HEIGHT = 768;
 
+	Engine* Engine::instance = nullptr;
+
 	Engine::Engine(std::string gameTitle, Scene *scenes, GLint numScenes) :
 		gameTitle {gameTitle},
 		scenes {scenes},
 		numScenes{numScenes}
 	{
+		if(instance == nullptr)
+		{
+			instance = this;
+		}
+		else
+		{
+			std::cerr << "Can't instantiate more than one Engine" << std::endl;
+		}
+
 		initGLFW();
 	}
 
@@ -84,7 +95,6 @@ namespace GameEngine
 
 	Engine* Engine::getInstance()
 	{
-		// TODO: Return the game engine instance
-		return nullptr;
+		return instance;
 	}
 }
