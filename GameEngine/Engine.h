@@ -13,6 +13,8 @@ namespace GameEngine
 		std::string gameTitle;
 		Scene* scenes;
 		GLint numScenes;
+		GLint windowWidth;
+		GLint windowHeight;
 	public:
 		Engine(std::string gameTitle, Scene* scenes, GLint numScenes);
 		~Engine();
@@ -21,6 +23,7 @@ namespace GameEngine
 		bool initGLFW();
 		GLFWwindow *createWindow(bool fullScreen);
 		void onMouseClick(int button, int action, int mods);
+		void onWindowSizeChanged(int width, int height);
 	};
 }
 

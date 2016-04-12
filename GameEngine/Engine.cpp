@@ -12,7 +12,9 @@ namespace GameEngine
 		gameTitle {gameTitle},
 		scenes {scenes},
 		numScenes{numScenes},
-		window {nullptr}
+		window {nullptr},
+		windowWidth{DEFAULT_SCREEN_WIDTH},
+		windowHeight{DEFAULT_SCREEN_HEIGHT}
 	{
 		if(instance == nullptr)
 		{
@@ -31,7 +33,7 @@ namespace GameEngine
 		while (!glfwWindowShouldClose(window))
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glViewport(0, 0, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
+			glViewport(0, 0, windowWidth, windowHeight);
 
 			for (int i = 0; i < numScenes; ++i)
 			{
@@ -93,6 +95,10 @@ namespace GameEngine
 		else
 		{
 			window = glfwCreateWindow(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, gameTitle.c_str(), nullptr, nullptr);
+			glfwSetWindowSizeCallback(window, [=](GLFWwindow* w, int width, int height)
+			{
+				getInstance()->onWindowSizeChanged(width, height);
+			});
 		}
 
 		glfwSetMouseButtonCallback(window, [=](GLFWwindow* w, int button, int action, int mods)
@@ -116,9 +122,19 @@ namespace GameEngine
 		delete[] scenes;
 	}
 
-	
 	Engine* Engine::getInstance()
 	{
 		return instance;
+	}
+
+	void Engine::onWindowSizeChanged(int width, int height)
+	{
+		windowHeight = height;
+		windowWidth = width;
+
+		for (int i = 0; i < numScenes; ++i)
+		{
+			scenes[i].onWindowSizeChanged(width, height);
+		}
 	}
 }

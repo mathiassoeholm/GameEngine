@@ -14,5 +14,6 @@ namespace GameEngine
 		void update();
 		void addGameObject(GameObject gameObject);
 		virtual void onMouseClick(int button, int action, int mods){};
+		virtual void onWindowSizeChanged(int width, int height){};
 	};
 }
