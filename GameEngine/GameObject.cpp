@@ -9,7 +9,7 @@ namespace GameEngine
 
 	}
 
-	void GameObject::render()
+	void GameObject::update()
 	{
 		// TODO: Render MeshRenders
 	}

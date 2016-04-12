@@ -2,7 +2,7 @@
 
 namespace GameEngine
 {
-	void Scene::render()
+	void Scene::update()
 	{
 
 	}

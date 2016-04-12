@@ -9,6 +9,7 @@ namespace GameEngine
 	class Engine
 	{
 		static Engine* instance;
+		GLFWwindow* window;
 		std::string gameTitle;
 		Scene* scenes;
 		GLint numScenes;

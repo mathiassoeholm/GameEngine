@@ -13,7 +13,7 @@ namespace GameEngine
 		std::vector<Component> components;
 	public:
 		GameObject();
-		void render();
+		void update();
 		void addComponent(Component component);
 	};
 }

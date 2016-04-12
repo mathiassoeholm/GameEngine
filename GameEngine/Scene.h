@@ -9,10 +9,9 @@ namespace GameEngine
 	{
 	private:
 		std::vector<GameObject> gameObjects;
-		void render();
-
 	public:
 		Scene();
+		void update();
 		void addGameObject(GameObject gameObject);
 		virtual void onMouseClick(int button, int action, int mods){};
 	};

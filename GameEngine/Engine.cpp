@@ -11,7 +11,8 @@ namespace GameEngine
 	Engine::Engine(std::string gameTitle, Scene *scenes, GLint numScenes) :
 		gameTitle {gameTitle},
 		scenes {scenes},
-		numScenes{numScenes}
+		numScenes{numScenes},
+		window {nullptr}
 	{
 		if(instance == nullptr)
 		{
@@ -23,6 +24,28 @@ namespace GameEngine
 		}
 
 		initGLFW();
+		glewInit();
+
+		glEnable(GL_DEPTH_TEST);
+
+		while (!glfwWindowShouldClose(window))
+		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glViewport(0, 0, DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
+
+			for (int i = 0; i < numScenes; ++i)
+			{
+				scenes[i].update();
+			}
+
+			glfwPollEvents();
+			glfwSwapBuffers(window);
+
+			if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
+			{
+				glfwSetWindowShouldClose(window, 1);
+			}
+		}
 	}
 
 	bool Engine::initGLFW()
@@ -44,7 +67,7 @@ namespace GameEngine
 		// Anti-Aliasing
 		glfwWindowHint(GLFW_SAMPLES, 4);
 
-		GLFWwindow* window = createWindow(false);
+		window = createWindow(false);
 		if (!window)
 		{
 			std::cerr << "Could not open window with GLFW3" << std::endl;
