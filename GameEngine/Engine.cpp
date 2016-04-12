@@ -116,6 +116,7 @@ namespace GameEngine
 		delete[] scenes;
 	}
 
+	
 	Engine* Engine::getInstance()
 	{
 		return instance;
