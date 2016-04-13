@@ -1,14 +1,17 @@
 #pragma once
 
 #include <string>
+#include <GL/glew.h>
 
-namespace
+namespace GameEngine
 {
 	class Material
 	{
+		GLuint shaderProgramIndex;
 	public:
-		Material(std::string vertexShaderSource, std::string fragmentShaderSource);
+		Material(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
 		void use() const;
+	private:
+		GLuint createShader(const std::string& source, GLenum shaderType);
 	};
 }
-
