@@ -7,3 +7,8 @@ namespace GameEngine
 
 	}
 }
+
+Material::Material(std::string vertexShaderSource, std::string fragmentShaderSource)
+{
+
+}
