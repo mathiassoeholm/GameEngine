@@ -9,12 +9,12 @@ namespace GameEngine
 	Engine* Engine::instance = nullptr;
 
 	Engine::Engine(std::string gameTitle, Scene *scenes, GLint numScenes) :
-		gameTitle {gameTitle},
-		scenes {scenes},
-		numScenes{numScenes},
-		window {nullptr},
-		windowWidth{DEFAULT_SCREEN_WIDTH},
-		windowHeight{DEFAULT_SCREEN_HEIGHT}
+		gameTitle (gameTitle),
+		scenes (scenes),
+		numScenes(numScenes),
+		window (nullptr),
+		windowWidth(DEFAULT_SCREEN_WIDTH),
+		windowHeight(DEFAULT_SCREEN_HEIGHT)
 	{
 		if(instance == nullptr)
 		{
