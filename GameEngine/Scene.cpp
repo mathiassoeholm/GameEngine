@@ -4,7 +4,10 @@ namespace GameEngine
 {
 	void Scene::update()
 	{
-
+		for (auto gameObject : gameObjects)
+		{
+			gameObject.update();
+		}
 	}
 
 	Scene::Scene()

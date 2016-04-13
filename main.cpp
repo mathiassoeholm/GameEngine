@@ -130,6 +130,8 @@ int main(int argc, char **argv)
 {
 	engineTest();
 
+	return 0;
+
 	//mathTest();
 
 	restartGlLog();

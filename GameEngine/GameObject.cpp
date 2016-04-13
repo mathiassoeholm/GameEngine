@@ -4,19 +4,22 @@ namespace GameEngine
 {
 	GameObject::GameObject() :
 			modelMatrix{glm::mat4()},
-			components{std::vector<Component>()}
+			components{std::multiset<Component>()}
 	{
 
 	}
 
 	void GameObject::update()
 	{
-		// TODO: Render MeshRenders
+		for (auto component : components)
+		{
+			component.update();
+		}
 	}
 
 	void GameObject::addComponent(Component component)
 	{
-		components.push_back(component);
+		components.insert(component);
 	}
 }
 

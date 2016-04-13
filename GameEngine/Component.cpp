@@ -7,8 +7,18 @@ namespace GameEngine
 		enabled = value;
 	}
 
-	bool Component::getEnabled()
+	bool Component::getEnabled() const
 	{
 		return enabled;
+	}
+
+	int Component::getOrder() const
+	{
+		return 0;
+	}
+
+	bool Component::operator<(const Component &other) const
+	{
+		return getOrder() < other.getOrder();
 	}
 }
