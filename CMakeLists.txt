@@ -22,6 +22,6 @@ add_definitions(-DGLEW_STATIC)
 
 SET(LIBRARIES glfw ${OPENGL_LIBRARY} ${CMAKE_DL_LIBS})
 
-set(SOURCE_FILES main.cpp glew/glew.c GLLog.cpp Scenes/WorldScene.cpp ShaderUtil.cpp Camera.cpp Scenes/WarpTest.cpp Scenes/HeightMapScene.cpp Vertex.h Mesh.h MeshFactory.cpp MeshFactory.h GameEngine/GameObject.cpp GameEngine/GameObject.h GameEngine/Component.cpp GameEngine/Component.h GameEngine/MeshRenderer.cpp GameEngine/MeshRenderer.h GameEngine/Scene.cpp GameEngine/Scene.h GameEngine/Camera.cpp GameEngine/Camera.h GameEngine/Engine.cpp GameEngine/Engine.h GameEngine/Mesh.cpp GameEngine/Mesh.h GameEngine/Material.cpp GameEngine/Material.h GameEngine/Vertex.h)
+set(SOURCE_FILES main.cpp glew/glew.c GLLog.cpp Scenes/WorldScene.cpp ShaderUtil.cpp Camera.cpp Scenes/WarpTest.cpp Scenes/HeightMapScene.cpp Vertex.h Mesh.h MeshFactory.cpp MeshFactory.h GameEngine/GameObject.cpp GameEngine/GameObject.h GameEngine/Component.cpp GameEngine/Component.h GameEngine/MeshRenderer.cpp GameEngine/MeshRenderer.h GameEngine/Scene.cpp GameEngine/Scene.h GameEngine/Camera.cpp GameEngine/Camera.h GameEngine/Engine.cpp GameEngine/Engine.h GameEngine/Mesh.cpp GameEngine/Mesh.h GameEngine/Material.cpp GameEngine/Material.h GameEngine/Vertex.h GameEngine/Primitives.cpp GameEngine/Primitives.h GameEngineTest/TestScene.cpp GameEngineTest/TestScene.h)
 add_executable(OpenGLPlayground ${SOURCE_FILES})
 target_link_libraries(OpenGLPlayground ${LIBRARIES})

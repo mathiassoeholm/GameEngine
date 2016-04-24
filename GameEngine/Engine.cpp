@@ -30,6 +30,11 @@ namespace GameEngine
 
 		glEnable(GL_DEPTH_TEST);
 
+		for (int i = 0; i < numScenes; ++i)
+		{
+			scenes[i].initialize();
+		}
+
 		while (!glfwWindowShouldClose(window))
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -37,7 +42,8 @@ namespace GameEngine
 
 			for (int i = 0; i < numScenes; ++i)
 			{
-				scenes[i].update();
+				// TODO: Only update selected scene
+				//scenes[i].update();
 			}
 
 			glfwPollEvents();

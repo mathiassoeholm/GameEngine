@@ -14,6 +14,8 @@
 #include "glm/ext.hpp"
 #include "Scenes/HeightMapScene.h"
 #include "GameEngine/Engine.h"
+#include "GameEngine/MeshRenderer.h"
+#include "GameEngineTest/TestScene.h"
 
 using namespace std;
 using namespace Math_ias;
@@ -121,7 +123,16 @@ void mathTest()
 
 void engineTest()
 {
-	GameEngine::Engine* e = new GameEngine::Engine("Test", nullptr, 0);
+	using namespace GameEngine;
+
+	Scene* testScene = new TestScene();
+
+	//GameObject triangleGo;
+	//triangleGo.addComponent()
+
+	//mainScene->addGameObject()
+
+	GameEngine::Engine* e = new GameEngine::Engine("Test", testScene, 1);
 
 	delete e;
 }

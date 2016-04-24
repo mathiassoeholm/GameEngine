@@ -22,7 +22,4 @@ namespace GameEngine
 		// Rendering happens late in the update loop
 		return 1000;
 	}
-
-
 }
-
