@@ -26,6 +26,8 @@ namespace GameEngine
 		}
 
 		initGLFW();
+
+		glewExperimental = GL_TRUE;
 		glewInit();
 
 		glEnable(GL_DEPTH_TEST);
@@ -43,7 +45,7 @@ namespace GameEngine
 			for (int i = 0; i < numScenes; ++i)
 			{
 				// TODO: Only update selected scene
-				//scenes[i].update();
+				scenes[i].update();
 			}
 
 			glfwPollEvents();
@@ -56,8 +58,15 @@ namespace GameEngine
 		}
 	}
 
+	void glfwErrorCallback(int error, const char* description)
+	{
+		std::cerr << "GLFW ERROR: code " << error << " msg: " << description << std::endl;
+	}
+
 	bool Engine::initGLFW()
 	{
+		glfwSetErrorCallback(glfwErrorCallback);
+
 		if (!glfwInit())
 		{
 			std::cerr << "Could not start GLFW3" << std::endl;
@@ -125,7 +134,12 @@ namespace GameEngine
 
 	Engine::~Engine()
 	{
-		delete[] scenes;
+		glfwTerminate();
+
+		if(scenes != nullptr)
+		{
+			delete[] scenes;
+		}
 	}
 
 	Engine* Engine::getInstance()

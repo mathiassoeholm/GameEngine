@@ -125,7 +125,7 @@ void engineTest()
 {
 	using namespace GameEngine;
 
-	Scene* testScene = new TestScene();
+	Scene* testScene = new TestScene[1];
 
 	//GameObject triangleGo;
 	//triangleGo.addComponent()
