@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <memory>
 
 std::string readFile(const std::string& fileName)
 {
@@ -18,11 +19,12 @@ std::string readFile(const std::string& fileName)
 
 void TestScene::initialize()
 {
-	//Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
-	//Mesh triangleMesh = Primitives::createTriangle();
-	//MeshRenderer renderer(triangleMesh, material);
-	//GameObject triangleGo;
-	//triangleGo.addComponent(renderer);
+	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
+	Mesh triangleMesh = Primitives::createTriangle();
+	MeshRenderer renderer(triangleMesh, material);
+	GameObject triangleGo;
 
-	//addGameObject(triangleGo);
+	triangleGo.addComponent(std::unique_ptr<Component>(new MeshRenderer(triangleMesh, material)));
+
+	addGameObject(triangleGo);
 }

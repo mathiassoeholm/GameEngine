@@ -1,10 +1,11 @@
+#include <iostream>
 #include "GameObject.h"
 
 namespace GameEngine
 {
 	GameObject::GameObject() :
 			modelMatrix{glm::mat4()},
-			components{std::multiset<Component>()}
+			components{std::multiset<std::unique_ptr<Component>>()}
 	{
 
 	}
@@ -13,11 +14,11 @@ namespace GameEngine
 	{
 		for (auto component : components)
 		{
-			component.update();
+			component->update();
 		}
 	}
 
-	void GameObject::addComponent(Component component)
+	void GameObject::addComponent(const std::unique_ptr<Component>& component)
 	{
 		components.insert(component);
 	}
