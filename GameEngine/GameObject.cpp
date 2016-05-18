@@ -5,7 +5,7 @@ namespace GameEngine
 {
 	GameObject::GameObject() :
 			modelMatrix{glm::mat4()},
-			components{std::multiset<std::unique_ptr<Component>>()}
+			components{std::multiset<Component*>()}
 	{
 
 	}
@@ -18,9 +18,17 @@ namespace GameEngine
 		}
 	}
 
-	void GameObject::addComponent(const std::unique_ptr<Component>& component)
+	void GameObject::addComponent(Component* component)
 	{
 		components.insert(component);
+	}
+
+	void GameObject::destroy()
+	{
+		for (auto component : components)
+		{
+			delete component;
+		}
 	}
 }
 

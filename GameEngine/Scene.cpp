@@ -23,5 +23,13 @@ namespace GameEngine
 	{
 		gameObjects.push_back(gameObject);
 	}
+
+	void Scene::destroyAllGameObjects()
+	{
+		for (auto gameObject : gameObjects)
+		{
+			gameObject.destroy();
+		}
+	}
 }
 

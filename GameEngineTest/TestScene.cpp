@@ -24,7 +24,7 @@ void TestScene::initialize()
 	MeshRenderer renderer(triangleMesh, material);
 	GameObject triangleGo;
 
-	triangleGo.addComponent(std::unique_ptr<Component>(new MeshRenderer(triangleMesh, material)));
+	triangleGo.addComponent(new MeshRenderer(triangleMesh, material));
 
 	addGameObject(triangleGo);
 }

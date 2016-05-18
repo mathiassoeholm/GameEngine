@@ -13,6 +13,7 @@ namespace GameEngine
 		Scene();
 		void update();
 		void addGameObject(GameObject gameObject);
+		void destroyAllGameObjects();
 
 		// Called after the engine has initialized
 		virtual void initialize(){};

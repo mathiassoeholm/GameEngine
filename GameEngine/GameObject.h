@@ -13,10 +13,11 @@ namespace GameEngine
 		glm::mat4 modelMatrix;
 
 		// We keep components in a multiset, so that they are executed in order
-		std::multiset<std::unique_ptr<Component>> components;
+		std::multiset<Component*> components;
 	public:
 		GameObject();
 		void update();
-		void addComponent(const std::unique_ptr<Component>& component);
+		void addComponent(Component* component);
+		void destroy();
 	};
 }

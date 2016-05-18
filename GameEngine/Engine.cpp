@@ -136,6 +136,11 @@ namespace GameEngine
 	{
 		glfwTerminate();
 
+		for (int i = 0; i < numScenes; ++i)
+		{
+			scenes[i].destroyAllGameObjects();
+		}
+
 		if(scenes != nullptr)
 		{
 			delete[] scenes;
