@@ -3,9 +3,9 @@
 
 namespace GameEngine
 {
-	MeshRenderer::MeshRenderer(Mesh mesh, Material material) :
-		mesh(mesh),
-		material(material)
+	MeshRenderer::MeshRenderer(const Mesh& mesh, const Material& material) :
+		material(material),
+		mesh(mesh)
 	{
 
 	}
