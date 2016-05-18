@@ -35,6 +35,8 @@ namespace GameEngine
 		tri.indices = new GLushort[tri.numIndices];
 		memcpy(tri.indices, indices, sizeof(indices));
 
+		tri.sendToBuffer();
+
 		return tri;
 	}
 

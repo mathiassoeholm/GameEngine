@@ -17,10 +17,12 @@ namespace GameEngine
 		~Mesh();
 
 		void bind();
+		void sendToBuffer();
 		int getNumIndices() const;
 
 		Mesh& operator=(const Mesh &source);
 	private:
+		GLuint vao;
 		GLsizeiptr verticesBufferSize() const;
 		GLsizeiptr indicesBufferSize() const;
 		void copyValues(const Mesh &source);
