@@ -9,10 +9,10 @@ namespace GameEngine
 {
 	class MeshRenderer : public Component
 	{
-		Mesh& mesh;
-		Material& material;
+		Mesh mesh;
+		Material material;
 	public:
-		MeshRenderer(Mesh& mesh, Material& material);
+		MeshRenderer(Mesh mesh, Material material);
 		void update() override;
 		int getOrder() const override;
 	};

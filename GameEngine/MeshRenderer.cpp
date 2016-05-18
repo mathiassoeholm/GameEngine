@@ -3,7 +3,7 @@
 
 namespace GameEngine
 {
-	MeshRenderer::MeshRenderer(Mesh &mesh, Material &material) :
+	MeshRenderer::MeshRenderer(Mesh mesh, Material material) :
 		mesh(mesh),
 		material(material)
 	{
