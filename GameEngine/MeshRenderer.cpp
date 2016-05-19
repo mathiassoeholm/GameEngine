@@ -1,5 +1,4 @@
 #include "MeshRenderer.h"
-#include "gl/glew.h"
 
 namespace GameEngine
 {
@@ -12,6 +11,7 @@ namespace GameEngine
 
 	void MeshRenderer::update()
 	{
+		material.setUniform("modelMatrix", getGameObject()->getModelMatrix());
 		material.use();
 		mesh.bind();
 		glDrawElements(GL_TRIANGLES, mesh.getNumIndices(), GL_UNSIGNED_SHORT, 0);

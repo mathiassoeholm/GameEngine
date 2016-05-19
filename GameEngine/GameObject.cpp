@@ -3,9 +3,11 @@
 
 namespace GameEngine
 {
+
+
 	GameObject::GameObject() :
-			modelMatrix{glm::mat4()},
-			components{std::multiset<Component*>()}
+			modelMatrix(glm::mat4()),
+			components(std::multiset<Component*>())
 	{
 
 	}
@@ -21,6 +23,7 @@ namespace GameEngine
 	void GameObject::addComponent(Component* component)
 	{
 		components.insert(component);
+		component->initialize(this);
 	}
 
 	void GameObject::destroy()
@@ -29,6 +32,11 @@ namespace GameEngine
 		{
 			delete component;
 		}
+	}
+
+	const glm::mat4& GameObject::getModelMatrix() const
+	{
+		return modelMatrix;
 	}
 }
 

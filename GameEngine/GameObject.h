@@ -8,6 +8,9 @@
 
 namespace GameEngine
 {
+	// Forward declaration because of cyclic dependency
+	class Component;
+
 	class GameObject
 	{
 		glm::mat4 modelMatrix;
@@ -19,5 +22,6 @@ namespace GameEngine
 		void update();
 		void addComponent(Component* component);
 		void destroy();
+		const glm::mat4& getModelMatrix() const;
 	};
 }

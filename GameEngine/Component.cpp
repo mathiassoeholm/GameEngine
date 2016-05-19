@@ -21,4 +21,14 @@ namespace GameEngine
 	{
 		return getOrder() < other.getOrder();
 	}
+
+	void Component::initialize(GameObject* gameObject)
+	{
+		this->gameObject = gameObject;
+	}
+
+	GameObject* Component::getGameObject() const
+	{
+		return gameObject;
+	}
 }
