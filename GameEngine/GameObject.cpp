@@ -3,8 +3,6 @@
 
 namespace GameEngine
 {
-
-
 	GameObject::GameObject() :
 			modelMatrix(glm::mat4()),
 			components(std::multiset<Component*>())
@@ -37,6 +35,11 @@ namespace GameEngine
 	const glm::mat4& GameObject::getModelMatrix() const
 	{
 		return modelMatrix;
+	}
+
+	void GameObject::translate(const glm::vec3 translation)
+	{
+		modelMatrix = modelMatrix * glm::transpose(glm::translate(translation));
 	}
 }
 

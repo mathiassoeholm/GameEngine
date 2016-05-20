@@ -11,8 +11,8 @@ namespace GameEngine
 
 	void MeshRenderer::update()
 	{
-		material.setUniform("modelMatrix", getGameObject()->getModelMatrix());
 		material.use();
+		material.setUniform("modelMatrix", getGameObject()->getModelMatrix());
 		mesh.bind();
 		glDrawElements(GL_TRIANGLES, mesh.getNumIndices(), GL_UNSIGNED_SHORT, 0);
 	}

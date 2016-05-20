@@ -6,20 +6,20 @@ namespace GameEngine
 	{
 		for (auto gameObject : gameObjects)
 		{
-			gameObject.update();
+			gameObject->update();
 		}
 	}
 
 	Scene::Scene()
 	{
-		gameObjects = std::vector<GameObject>();
+		gameObjects = std::vector<GameObject*>();
 
 		// TODO: Add Camera component and so on
-		GameObject mainCamera;
-		addGameObject(mainCamera);
+		//GameObject mainCamera;
+		//addGameObject(mainCamera);
 	}
 
-	void Scene::addGameObject(GameObject gameObject)
+	void Scene::addGameObject(GameObject* gameObject)
 	{
 		gameObjects.push_back(gameObject);
 	}
@@ -28,7 +28,8 @@ namespace GameEngine
 	{
 		for (auto gameObject : gameObjects)
 		{
-			gameObject.destroy();
+			gameObject->destroy();
+			delete gameObject;
 		}
 	}
 }

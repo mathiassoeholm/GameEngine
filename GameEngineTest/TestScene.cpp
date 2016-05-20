@@ -3,10 +3,10 @@
 #include "../GameEngine/Mesh.h"
 #include "../GameEngine/Primitives.h"
 #include "../GameEngine/MeshRenderer.h"
+#include "CustomComponent.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <memory>
 
 std::string readFile(const std::string& fileName)
 {
@@ -21,9 +21,10 @@ void TestScene::initialize()
 {
 	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
 	Mesh triangleMesh = Primitives::createTriangle();
-	GameObject triangleGo;
+	GameObject* triangleGo = new GameObject();
 
-	triangleGo.addComponent(new MeshRenderer(triangleMesh, material));
+	triangleGo->addComponent(new MeshRenderer(triangleMesh, material));
+	triangleGo->addComponent(new CustomComponent());
 
 	addGameObject(triangleGo);
 }

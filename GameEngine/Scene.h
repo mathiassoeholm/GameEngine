@@ -8,11 +8,11 @@ namespace GameEngine
 	class Scene
 	{
 	private:
-		std::vector<GameObject> gameObjects;
+		std::vector<GameObject*> gameObjects;
 	public:
 		Scene();
 		void update();
-		void addGameObject(GameObject gameObject);
+		void addGameObject(GameObject* gameObject);
 		void destroyAllGameObjects();
 
 		// Called after the engine has initialized
