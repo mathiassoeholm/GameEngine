@@ -1,10 +1,6 @@
-//
-// Created by Mathias on 20-05-2016.
-//
-
 #include "CustomComponent.h"
 
-void CustomComponent::update()
+void CustomComponent::update(Time& time)
 {
-	getGameObject()->translate(glm::vec3(0.005f, 0.005f, 0));
+	getGameObject()->translate(glm::vec3(0.1f, 0.05f, 0) * time.getDeltaTime());
 }

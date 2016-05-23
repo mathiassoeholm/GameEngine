@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Time.h"
 
 namespace GameEngine
 {
@@ -18,7 +19,7 @@ namespace GameEngine
 		GameObject* getGameObject() const;
 		void setEnabled(bool value);
 		bool getEnabled() const;
-		virtual void update() {}
+		virtual void update(Time& time) {}
 
 		// Components with lower order will run first, default order is 0
 		virtual int getOrder() const;

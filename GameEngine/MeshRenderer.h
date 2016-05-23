@@ -13,7 +13,7 @@ namespace GameEngine
 		Material material;
 	public:
 		MeshRenderer(const Mesh& mesh, const Material& material);
-		void update() override;
+		void update(Time& time) override;
 		int getOrder() const override;
 	};
 }

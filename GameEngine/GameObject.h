@@ -5,6 +5,7 @@
 #include <memory>
 #include "gl/glew.h"
 #include "Component.h"
+#include "Time.h"
 
 namespace GameEngine
 {
@@ -19,7 +20,7 @@ namespace GameEngine
 		std::multiset<Component*> components;
 	public:
 		GameObject();
-		void update();
+		void update(Time& time);
 		void addComponent(Component* component);
 		void destroy();
 		void translate(const glm::vec3 translation);

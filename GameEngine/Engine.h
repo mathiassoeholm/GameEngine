@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Scene.h"
+#include "Time.h"
 #include <string>
 #include <GLFW/glfw3.h>
 
@@ -15,6 +16,7 @@ namespace GameEngine
 		GLint numScenes;
 		GLint windowWidth;
 		GLint windowHeight;
+		Time time;
 	public:
 		Engine(std::string gameTitle, Scene* scenes, GLint numScenes);
 		~Engine();

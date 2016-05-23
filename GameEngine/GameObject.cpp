@@ -10,11 +10,11 @@ namespace GameEngine
 
 	}
 
-	void GameObject::update()
+	void GameObject::update(Time& time)
 	{
 		for (auto component : components)
 		{
-			component->update();
+			component->update(time);
 		}
 	}
 

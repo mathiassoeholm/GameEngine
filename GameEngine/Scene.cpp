@@ -2,11 +2,11 @@
 
 namespace GameEngine
 {
-	void Scene::update()
+	void Scene::update(Time& time)
 	{
 		for (auto gameObject : gameObjects)
 		{
-			gameObject->update();
+			gameObject->update(time);
 		}
 	}
 

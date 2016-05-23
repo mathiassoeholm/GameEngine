@@ -7,5 +7,5 @@ using namespace GameEngine;
 class CustomComponent : public Component
 {
 public:
-	void update() override;
+	void update(Time& time) override;
 };

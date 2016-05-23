@@ -9,7 +9,7 @@ namespace GameEngine
 
 	}
 
-	void MeshRenderer::update()
+	void MeshRenderer::update(Time& time)
 	{
 		material.use();
 		material.setUniform("modelMatrix", getGameObject()->getModelMatrix());

@@ -14,7 +14,8 @@ namespace GameEngine
 		numScenes(numScenes),
 		window (nullptr),
 		windowWidth(DEFAULT_SCREEN_WIDTH),
-		windowHeight(DEFAULT_SCREEN_HEIGHT)
+		windowHeight(DEFAULT_SCREEN_HEIGHT),
+		time(Time())
 	{
 		if(instance == nullptr)
 		{
@@ -42,10 +43,12 @@ namespace GameEngine
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glViewport(0, 0, windowWidth, windowHeight);
 
+			time.update();
+
 			for (int i = 0; i < numScenes; ++i)
 			{
 				// TODO: Only update selected scene
-				scenes[i].update();
+				scenes[i].update(time);
 			}
 
 			glfwPollEvents();

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "GameObject.h"
+#include "Time.h"
 
 namespace GameEngine
 {
@@ -11,7 +12,7 @@ namespace GameEngine
 		std::vector<GameObject*> gameObjects;
 	public:
 		Scene();
-		void update();
+		void update(Time& time);
 		void addGameObject(GameObject* gameObject);
 		void destroyAllGameObjects();
 
