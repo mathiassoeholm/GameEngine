@@ -37,9 +37,16 @@ namespace GameEngine
 		return modelMatrix;
 	}
 
-	void GameObject::translate(const glm::vec3 translation)
+	void GameObject::translate(const glm::vec3& translation)
 	{
 		modelMatrix = modelMatrix * glm::transpose(glm::translate(translation));
+	}
+
+	void GameObject::setPosition(const glm::vec3& position)
+	{
+		modelMatrix[0][3] = position.x;
+		modelMatrix[1][3] = position.y;
+		modelMatrix[2][3] = position.z;
 	}
 }
 

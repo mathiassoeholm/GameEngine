@@ -2,5 +2,7 @@
 
 void CustomComponent::update(Time& time)
 {
-	getGameObject()->translate(glm::vec3(0.1f, 0.05f, 0) * time.getDeltaTime());
+	double s = sin(time.getElapsedTime()) * 0.5;
+	double c = cos(time.getElapsedTime()) * 0.5;
+	getGameObject()->setPosition(glm::vec3(s, c, 0));
 }
