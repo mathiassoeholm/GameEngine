@@ -21,10 +21,8 @@ void TestScene::initialize()
 {
 	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
 	Mesh triangleMesh = Primitives::createTriangle();
-	GameObject* triangleGo = new GameObject();
+	auto triangleGo = instantiateGameObject();
 
 	triangleGo->addComponent(new MeshRenderer(triangleMesh, material));
 	triangleGo->addComponent(new CustomComponent());
-
-	addGameObject(triangleGo);
 }

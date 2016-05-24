@@ -8,12 +8,20 @@ namespace GameEngine
 		{
 			gameObject->update(time);
 		}
+
+		// GameObjects are destroyed at the end of the update loop
+		for (auto gameObject : gameObjectsToDestroy)
+		{
+			gameObjects.remove(gameObject);
+			delete gameObject;
+		}
+
+		gameObjectsToDestroy.clear();
 	}
 
-	Scene::Scene()
+	Scene::Scene() : gameObjectsToDestroy(std::vector<GameObject*>()),
+					 gameObjects(std::forward_list<GameObject*>())
 	{
-		gameObjects = std::forward_list<GameObject*>();
-
 		// TODO: Add Camera component and so on
 		//GameObject mainCamera;
 		//addGameObject(mainCamera);
@@ -36,8 +44,14 @@ namespace GameEngine
 
 	void Scene::destroyGameObject(GameObject *gameObject)
 	{
-		gameObjects.remove(gameObject);
-		delete gameObject;
+		gameObjectsToDestroy.push_back(gameObject);
+	}
+
+	GameObject* Scene::instantiateGameObject()
+	{
+		auto go = new GameObject(*this);
+		addGameObject(go);
+		return go;
 	}
 }
 

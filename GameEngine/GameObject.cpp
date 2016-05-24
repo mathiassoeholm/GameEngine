@@ -3,9 +3,11 @@
 
 namespace GameEngine
 {
-	GameObject::GameObject() :
+	GameObject::GameObject(Scene& parentScene) :
 			modelMatrix(glm::mat4()),
-			components(std::multiset<Component*>())
+			components(std::multiset<Component*>()),
+			parentScene(parentScene),
+			isDestroyed(false)
 	{
 
 	}
@@ -15,6 +17,11 @@ namespace GameEngine
 		for (auto component : components)
 		{
 			component->update(time);
+
+			if(isDestroyed)
+			{
+				return;
+			}
 		}
 	}
 
@@ -41,12 +48,19 @@ namespace GameEngine
 		modelMatrix[2][3] = position.z;
 	}
 
+	void GameObject::destroy()
+	{
+		isDestroyed = true;
+		parentScene.destroyGameObject(this);
+	}
+
 	GameObject::~GameObject()
 	{
 		for (auto component : components)
 		{
 			delete component;
 		}
+
+		components.clear();
 	}
 }
-
