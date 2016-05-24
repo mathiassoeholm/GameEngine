@@ -24,14 +24,6 @@ namespace GameEngine
 		component->initialize(this);
 	}
 
-	void GameObject::destroy()
-	{
-		for (auto component : components)
-		{
-			delete component;
-		}
-	}
-
 	const glm::mat4& GameObject::getModelMatrix() const
 	{
 		return modelMatrix;
@@ -47,6 +39,14 @@ namespace GameEngine
 		modelMatrix[0][3] = position.x;
 		modelMatrix[1][3] = position.y;
 		modelMatrix[2][3] = position.z;
+	}
+
+	GameObject::~GameObject()
+	{
+		for (auto component : components)
+		{
+			delete component;
+		}
 	}
 }
 

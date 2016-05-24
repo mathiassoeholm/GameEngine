@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <forward_list>
 #include "GameObject.h"
 #include "Time.h"
 
@@ -9,11 +9,12 @@ namespace GameEngine
 	class Scene
 	{
 	private:
-		std::vector<GameObject*> gameObjects;
+		std::forward_list<GameObject*> gameObjects;
 	public:
 		Scene();
 		void update(Time& time);
 		void addGameObject(GameObject* gameObject);
+		void destroyGameObject(GameObject* gameObject);
 		void destroyAllGameObjects();
 
 		// Called after the engine has initialized

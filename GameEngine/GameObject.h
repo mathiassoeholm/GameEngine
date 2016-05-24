@@ -20,9 +20,9 @@ namespace GameEngine
 		std::multiset<Component*> components;
 	public:
 		GameObject();
+		~GameObject();
 		void update(Time& time);
 		void addComponent(Component* component);
-		void destroy();
 		void setPosition(const glm::vec3& position);
 		void translate(const glm::vec3& translation);
 		const glm::mat4& getModelMatrix() const;
