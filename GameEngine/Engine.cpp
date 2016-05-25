@@ -3,7 +3,7 @@
 
 namespace GameEngine
 {
-	const static int DEFAULT_SCREEN_WIDTH = 1024;
+	const static int DEFAULT_SCREEN_WIDTH = 768;
 	const static int DEFAULT_SCREEN_HEIGHT = 768;
 
 	Engine* Engine::instance = nullptr;

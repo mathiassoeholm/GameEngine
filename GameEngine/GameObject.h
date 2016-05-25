@@ -29,6 +29,7 @@ namespace GameEngine
 		void addComponent(Component* component);
 		void setPosition(const glm::vec3& position);
 		void translate(const glm::vec3& translation);
+        void rotate(const glm::vec3& rotation);
 		void destroy();
 		const glm::mat4& getModelMatrix() const;
 	};
