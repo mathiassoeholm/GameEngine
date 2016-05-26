@@ -3,7 +3,7 @@
 
 namespace GameEngine
 {
-	Time::Time() : lastGLFWTime(glfwGetTime()), timeScale(1)
+	Time::Time() : lastGLFWTime(glfwGetTime()), timeScale(1), elapsedTime(0)
 	{
 
 	}

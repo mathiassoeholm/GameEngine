@@ -2,6 +2,14 @@
 
 namespace GameEngine
 {
+	Scene::Scene() : gameObjectsToDestroy(std::vector<GameObject*>()),
+					 gameObjects(std::forward_list<GameObject*>())
+	{
+		auto camGameObject = instantiateGameObject();
+		//mainCamera = new Camera();
+		//camGameObject->addComponent(mainCamera);
+	}
+
 	void Scene::update(Time& time)
 	{
 		for (auto gameObject : gameObjects)
@@ -17,14 +25,6 @@ namespace GameEngine
 		}
 
 		gameObjectsToDestroy.clear();
-	}
-
-	Scene::Scene() : gameObjectsToDestroy(std::vector<GameObject*>()),
-					 gameObjects(std::forward_list<GameObject*>())
-	{
-		// TODO: Add Camera component and so on
-		//GameObject mainCamera;
-		//addGameObject(mainCamera);
 	}
 
 	void Scene::addGameObject(GameObject* gameObject)
@@ -52,6 +52,11 @@ namespace GameEngine
 		auto go = new GameObject(*this);
 		addGameObject(go);
 		return go;
+	}
+
+	Camera* Scene::getMainCamera() const
+	{
+		return mainCamera;
 	}
 }
 

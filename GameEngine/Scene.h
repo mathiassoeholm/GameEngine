@@ -4,6 +4,7 @@
 #include <vector>
 #include "GameObject.h"
 #include "Time.h"
+#include "Camera.h"
 
 namespace GameEngine
 {
@@ -13,10 +14,12 @@ namespace GameEngine
 	class Scene
 	{
 	private:
+		Camera* mainCamera;
 		std::forward_list<GameObject*> gameObjects;
 		std::vector<GameObject*> gameObjectsToDestroy;
 	public:
 		Scene();
+		Camera* getMainCamera() const;
 		void update(Time& time);
 		void addGameObject(GameObject* gameObject);
 		void destroyGameObject(GameObject* gameObject);

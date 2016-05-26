@@ -1,4 +1,9 @@
-class Camera
-{
+#pragma once
 
-};
+namespace GameEngine
+{
+	class Camera
+	{
+
+	};
+}

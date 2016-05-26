@@ -66,12 +66,8 @@ namespace GameEngine
 
     void GameObject::rotate(const glm::vec3 &rotation)
     {
-        auto modelMatrixT = glm::transpose(modelMatrix);
-
-        modelMatrixT = glm::rotate(modelMatrixT, rotation.x, glm::vec3(1, 0 ,0));
-        modelMatrixT = glm::rotate(modelMatrixT, rotation.y, glm::vec3(0, 1 ,0));
-        modelMatrixT = glm::rotate(modelMatrixT, rotation.z, glm::vec3(0, 0 ,1));
-
-        modelMatrix = glm::transpose(modelMatrixT);
+		modelMatrix = glm::rotate(modelMatrix, rotation.x, glm::vec3(1, 0 ,0));
+		modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0, 1 ,0));
+		modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0, 0 ,1));
     }
 }
