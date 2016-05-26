@@ -2,14 +2,13 @@
 
 #include <forward_list>
 #include <vector>
-#include "GameObject.h"
 #include "Time.h"
-#include "Camera.h"
 
 namespace GameEngine
 {
-	// Forward declaration because of cyclic dependency
+	// Forward declarations because of cyclic dependencies
 	class GameObject;
+	class Camera;
 
 	class Scene
 	{

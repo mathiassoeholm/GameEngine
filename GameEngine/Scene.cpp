@@ -1,4 +1,6 @@
 #include "Scene.h"
+#include "GameObject.h"
+#include "Camera.h"
 
 namespace GameEngine
 {
@@ -6,8 +8,8 @@ namespace GameEngine
 					 gameObjects(std::forward_list<GameObject*>())
 	{
 		auto camGameObject = instantiateGameObject();
-		//mainCamera = new Camera();
-		//camGameObject->addComponent(mainCamera);
+		mainCamera = new Camera();
+		camGameObject->addComponent(mainCamera);
 	}
 
 	void Scene::update(Time& time)

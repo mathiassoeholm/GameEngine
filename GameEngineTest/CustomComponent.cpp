@@ -1,3 +1,5 @@
+#include <math.h>
+#include <glm/detail/type_vec.hpp>
 #include "CustomComponent.h"
 
 void CustomComponent::update(Time& time)

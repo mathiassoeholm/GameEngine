@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GameObject.h"
+#include "Component.h"
 
 namespace GameEngine
 {

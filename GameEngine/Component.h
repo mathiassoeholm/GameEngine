@@ -1,13 +1,10 @@
 #pragma once
 
-#include "GameObject.h"
 #include "Time.h"
+#include "GameObject.h"
 
 namespace GameEngine
 {
-	// Forward declaration because of cyclic dependency
-	class GameObject;
-
 	class Component
 	{
 		bool enabled;

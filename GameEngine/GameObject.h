@@ -4,7 +4,6 @@
 #include <set>
 #include <memory>
 #include "gl/glew.h"
-#include "Component.h"
 #include "Time.h"
 #include "Scene.h"
 
@@ -12,7 +11,6 @@ namespace GameEngine
 {
 	// Forward declarations because of cyclic dependencies
 	class Component;
-	class Scene;
 
 	class GameObject
 	{
