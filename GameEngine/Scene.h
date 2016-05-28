@@ -27,7 +27,10 @@ namespace GameEngine
 
 		// Called after the engine has initialized
 		virtual void initialize(){};
+
+		void mouseClick(int button, int action, int mods);
 		virtual void onMouseClick(int button, int action, int mods){};
+		void windowSizeChanged(int width, int height);
 		virtual void onWindowSizeChanged(int width, int height){};
 	};
 }

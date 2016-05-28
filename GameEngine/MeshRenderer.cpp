@@ -1,4 +1,5 @@
 #include "MeshRenderer.h"
+#include "Camera.h"
 
 namespace GameEngine
 {
@@ -12,7 +13,16 @@ namespace GameEngine
 	void MeshRenderer::update(Time& time)
 	{
 		material.use();
-		material.setUniform("modelMatrix", getGameObject()->getModelMatrix());
+
+		auto model = getGameObject()->getModelMatrix();
+		auto view = getGameObject()->getCamera()->getViewMatrix();
+		auto proj = getGameObject()->getCamera()->getProjMatrix();
+
+		material.setUniform("modelMatrix", model);
+		material.setUniform("viewMatrix", view);
+		material.setUniform("projMatrix", proj);
+		material.setUniform("mvpMatrix", proj * view * model);
+
 		mesh.bind();
 		glDrawElements(GL_TRIANGLES, mesh.getNumIndices(), GL_UNSIGNED_SHORT, 0);
 	}

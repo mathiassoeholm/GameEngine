@@ -60,5 +60,17 @@ namespace GameEngine
 	{
 		return mainCamera;
 	}
+
+	void Scene::windowSizeChanged(int width, int height)
+	{
+		mainCamera->setScreenDimensions(width, height);
+
+		onWindowSizeChanged(width, height);
+	}
+
+	void Scene::mouseClick(int button, int action, int mods)
+	{
+		onMouseClick(button, action, mods);
+	}
 }
 

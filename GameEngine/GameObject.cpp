@@ -42,6 +42,11 @@ namespace GameEngine
 		modelMatrix = modelMatrix * glm::transpose(glm::translate(translation));
 	}
 
+	glm::vec3 GameObject::getPosition() const
+	{
+		return glm::vec3(modelMatrix[0][3], modelMatrix[1][3], modelMatrix[2][3]);
+	}
+
 	void GameObject::setPosition(const glm::vec3& position)
 	{
 		modelMatrix[0][3] = position.x;
@@ -71,4 +76,9 @@ namespace GameEngine
 		modelMatrix = glm::rotate(modelMatrix, rotation.y, glm::vec3(0, 1 ,0));
 		modelMatrix = glm::rotate(modelMatrix, rotation.z, glm::vec3(0, 0 ,1));
     }
+
+	Camera* GameObject::getCamera() const
+	{
+		return parentScene.getMainCamera();
+	}
 }

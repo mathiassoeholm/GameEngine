@@ -16,6 +16,7 @@ namespace GameEngine
 		GameObject* getGameObject() const;
 		void setEnabled(bool value);
 		bool getEnabled() const;
+		virtual void onInitialize() {}
 		virtual void update(Time& time) {}
 
 		// Components with lower order will run first, default order is 0

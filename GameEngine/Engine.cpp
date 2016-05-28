@@ -109,6 +109,7 @@ namespace GameEngine
 			GLFWmonitor* mon = glfwGetPrimaryMonitor();
 			const GLFWvidmode* vidmode = glfwGetVideoMode(mon);
 			window = glfwCreateWindow(vidmode->width, vidmode->height, gameTitle.c_str(), mon, nullptr);
+			getInstance()->onWindowSizeChanged(vidmode->width, vidmode->height);
 		}
 		else
 		{
@@ -117,7 +118,10 @@ namespace GameEngine
 			{
 				getInstance()->onWindowSizeChanged(width, height);
 			});
+			getInstance()->onWindowSizeChanged(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 		}
+
+
 
 		glfwSetMouseButtonCallback(window, [=](GLFWwindow* w, int button, int action, int mods)
 		{
@@ -131,7 +135,7 @@ namespace GameEngine
 	{
 		for (int i = 0; i < numScenes; ++i)
 		{
-			scenes[i].onMouseClick(button, action, mods);
+			scenes[i].mouseClick(button, action, mods);
 		}
 	}
 
@@ -162,7 +166,7 @@ namespace GameEngine
 
 		for (int i = 0; i < numScenes; ++i)
 		{
-			scenes[i].onWindowSizeChanged(width, height);
+			scenes[i].windowSizeChanged(width, height);
 		}
 	}
 }

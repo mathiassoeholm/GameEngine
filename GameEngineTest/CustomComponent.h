@@ -8,4 +8,5 @@ class CustomComponent : public Component
 {
 public:
 	void update(Time& time) override;
+	void onInitialize() override;
 };

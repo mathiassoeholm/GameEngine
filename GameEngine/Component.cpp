@@ -25,6 +25,7 @@ namespace GameEngine
 	void Component::initialize(GameObject* gameObject)
 	{
 		this->gameObject = gameObject;
+		onInitialize();
 	}
 
 	GameObject* Component::getGameObject() const
