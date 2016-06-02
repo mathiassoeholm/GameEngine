@@ -65,7 +65,7 @@ namespace GameEngine
 
 		if(location != -1)
 		{
-			glUniformMatrix4fv(location, 1, GL_TRUE, glm::value_ptr(matrix));
+			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
 		}
 	}
 }

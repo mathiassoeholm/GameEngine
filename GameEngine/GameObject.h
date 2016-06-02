@@ -14,6 +14,9 @@ namespace GameEngine
 
 	class GameObject
 	{
+		glm::mat4 rotationMatrix;
+		glm::mat4 translationMatrix;
+		glm::mat4 scaleMatrix;
 		glm::mat4 modelMatrix;
 		Scene& parentScene;
 		bool isDestroyed;
@@ -30,6 +33,7 @@ namespace GameEngine
 		void translate(const glm::vec3& translation);
         void rotate(const glm::vec3& rotation);
 		void destroy();
+		void updateModelMatrix();
 		const glm::mat4& getModelMatrix() const;
 		Camera* getCamera() const;
 	};
