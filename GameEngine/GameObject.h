@@ -36,5 +36,9 @@ namespace GameEngine
 		void updateModelMatrix();
 		const glm::mat4& getModelMatrix() const;
 		Camera* getCamera() const;
+
+		glm::vec3 getUp() const;
+		glm::vec3 getForward() const;
+		glm::vec3 getRight() const;
 	};
 }

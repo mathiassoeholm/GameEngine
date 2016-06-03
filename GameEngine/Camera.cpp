@@ -50,8 +50,8 @@ namespace GameEngine
 
 		viewMatrix = glm::lookAt(
 				getGameObject()->getPosition(),
-				glm::vec3(0,0,0), // TODO: Look in direction of cam rotation
-				glm::vec3(0,1,0));
+				getGameObject()->getPosition() + getGameObject()->getForward(),
+				getGameObject()->getUp());
 	}
 
 	void Camera::setScreenDimensions(const GLint &width, const GLint &height)

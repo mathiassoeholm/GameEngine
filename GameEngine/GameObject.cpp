@@ -42,7 +42,9 @@ namespace GameEngine
 
 	void GameObject::translate(const glm::vec3& translation)
 	{
-		translationMatrix = glm::translate(translation) * translationMatrix;
+		translationMatrix[3][0] += translation.x;
+		translationMatrix[3][1] += translation.y;
+		translationMatrix[3][2] += translation.z;
 		updateModelMatrix();
 	}
 
@@ -92,5 +94,23 @@ namespace GameEngine
 	void GameObject::updateModelMatrix()
 	{
 		modelMatrix = translationMatrix * rotationMatrix * scaleMatrix;
+	}
+
+	glm::vec3 GameObject::getUp() const
+	{
+		auto v = rotationMatrix * glm::vec4(0, 1, 0, 0);
+		return glm::vec3(v.x, v.y, v.z);
+	}
+
+	glm::vec3 GameObject::getForward() const
+	{
+		auto v = rotationMatrix * glm::vec4(0, 0, -1, 0);
+		return glm::vec3(v.x, v.y, v.z);
+	}
+
+	glm::vec3 GameObject::getRight() const
+	{
+		auto v = rotationMatrix * glm::vec4(1, 0, 0, 0);
+		return glm::vec3(v.x, v.y, v.z);
 	}
 }
