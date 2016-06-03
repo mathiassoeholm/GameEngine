@@ -43,6 +43,7 @@ namespace GameEngine
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glViewport(0, 0, windowWidth, windowHeight);
 
+			glfwPollEvents();
 			time.update();
 
 			for (int i = 0; i < numScenes; ++i)
@@ -51,7 +52,6 @@ namespace GameEngine
 				scenes[i].update(time);
 			}
 
-			glfwPollEvents();
 			glfwSwapBuffers(window);
 
 			if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
@@ -95,6 +95,10 @@ namespace GameEngine
 			return false;
 		}
 
+		glfwSetKeyCallback(window, [=](GLFWwindow *window, int key, int scancode, int action, int mods)
+		{
+			getInstance()->onKeyEvent(window, key, scancode, action,  mods);
+		});
 		glfwMakeContextCurrent(window);
 
 		return true;
@@ -120,8 +124,6 @@ namespace GameEngine
 			});
 			getInstance()->onWindowSizeChanged(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT);
 		}
-
-
 
 		glfwSetMouseButtonCallback(window, [=](GLFWwindow* w, int button, int action, int mods)
 		{
@@ -167,6 +169,14 @@ namespace GameEngine
 		for (int i = 0; i < numScenes; ++i)
 		{
 			scenes[i].windowSizeChanged(width, height);
+		}
+	}
+
+	void Engine::onKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods)
+	{
+		for (int i = 0; i < numScenes; ++i)
+		{
+			scenes[i].keyEvent(key, action);
 		}
 	}
 }

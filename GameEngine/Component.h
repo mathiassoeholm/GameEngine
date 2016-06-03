@@ -18,6 +18,9 @@ namespace GameEngine
 		bool getEnabled() const;
 		virtual void onInitialize() {}
 		virtual void update(Time& time) {}
+		virtual void onKeyPressed(int key){};
+		virtual void onKeyReleased(int key){};
+		virtual void onKey(int key){};
 
 		// Components with lower order will run first, default order is 0
 		virtual int getOrder() const;

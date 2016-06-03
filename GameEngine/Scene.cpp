@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Camera.h"
+#include <GLFW/glfw3.h>
 
 namespace GameEngine
 {
@@ -71,6 +72,26 @@ namespace GameEngine
 	void Scene::mouseClick(int button, int action, int mods)
 	{
 		onMouseClick(button, action, mods);
+	}
+
+	void Scene::keyEvent(int key, int action)
+	{
+		for (auto gameObject : gameObjects)
+		{
+			if(action == GLFW_PRESS)
+			{
+				gameObject->onKeyPressed(key);
+				gameObject->onKey(key);
+			}
+			else if(action == GLFW_RELEASE)
+			{
+				gameObject->onKeyReleased(key);
+			}
+			else if(action == GLFW_REPEAT)
+			{
+				gameObject->onKey(key);
+			}
+		}
 	}
 }
 

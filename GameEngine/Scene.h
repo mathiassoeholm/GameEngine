@@ -32,5 +32,6 @@ namespace GameEngine
 		virtual void onMouseClick(int button, int action, int mods){};
 		void windowSizeChanged(int width, int height);
 		virtual void onWindowSizeChanged(int width, int height){};
+		void keyEvent(int key, int action);
 	};
 }

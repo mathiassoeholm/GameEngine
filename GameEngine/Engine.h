@@ -26,6 +26,7 @@ namespace GameEngine
 		GLFWwindow *createWindow(bool fullScreen);
 		void onMouseClick(int button, int action, int mods);
 		void onWindowSizeChanged(int width, int height);
+		void onKeyEvent(GLFWwindow* window, int key, int scancode, int action, int mods);
 	};
 }
 
