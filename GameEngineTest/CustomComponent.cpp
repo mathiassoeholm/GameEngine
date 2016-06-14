@@ -2,6 +2,7 @@
 #include "CustomComponent.h"
 #include "../GameEngine/Camera.h"
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 void CustomComponent::update(const UpdateInfo& updateInfo)
 {
@@ -28,6 +29,15 @@ void CustomComponent::update(const UpdateInfo& updateInfo)
 		getGameObject()->translate(glm::vec3(3 * updateInfo.time.getDeltaTime(), 0, 0));
 	}
 
+	if(updateInfo.keyboard.isKeyPressed(GLFW_KEY_ENTER))
+	{
+		std::cout << "Pressed enter" << std::endl;
+	}
+
+	if(updateInfo.keyboard.isKeyReleased(GLFW_KEY_ENTER))
+	{
+		std::cout << "Released enter" << std::endl;
+	}
 
     //getGameObject()->translate(glm::vec3(0.5f * time.getDeltaTime(), 0, 0));
     //getGameObject()->setPosition(glm::vec3(-0.4f, 0, 0));

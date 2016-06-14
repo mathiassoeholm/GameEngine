@@ -55,6 +55,8 @@ namespace GameEngine
 				scenes[i].update(updateInfo);
 			}
 
+			keyboard.clearReleasedAndPressed();
+
 			glfwSwapBuffers(window);
 
 			if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE))
