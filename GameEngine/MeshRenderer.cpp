@@ -10,7 +10,7 @@ namespace GameEngine
 
 	}
 
-	void MeshRenderer::update(Time& time)
+	void MeshRenderer::update(const UpdateInfo& updateInfo)
 	{
 		material.use();
 

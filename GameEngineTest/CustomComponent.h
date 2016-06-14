@@ -7,9 +7,7 @@ using namespace GameEngine;
 
 class CustomComponent : public Component
 {
-	Time* time;
 public:
-	void update(Time& time) override;
+	void update(const UpdateInfo& updateInfo) override;
 	void onInitialize() override;
-	void onKey(int key) override;
 };

@@ -23,7 +23,7 @@ namespace GameEngine
 		void setFieldOfView(const GLfloat& value);
 		const glm::mat4& getProjMatrix() const;
 		const glm::mat4& getViewMatrix() const;
-		void update(Time& time) override;
+		void update(const UpdateInfo& updateInfo) override;
 		int getOrder() const override;
 		void setScreenDimensions(const GLint& width, const GLint& height);
 	};

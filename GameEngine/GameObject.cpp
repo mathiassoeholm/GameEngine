@@ -16,11 +16,11 @@ namespace GameEngine
 
 	}
 
-	void GameObject::update(Time& time)
+	void GameObject::update(const UpdateInfo& updateInfo)
 	{
 		for (auto component : components)
 		{
-			component->update(time);
+			component->update(updateInfo);
 
 			if(isDestroyed)
 			{
@@ -112,44 +112,5 @@ namespace GameEngine
 	{
 		auto v = rotationMatrix * glm::vec4(1, 0, 0, 0);
 		return glm::vec3(v.x, v.y, v.z);
-	}
-
-	void GameObject::onKeyPressed(int key)
-	{
-		for (auto component : components)
-		{
-			component->onKeyPressed(key);
-
-			if(isDestroyed)
-			{
-				return;
-			}
-		}
-	}
-
-	void GameObject::onKeyReleased(int key)
-	{
-		for (auto component : components)
-		{
-			component->onKeyReleased(key);
-
-			if(isDestroyed)
-			{
-				return;
-			}
-		}
-	}
-
-	void GameObject::onKey(int key)
-	{
-		for (auto component : components)
-		{
-			component->onKey(key);
-
-			if(isDestroyed)
-			{
-				return;
-			}
-		}
 	}
 }

@@ -13,11 +13,11 @@ namespace GameEngine
 		camGameObject->addComponent(mainCamera);
 	}
 
-	void Scene::update(Time& time)
+	void Scene::update(const UpdateInfo& updateInfo)
 	{
 		for (auto gameObject : gameObjects)
 		{
-			gameObject->update(time);
+			gameObject->update(updateInfo);
 		}
 
 		// GameObjects are destroyed at the end of the update loop
@@ -72,26 +72,6 @@ namespace GameEngine
 	void Scene::mouseClick(int button, int action, int mods)
 	{
 		onMouseClick(button, action, mods);
-	}
-
-	void Scene::keyEvent(int key, int action)
-	{
-		for (auto gameObject : gameObjects)
-		{
-			if(action == GLFW_PRESS)
-			{
-				gameObject->onKeyPressed(key);
-				gameObject->onKey(key);
-			}
-			else if(action == GLFW_RELEASE)
-			{
-				gameObject->onKeyReleased(key);
-			}
-			else if(action == GLFW_REPEAT)
-			{
-				gameObject->onKey(key);
-			}
-		}
 	}
 }
 

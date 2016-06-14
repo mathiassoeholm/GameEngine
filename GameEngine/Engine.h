@@ -2,6 +2,7 @@
 
 #include "Scene.h"
 #include "Time.h"
+#include "Keyboard.h"
 #include <string>
 #include <GLFW/glfw3.h>
 
@@ -17,6 +18,7 @@ namespace GameEngine
 		GLint windowWidth;
 		GLint windowHeight;
 		Time time;
+		Keyboard keyboard;
 	public:
 		Engine(std::string gameTitle, Scene* scenes, GLint numScenes);
 		~Engine();

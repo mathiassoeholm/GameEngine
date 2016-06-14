@@ -26,7 +26,7 @@ namespace GameEngine
 	public:
 		GameObject(Scene& parentScene);
 		~GameObject();
-		void update(Time& time);
+		void update(const UpdateInfo& updateInfo);
 		void addComponent(Component* component);
 		glm::vec3 getPosition() const;
 		void setPosition(const glm::vec3& position);
@@ -40,9 +40,5 @@ namespace GameEngine
 		glm::vec3 getUp() const;
 		glm::vec3 getForward() const;
 		glm::vec3 getRight() const;
-
-		void onKeyPressed(int key);
-		void onKeyReleased(int key);
-		void onKey(int key);
 	};
 }

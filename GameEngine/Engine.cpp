@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "UpdateInfo.h"
 #include <iostream>
 
 namespace GameEngine
@@ -46,10 +47,12 @@ namespace GameEngine
 			glfwPollEvents();
 			time.update();
 
+			auto updateInfo = UpdateInfo(time, keyboard);
+
 			for (int i = 0; i < numScenes; ++i)
 			{
 				// TODO: Only update selected scene
-				scenes[i].update(time);
+				scenes[i].update(updateInfo);
 			}
 
 			glfwSwapBuffers(window);
@@ -174,9 +177,13 @@ namespace GameEngine
 
 	void Engine::onKeyEvent(GLFWwindow *window, int key, int scancode, int action, int mods)
 	{
-		for (int i = 0; i < numScenes; ++i)
+		if(action == GLFW_PRESS)
 		{
-			scenes[i].keyEvent(key, action);
+			keyboard.setKeyDown(key);
+		}
+		else if(action == GLFW_RELEASE)
+		{
+			keyboard.setKeyUp(key);
 		}
 	}
 }

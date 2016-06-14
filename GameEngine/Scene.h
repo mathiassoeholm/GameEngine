@@ -3,6 +3,8 @@
 #include <forward_list>
 #include <vector>
 #include "Time.h"
+#include "Keyboard.h"
+#include "UpdateInfo.h"
 
 namespace GameEngine
 {
@@ -19,7 +21,7 @@ namespace GameEngine
 	public:
 		Scene();
 		Camera* getMainCamera() const;
-		void update(Time& time);
+		void update(const UpdateInfo& updateInfo);
 		void addGameObject(GameObject* gameObject);
 		void destroyGameObject(GameObject* gameObject);
 		void destroyAllGameObjects();
@@ -32,6 +34,5 @@ namespace GameEngine
 		virtual void onMouseClick(int button, int action, int mods){};
 		void windowSizeChanged(int width, int height);
 		virtual void onWindowSizeChanged(int width, int height){};
-		void keyEvent(int key, int action);
 	};
 }

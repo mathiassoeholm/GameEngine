@@ -3,12 +3,32 @@
 #include "../GameEngine/Camera.h"
 #include <GLFW/glfw3.h>
 
-void CustomComponent::update(Time& time)
+void CustomComponent::update(const UpdateInfo& updateInfo)
 {
-	this->time = &time;
+	double s = sin(updateInfo.time.getElapsedTime()) * 0.5;
+	double c = cos(updateInfo.time.getElapsedTime()) * 0.5;
 
-	double s = sin(time.getElapsedTime()) * 0.5;
-	double c = cos(time.getElapsedTime()) * 0.5;
+	if(updateInfo.keyboard.isKeyDown(GLFW_KEY_W))
+	{
+		getGameObject()->translate(glm::vec3(0, 3 * updateInfo.time.getDeltaTime(), 0));
+	}
+
+	if(updateInfo.keyboard.isKeyDown(GLFW_KEY_A))
+	{
+		getGameObject()->translate(glm::vec3(-3 * updateInfo.time.getDeltaTime(), 0, 0));
+	}
+
+	if(updateInfo.keyboard.isKeyDown(GLFW_KEY_S))
+	{
+		getGameObject()->translate(glm::vec3(0, -3 * updateInfo.time.getDeltaTime(), 0));
+	}
+
+	if(updateInfo.keyboard.isKeyDown(GLFW_KEY_D))
+	{
+		getGameObject()->translate(glm::vec3(3 * updateInfo.time.getDeltaTime(), 0, 0));
+	}
+
+
     //getGameObject()->translate(glm::vec3(0.5f * time.getDeltaTime(), 0, 0));
     //getGameObject()->setPosition(glm::vec3(-0.4f, 0, 0));
 	//getGameObject()->rotate(glm::vec3(0, 0, 10 * time.getDeltaTime()));
@@ -19,17 +39,4 @@ void CustomComponent::update(Time& time)
 void CustomComponent::onInitialize()
 {
 	getGameObject()->getCamera()->getGameObject()->setPosition(glm::vec3(0, 0, 5));
-}
-
-void CustomComponent::onKey(int key)
-{
-	// TODO: We shouldn't have to use GLFW directly in client code
-	if(key == GLFW_KEY_D)
-	{
-		getGameObject()->translate(glm::vec3(time->getDeltaTime(), 0, 0));
-	}
-	else if(key == GLFW_KEY_A)
-	{
-		getGameObject()->translate(glm::vec3(-time->getDeltaTime(), 0, 0));
-	}
 }

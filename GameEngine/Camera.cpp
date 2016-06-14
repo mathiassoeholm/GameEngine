@@ -40,7 +40,7 @@ namespace GameEngine
 		fieldOfView = value;
 	}
 
-	void Camera::update(Time &time)
+	void Camera::update(const UpdateInfo& updateInfo)
 	{
 		projMatrix = glm::perspective(
 				glm::radians(fieldOfView),

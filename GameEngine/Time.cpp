@@ -8,7 +8,7 @@ namespace GameEngine
 
 	}
 
-	GLdouble Time::getTimeScale()
+	GLdouble Time::getTimeScale() const
 	{
 		return timeScale;
 	}
@@ -18,17 +18,17 @@ namespace GameEngine
 		timeScale = value;
 	}
 
-	GLdouble Time::getElapsedTime()
+	GLdouble Time::getElapsedTime() const
 	{
 		return elapsedTime;
 	}
 
-	GLdouble Time::getDeltaTime()
+	GLdouble Time::getDeltaTime() const
 	{
 		return deltaTime;
 	}
 
-	GLdouble Time::getUnscaledDeltaTime()
+	GLdouble Time::getUnscaledDeltaTime() const
 	{
 		return unscaledDeltaTime;
 	}

@@ -13,10 +13,10 @@ namespace GameEngine
 		GLdouble lastGLFWTime;
 	public:
 		Time();
-		GLdouble getElapsedTime();
-		GLdouble getDeltaTime();
-		GLdouble getUnscaledDeltaTime();
-		GLdouble getTimeScale();
+		GLdouble getElapsedTime() const;
+		GLdouble getDeltaTime()  const;
+		GLdouble getUnscaledDeltaTime() const;
+		GLdouble getTimeScale() const;
 		void setTimeScale(GLdouble value);
 		void update();
 	};
