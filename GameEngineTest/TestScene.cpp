@@ -20,7 +20,7 @@ std::string readFile(const std::string& fileName)
 void TestScene::initialize()
 {
 	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
-	Mesh triangleMesh = Primitives::createTriangle();
+	Mesh triangleMesh = Primitives::createCube();
 	auto triangleGo = instantiateGameObject();
 
 	triangleGo->addComponent(new MeshRenderer(triangleMesh, material));

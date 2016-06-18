@@ -9,5 +9,6 @@ namespace GameEngine
 	{
 	public:
 		static Mesh createTriangle();
+		static Mesh createCube();
 	};
 }
