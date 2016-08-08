@@ -3,6 +3,8 @@
 
 namespace GameEngine
 {
+	static const size_t COMPONENTS_PER_VERTEX_ATTR = 3;
+
 	void Mesh::bind()
 	{
 		glBindVertexArray(vao);
@@ -100,9 +102,9 @@ namespace GameEngine
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 		// Position
-		glVertexAttribPointer(0, numVertices, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
+		glVertexAttribPointer(0, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
 		// Normals
-		glVertexAttribPointer(1, numVertices, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(3*sizeof(float)));
+		glVertexAttribPointer(1, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(3*sizeof(float)));
 	}
 }
