@@ -125,10 +125,12 @@ namespace GameEngine
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 		// Position
-		glVertexAttribPointer(0, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
+		static const int floatsInAPos = 3;
+		glVertexAttribPointer(0, floatsInAPos, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
 		// Normals
-		glVertexAttribPointer(1, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(COMPONENTS_PER_VERTEX_ATTR*sizeof(float)));
+		static const int floatsInANormal = 3;
+		glVertexAttribPointer(1, floatsInANormal, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(COMPONENTS_PER_VERTEX_ATTR*sizeof(float)));
 	}
 
 
