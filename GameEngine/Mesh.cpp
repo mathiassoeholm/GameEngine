@@ -19,7 +19,8 @@ namespace GameEngine
 		vertices(nullptr),
 		numVertices(0),
 		indices(nullptr),
-		numIndices(0)
+		numIndices(0),
+		references(0)
 	{
 
 	}
@@ -49,6 +50,9 @@ namespace GameEngine
 		numVertices = source.numVertices;
 		numIndices = source.numIndices;
 		vao = source.vao;
+		vbo = source.vbo;
+		ibo = source.ibo;
+		references = source.references;
 
 		if(source.vertices)
 		{
@@ -67,9 +71,28 @@ namespace GameEngine
 	{
 		numIndices = 0;
 		numVertices = 0;
+		references = 0;
 		vao = 0;
+		vbo = 0;
+		ibo = 0;
 		delete[] vertices;
 		delete[] indices;
+	}
+
+	void Mesh::incrementRefCount()
+	{
+		references++;
+	}
+
+	void Mesh::decrementRefCount()
+	{
+		references--;
+
+		if(references == 0)
+		{
+			glDeleteBuffers(1, &vbo);
+			glDeleteBuffers(1, &ibo);
+		}
 	}
 
 	GLsizeiptr Mesh::verticesBufferSize() const
@@ -84,12 +107,12 @@ namespace GameEngine
 
 	void Mesh::sendToBuffer()
 	{
-		GLuint vbo = 0;
+		vbo = 0;
 		glGenBuffers(1, &vbo);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBufferData(GL_ARRAY_BUFFER, verticesBufferSize(), vertices, GL_STATIC_DRAW);
 
-		GLuint ibo;
+		ibo = 0;
 		glGenBuffers(1, &ibo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indicesBufferSize(), indices, GL_STATIC_DRAW);
@@ -107,4 +130,7 @@ namespace GameEngine
 		// Normals
 		glVertexAttribPointer(1, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(3*sizeof(float)));
 	}
+
+
+
 }

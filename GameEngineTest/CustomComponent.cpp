@@ -39,6 +39,11 @@ void CustomComponent::update(const UpdateInfo& updateInfo)
 		std::cout << "Released enter" << std::endl;
 	}
 
+	if(updateInfo.keyboard.isKeyReleased(GLFW_KEY_E))
+	{
+		getGameObject()->destroy();
+	}
+
     //getGameObject()->translate(glm::vec3(0.5f * time.getDeltaTime(), 0, 0));
     //getGameObject()->setPosition(glm::vec3(-0.4f, 0, 0));
 	//getGameObject()->rotate(glm::vec3(0, 0, 10 * time.getDeltaTime()));

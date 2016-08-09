@@ -18,6 +18,7 @@ namespace GameEngine
 		bool getEnabled() const;
 		virtual void onInitialize() {}
 		virtual void update(const UpdateInfo& updateInfo) {}
+		virtual void onDestroy() {}
 
 		// Components with lower order will run first, default order is 0
 		virtual int getOrder() const;

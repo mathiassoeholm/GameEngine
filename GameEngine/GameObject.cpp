@@ -63,12 +63,19 @@ namespace GameEngine
 
 	void GameObject::destroy()
 	{
+		for (auto component : components)
+		{
+			component->onDestroy();
+		}
+
 		isDestroyed = true;
 		parentScene.destroyGameObject(this);
 	}
 
 	GameObject::~GameObject()
 	{
+		destroy();
+
 		for (auto component : components)
 		{
 			delete component;

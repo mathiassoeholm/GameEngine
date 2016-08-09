@@ -11,11 +11,14 @@ namespace GameEngine
 		GLuint numVertices;
 		GLushort* indices;
 		GLuint numIndices;
+		GLuint references;
 
 		Mesh();
 		Mesh(const Mesh &source);
 		~Mesh();
 
+		void incrementRefCount();
+		void decrementRefCount();
 		void bind();
 		void sendToBuffer();
 		int getNumIndices() const;
@@ -23,6 +26,8 @@ namespace GameEngine
 		Mesh& operator=(const Mesh &source);
 	private:
 		GLuint vao;
+		GLuint vbo;
+		GLuint ibo;
 		GLsizeiptr verticesBufferSize() const;
 		GLsizeiptr indicesBufferSize() const;
 		void copyValues(const Mesh &source);

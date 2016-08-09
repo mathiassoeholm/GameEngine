@@ -7,7 +7,7 @@ namespace GameEngine
 		material(material),
 		mesh(mesh)
 	{
-
+		this->mesh.incrementRefCount();
 	}
 
 	void MeshRenderer::update(const UpdateInfo& updateInfo)
@@ -25,6 +25,11 @@ namespace GameEngine
 
 		mesh.bind();
 		glDrawElements(GL_TRIANGLES, mesh.getNumIndices(), GL_UNSIGNED_SHORT, 0);
+	}
+
+	void MeshRenderer::onDestroy()
+	{
+		mesh.decrementRefCount();
 	}
 
 	int MeshRenderer::getOrder() const
