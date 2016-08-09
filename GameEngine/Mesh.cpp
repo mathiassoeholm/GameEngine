@@ -128,7 +128,7 @@ namespace GameEngine
 		glVertexAttribPointer(0, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
 		// Normals
-		glVertexAttribPointer(1, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(3*sizeof(float)));
+		glVertexAttribPointer(1, COMPONENTS_PER_VERTEX_ATTR, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(COMPONENTS_PER_VERTEX_ATTR*sizeof(float)));
 	}
 
 
