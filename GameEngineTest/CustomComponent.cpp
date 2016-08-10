@@ -26,8 +26,11 @@ void CustomComponent::update(const UpdateInfo& updateInfo)
 
 	if(updateInfo.keyboard.isKeyDown(GLFW_KEY_D))
 	{
-		getGameObject()->translate(glm::vec3(3 * updateInfo.time.getDeltaTime(), 0, 0));
+		getGameObject()->translate(glm::vec3(3 * updateInfo.time.getDeltaTime() * 2, 0, 0));
 	}
+
+	getGameObject()->rotate(glm::vec3(0, updateInfo.time.getDeltaTime() * 0.5, 0));
+	getGameObject()->setPosition(glm::vec3(0, s, 0));
 
 	if(updateInfo.keyboard.isKeyPressed(GLFW_KEY_ENTER))
 	{

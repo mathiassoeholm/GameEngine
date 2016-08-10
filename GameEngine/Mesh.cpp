@@ -120,17 +120,23 @@ namespace GameEngine
 		vao = 0;
 		glGenVertexArrays(1, &vao);
 		glBindVertexArray(vao);
-		glEnableVertexAttribArray(0);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
-		// Position
+		// Positions
 		static const int floatsInAPos = 3;
+		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, floatsInAPos, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
 		// Normals
 		static const int floatsInANormal = 3;
-		glVertexAttribPointer(1, floatsInANormal, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(COMPONENTS_PER_VERTEX_ATTR*sizeof(float)));
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, floatsInANormal, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(floatsInAPos*sizeof(GLfloat)));
+
+		// Colors
+		static const int floatsInAColor = 4;
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, floatsInAColor, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)((floatsInAPos+floatsInANormal)*sizeof(GLfloat)));
 	}
 
 
