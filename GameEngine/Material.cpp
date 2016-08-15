@@ -26,6 +26,9 @@ namespace GameEngine
 		{
 			std::cerr << "ERROR: Could not link shader GL index " << shaderProgramIndex << std::endl;
 		}
+
+		glDeleteShader(vertexIndex);
+		glDeleteShader(fragmentIndex);
 	}
 
 	GLuint Material::createShader(const std::string &source, GLenum shaderType)
