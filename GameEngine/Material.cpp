@@ -9,6 +9,7 @@ namespace GameEngine
 	}
 
 	Material::Material(const std::string &vertexShaderSource, const std::string &fragmentShaderSource) :
+		references(0),
 		uniformLocationCache(std::unordered_map<std::string, GLint>())
 	{
 		GLuint vertexIndex = createShader(vertexShaderSource, GL_VERTEX_SHADER);
@@ -69,6 +70,22 @@ namespace GameEngine
 		if(location != -1)
 		{
 			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		}
+	}
+
+	void Material::incrementRefCount()
+	{
+		references++;
+	}
+
+	void Material::decrementRefCount()
+	{
+		references--;
+
+		if(references == 0)
+		{
+			glUseProgram(0);
+			glDeleteProgram(shaderProgramIndex);
 		}
 	}
 }

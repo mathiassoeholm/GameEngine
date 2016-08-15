@@ -8,6 +8,7 @@ namespace GameEngine
 		mesh(mesh)
 	{
 		this->mesh.incrementRefCount();
+		this->material.incrementRefCount();
 	}
 
 	void MeshRenderer::update(const UpdateInfo& updateInfo)
@@ -30,6 +31,7 @@ namespace GameEngine
 	void MeshRenderer::onDestroy()
 	{
 		mesh.decrementRefCount();
+		material.decrementRefCount();
 	}
 
 	int MeshRenderer::getOrder() const
