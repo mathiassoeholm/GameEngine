@@ -2,25 +2,11 @@
 #include "GLFW/glfw3.h"
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include "GLLog.h"
-#include "glm/ext.hpp"
 #include "GameEngine/Engine.h"
 #include "GameEngine/MeshRenderer.h"
 #include "GameEngineTest/TestScene.h"
 
 using namespace std;
-
-int currentWindowWidth = 640;
-int currentWindowHeight = 480;
-
-void glfwErrorCallback(int error, const char* description)
-{
-	stringstream log;
-	log << "GLFW ERROR: code " << error << " msg: " << description << endl;
-
-	glLogErr(log.str());
-}
 
 void updateFpsCounter(GLFWwindow* window)
 {
