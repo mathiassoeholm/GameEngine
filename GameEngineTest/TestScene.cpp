@@ -20,9 +20,13 @@ std::string readFile(const std::string& fileName)
 void TestScene::initialize()
 {
 	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
-	Mesh triangleMesh = Primitives::createCube();
-	auto triangleGo = instantiateGameObject();
+	Mesh cubeMesh = Primitives::createCube();
+	auto cubeGO = instantiateGameObject();
 
-	triangleGo->addComponent(new MeshRenderer(triangleMesh, material));
-	triangleGo->addComponent(new CustomComponent());
+	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
+	cubeGO->addComponent(new CustomComponent());
+
+	// Create secondary cube go, with same mesh
+	cubeGO = instantiateGameObject();
+	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
 }
