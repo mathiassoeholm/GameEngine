@@ -28,17 +28,22 @@ namespace GameEngine
 		~GameObject();
 		void update(const UpdateInfo& updateInfo);
 		void addComponent(Component* component);
+		void destroy();
+		Camera* getCamera() const;
+
+		// Transformation functions
 		glm::vec3 getPosition() const;
+		glm::vec3 getScale() const;
 		void setPosition(const glm::vec3& position);
 		void translate(const glm::vec3& translation);
         void rotate(const glm::vec3& rotation);
-		void destroy();
-		void updateModelMatrix();
+        void setScale(const glm::vec3& scale);
 		const glm::mat4& getModelMatrix() const;
-		Camera* getCamera() const;
 
 		glm::vec3 getUp() const;
 		glm::vec3 getForward() const;
 		glm::vec3 getRight() const;
+	private:
+		void updateModelMatrix();
 	};
 }

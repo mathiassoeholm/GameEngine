@@ -27,6 +27,6 @@ void TestScene::initialize()
 	cubeGO->addComponent(new CustomComponent());
 
 	// Create secondary cube go, with same mesh
-	cubeGO = instantiateGameObject();
-	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
+	//cubeGO = instantiateGameObject();
+	//cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
 }

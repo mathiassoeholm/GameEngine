@@ -1,6 +1,7 @@
 #include <iostream>
 #include "GameObject.h"
 #include "Component.h"
+#include <cmath>
 
 namespace GameEngine
 {
@@ -53,6 +54,11 @@ namespace GameEngine
 		return glm::vec3(modelMatrix[3][0], modelMatrix[3][1], modelMatrix[3][2]);
 	}
 
+	glm::vec3 GameObject::getScale() const
+	{
+		return glm::vec3(modelMatrix[0][0], modelMatrix[1][1], modelMatrix[2][2]);
+	}
+
 	void GameObject::setPosition(const glm::vec3& position)
 	{
 		translationMatrix[3][0] = position.x;
@@ -93,6 +99,15 @@ namespace GameEngine
 		updateModelMatrix();
     }
 
+	void GameObject::setScale(const glm::vec3 &scale)
+	{
+		scaleMatrix[0][0] = scale.x;
+		scaleMatrix[1][1] = scale.y;
+		scaleMatrix[2][2] = scale.z;
+
+		updateModelMatrix();
+	}
+
 	Camera* GameObject::getCamera() const
 	{
 		return parentScene.getMainCamera();
@@ -120,4 +135,7 @@ namespace GameEngine
 		auto v = rotationMatrix * glm::vec4(1, 0, 0, 0);
 		return glm::vec3(v.x, v.y, v.z);
 	}
+
+
+
 }
