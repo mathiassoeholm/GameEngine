@@ -6,7 +6,8 @@
 namespace GameEngine
 {
 	Scene::Scene() : gameObjectsToDestroy(std::vector<GameObject*>()),
-					 gameObjects(std::forward_list<GameObject*>())
+					 gameObjects(std::forward_list<GameObject*>()),
+					 lights(std::vector<Light*>())
 	{
 		auto camGameObject = instantiateGameObject();
 		mainCamera = new Camera();
