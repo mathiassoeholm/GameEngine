@@ -35,6 +35,12 @@ namespace GameEngine
 		gameObjects.push_front(gameObject);
 	}
 
+	// This is called automatically when creating a new light component
+	void Scene::addLight(Light *light)
+	{
+		lights.push_back(light);
+	}
+
 	void Scene::destroyAllGameObjects()
 	{
 		for (auto gameObject : gameObjects)
@@ -73,5 +79,7 @@ namespace GameEngine
 	{
 		onMouseClick(button, action, mods);
 	}
+
+
 }
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include "GameObject.h"
 #include "Component.h"
+#include "Lighting/Light.h"
 #include <cmath>
 
 namespace GameEngine
@@ -33,6 +34,14 @@ namespace GameEngine
 	void GameObject::addComponent(Component* component)
 	{
 		components.insert(component);
+
+		// If this is a light, the scene will keep track of it
+		auto light = dynamic_cast<Light*>(component);
+		if(light != nullptr)
+		{
+			parentScene.addLight(light);
+		}
+
 		component->initialize(this);
 	}
 

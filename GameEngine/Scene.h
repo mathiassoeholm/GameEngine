@@ -11,6 +11,7 @@ namespace GameEngine
 	// Forward declarations because of cyclic dependencies
 	class GameObject;
 	class Camera;
+	class Light;
 
 	class Scene
 	{
@@ -18,11 +19,14 @@ namespace GameEngine
 		Camera* mainCamera;
 		std::forward_list<GameObject*> gameObjects;
 		std::vector<GameObject*> gameObjectsToDestroy;
+		std::vector<Light*> lights;
 	public:
 		Scene();
 		Camera* getMainCamera() const;
 		void update(const UpdateInfo& updateInfo);
 		void addGameObject(GameObject* gameObject);
+		void addLight(Light* light);
+
 		void destroyGameObject(GameObject* gameObject);
 		void destroyAllGameObjects();
 		GameObject* instantiateGameObject();
