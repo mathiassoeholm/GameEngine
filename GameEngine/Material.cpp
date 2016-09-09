@@ -54,22 +54,21 @@ namespace GameEngine
 
 	void Material::setUniform(const std::string &name, const glm::mat4 &matrix)
 	{
-		GLint location;
-		auto locationPtr = uniformLocationCache.find(name);
-
-		if(locationPtr == uniformLocationCache.end())
-		{
-			location = glGetUniformLocation(shaderProgramIndex, name.c_str());
-			uniformLocationCache[name] = location;
-		}
-		else
-		{
-			location = locationPtr->second;
-		}
+		GLint location = getUniformLocation(name);
 
 		if(location != -1)
 		{
 			glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		}
+	}
+
+	void Material::setUniform(const std::string &name, const GLint dataLength, const GLfloat* data)
+	{
+		GLint location = getUniformLocation(name);
+
+		if(location != -1)
+		{
+			glUniform3fv(location, dataLength, data);
 		}
 	}
 
@@ -87,5 +86,23 @@ namespace GameEngine
 			glUseProgram(0);
 			glDeleteProgram(shaderProgramIndex);
 		}
+	}
+
+	GLint Material::getUniformLocation(const std::string &name)
+	{
+		GLint location;
+		auto locationPtr = uniformLocationCache.find(name);
+
+		if(locationPtr == uniformLocationCache.end())
+		{
+			location = glGetUniformLocation(shaderProgramIndex, name.c_str());
+			uniformLocationCache[name] = location;
+		}
+		else
+		{
+			location = locationPtr->second;
+		}
+
+		return location;
 	}
 }

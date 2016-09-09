@@ -1,5 +1,6 @@
 #include "MeshRenderer.h"
 #include "Camera.h"
+#include "Lighting/Light.h"
 
 namespace GameEngine
 {
@@ -23,6 +24,10 @@ namespace GameEngine
 		material.setUniform("viewMatrix", view);
 		material.setUniform("projMatrix", proj);
 		material.setUniform("mvpMatrix", proj * view * model);
+
+		auto lights = getGameObject()->getParentScene().getLightData();
+
+		//material.setUniform("lights", Scene::MAX_LIGHT_COUNT, reinterpret_cast<GLfloat*>(lights));
 
 		mesh.bind();
 		glDrawElements(GL_TRIANGLES, mesh.getNumIndices(), GL_UNSIGNED_SHORT, 0);

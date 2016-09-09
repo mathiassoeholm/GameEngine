@@ -15,16 +15,22 @@ namespace GameEngine
 
 	class Scene
 	{
+	public:
+		const static int MAX_LIGHT_COUNT;
 	private:
 		Camera* mainCamera;
 		std::forward_list<GameObject*> gameObjects;
 		std::vector<GameObject*> gameObjectsToDestroy;
 		std::vector<Light*> lights;
+		Light* lightData;
 	public:
 		Scene();
 		Camera* getMainCamera() const;
+		Light* getLightData() const;
 		void update(const UpdateInfo& updateInfo);
 		void addGameObject(GameObject* gameObject);
+
+		// This is called automatically when creating a new light component
 		void addLight(Light* light);
 
 		void destroyGameObject(GameObject* gameObject);
@@ -38,5 +44,7 @@ namespace GameEngine
 		virtual void onMouseClick(int button, int action, int mods){};
 		void windowSizeChanged(int width, int height);
 		virtual void onWindowSizeChanged(int width, int height){};
+	private:
+		void setLightData();
 	};
 }

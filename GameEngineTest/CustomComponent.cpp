@@ -57,5 +57,5 @@ void CustomComponent::update(const UpdateInfo& updateInfo)
 void CustomComponent::onInitialize()
 {
 	getGameObject()->getCamera()->getGameObject()->setPosition(glm::vec3(0, 0, 5));
-	getGameObject()->setScale(glm::vec3(0.2, 0.2, 0.2));
+	//getGameObject()->setScale(glm::vec3(0.2, 0.2, 0.2));
 }

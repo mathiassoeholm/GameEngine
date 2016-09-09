@@ -31,6 +31,9 @@ namespace GameEngine
 		void destroy();
 		Camera* getCamera() const;
 
+		// Use cautiously
+		Scene& getParentScene() const;
+
 		// Transformation functions
 		glm::vec3 getPosition() const;
 		glm::vec3 getScale() const;

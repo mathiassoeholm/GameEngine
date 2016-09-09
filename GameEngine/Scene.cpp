@@ -1,13 +1,18 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Camera.h"
+#include "Lighting/Light.h"
+#include <algorithm>
 #include <GLFW/glfw3.h>
 
 namespace GameEngine
 {
+	const int Scene::MAX_LIGHT_COUNT = 10;
+
 	Scene::Scene() : gameObjectsToDestroy(std::vector<GameObject*>()),
 					 gameObjects(std::forward_list<GameObject*>()),
-					 lights(std::vector<Light*>())
+					 lights(std::vector<Light*>()),
+					 lightData(new Light[Scene::MAX_LIGHT_COUNT])
 	{
 		auto camGameObject = instantiateGameObject();
 		mainCamera = new Camera();
@@ -16,6 +21,8 @@ namespace GameEngine
 
 	void Scene::update(const UpdateInfo& updateInfo)
 	{
+		setLightData();
+
 		for (auto gameObject : gameObjects)
 		{
 			gameObject->update(updateInfo);
@@ -36,8 +43,7 @@ namespace GameEngine
 		gameObjects.push_front(gameObject);
 	}
 
-	// This is called automatically when creating a new light component
-	void Scene::addLight(Light *light)
+	void Scene::addLight(Light* light)
 	{
 		lights.push_back(light);
 	}
@@ -81,6 +87,15 @@ namespace GameEngine
 		onMouseClick(button, action, mods);
 	}
 
+	void Scene::setLightData()
+	{
+		auto lightsToCopy = std::min(MAX_LIGHT_COUNT, static_cast<int>(lights.size()));
+		memcpy(lightData, &lights[0], lightsToCopy*sizeof(Light));
+	}
 
+	Light* Scene::getLightData() const
+	{
+		return lightData;
+	}
 }
 

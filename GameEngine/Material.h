@@ -16,9 +16,11 @@ namespace GameEngine
 		Material(const std::string& vertexShaderSource, const std::string& fragmentShaderSource);
 		void use() const;
 		void setUniform(const std::string& name, const glm::mat4& matrix);
+		void setUniform(const std::string& name, const GLint dataLength, const GLfloat* data);
 		void incrementRefCount();
 		void decrementRefCount();
 	private:
 		GLuint createShader(const std::string& source, GLenum shaderType);
+		GLint getUniformLocation(const std::string& name);
 	};
 }

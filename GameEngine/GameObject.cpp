@@ -146,5 +146,8 @@ namespace GameEngine
 	}
 
 
-
+	Scene& GameObject::getParentScene() const
+	{
+		return parentScene;
+	}
 }
