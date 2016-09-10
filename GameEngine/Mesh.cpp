@@ -128,15 +128,20 @@ namespace GameEngine
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, floatsInAPos, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
 
+		// Tex coords
+		static const int floatsInATexCoord = 2;
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, floatsInATexCoord, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(floatsInAPos*sizeof(GLfloat)));
+
 		// Normals
 		static const int floatsInANormal = 3;
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, floatsInANormal, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)(floatsInAPos*sizeof(GLfloat)));
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, floatsInANormal, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)((floatsInAPos+floatsInATexCoord)*sizeof(GLfloat)));
 
 		// Colors
 		static const int floatsInAColor = 4;
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, floatsInAColor, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)((floatsInAPos+floatsInANormal)*sizeof(GLfloat)));
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, floatsInAColor, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const void *)((floatsInAPos+floatsInATexCoord+floatsInANormal)*sizeof(GLfloat)));
 	}
 
 

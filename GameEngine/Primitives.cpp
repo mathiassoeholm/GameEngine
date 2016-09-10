@@ -18,14 +18,17 @@ namespace GameEngine
 		Vertex vertices[] =
 		{
 				glm::vec3(0.0f, 0.5f, 0.0f), // Position
+				glm::vec2(0.5f, 1.0f), // Tex coordinate
 				glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 
 				glm::vec3(0.5f, -0.5f, 0.0f),
+				glm::vec2(1.0f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 1.0f),
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 
 				glm::vec3(-0.5f, -0.5f, 0.0f),
+				glm::vec2(0.0f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 1.0f),
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
 		};
@@ -56,18 +59,22 @@ namespace GameEngine
 		Vertex vertices[] =
 		{
 				glm::vec3(-0.5f, 0.5f, 0.0f), // Position
+				glm::vec2(0.0f, 1.0f), // Tex coordinate
 				glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 
 				glm::vec3(0.5f, 0.5f, 0.0f),
+				glm::vec2(1.0f, 1.0f),
 				glm::vec3(0.0f, 0.0f, 1.0f),
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 
 				glm::vec3(0.5f, -0.5f, 0.0f),
+				glm::vec2(1.0f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 1.0f),
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 
 				glm::vec3(-0.5f, -0.5f, 0.0f),
+				glm::vec2(0.5f, 0.0f),
 				glm::vec3(0.0f, 0.0f, 1.0f),
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 		};
@@ -100,85 +107,109 @@ namespace GameEngine
 		{
 			// TOP
 			glm::vec3(-1.0f, 1.0f, 1.0f), // 0
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
 			glm::vec3(0.0f, 1.0f, 0.0f), // Normal
 			glm::vec4(1.0f, 0, 0.0f, 1.0f), // Color
 			glm::vec3(1.0f, 1.0f, 1.0f), // 1
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(0.0f, 1.0f, 0.0f), // Normal
 			glm::vec4(1.0f, 0, 0.0f, 1.0f), // Color
 			glm::vec3(1.0f, 1.0f, -1.0f), // 2
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(0.0f, 1.0f, 0.0f), // Normal
 			glm::vec4(1.0f, 0, 0.0f, 1.0f), // Color
 			glm::vec3(-1.0f, 1.0f, -1.0f), // 3
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(0.0f, 1.0f, 0.0f), // Normal
 			glm::vec4(1.0f, 0, 0.0f, 1.0f), // Color
 
 			// Front
 			glm::vec3(-1.0f, 1.0f, -1.0f), // 4
-			glm::vec3(0.0f, 0.0f, 1.0f), // Normal
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
+			glm::vec3(0.0f, 1.0f, 1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, 1.0f, -1.0f), // 5
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, -1.0f), // 6
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, -1.0f), // 7
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 
 			// Right
 			glm::vec3(1.0f, 1.0f, -1.0f), // 8
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
 			glm::vec3(1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, 1.0f, 1.0f), // 9
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, 1.0f), // 10
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, -1.0f), // 11
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 1.0f, 1.0f), // Color
 
 			// Left
 			glm::vec3(-1.0f, 1.0f, 1.0f), // 12
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
 			glm::vec3(-1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), // Color
 			glm::vec3(-1.0f, 1.0f, -1.0f), // 13
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(-1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, -1.0f), // 14
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(-1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, 1.0f), // 15
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(-1.0f, 0, 0), // Normal
 			glm::vec4(1.0f, 1.0f, 0.0f, 1.0f), // Color
 
 			// Back
 			glm::vec3(1.0f, 1.0f, 1.0f), // 16
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
 			glm::vec3(0, 0, -0.1f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(-1.0f, 1.0f, 1.0f), // 17
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(0, 0, -0.1f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, 1.0f), // 18
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(0, 0, -0.1f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, 1.0f), // 19
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(0, 0, -0.1f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 
 			// Bottom
 			glm::vec3(1.0f, -1.0f, -1.0f), // 20
+			glm::vec2(0.0f, 1.0f), // Tex coordinate
 			glm::vec3(0, -1.0f, 0), // Normal
 			glm::vec4(0, 0, 2.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, -1.0f), // 21
+			glm::vec2(1.0f, 1.0f), // Tex coordinate
 			glm::vec3(0, -1.0f, 0), // Normal
 			glm::vec4(0, 0, 2.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, 1.0f), // 22
+			glm::vec2(1.0f, 0.0f), // Tex coordinate
 			glm::vec3(0, -1.0f, 0), // Normal
 			glm::vec4(0, 0, 2.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, 1.0f), // 23
+			glm::vec2(0.0f, 0.0f), // Tex coordinate
 			glm::vec3(0, -1.0f, 0), // Normal
 			glm::vec4(0, 0, 2.0f, 1.0f), // Color
 		};
