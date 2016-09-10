@@ -8,9 +8,9 @@ namespace GameEngine
 	{
 	private:
 		glm::vec3 color;
-		glm::vec3 position;
 	public:
-		Light(const glm::vec3& color, const glm::vec3& position);
+		Light(const glm::vec3& color);
+		Light();
 	};
 }
 

@@ -3,6 +3,7 @@
 #include "../GameEngine/Mesh.h"
 #include "../GameEngine/Primitives.h"
 #include "../GameEngine/MeshRenderer.h"
+#include "../GameEngine/Lighting/Light.h"
 #include "CustomComponent.h"
 #include <iostream>
 #include <fstream>

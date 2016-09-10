@@ -25,7 +25,7 @@ namespace GameEngine
 		material.setUniform("projMatrix", proj);
 		material.setUniform("mvpMatrix", proj * view * model);
 
-		auto lights = getGameObject()->getParentScene().getLightData();
+		//auto lights = getGameObject()->getParentScene().getLightData();
 
 		//material.setUniform("lights", Scene::MAX_LIGHT_COUNT, reinterpret_cast<GLfloat*>(lights));
 
