@@ -1,6 +1,7 @@
 #pragma once
 
 #include <GL/glew.h>
+#include <string>
 
 namespace GameEngine
 {
@@ -8,6 +9,7 @@ namespace GameEngine
 	{
 		GLuint index;
 	public:
-		Texture();
+		Texture(const std::string& path);
+		void bind();
 	};
 }

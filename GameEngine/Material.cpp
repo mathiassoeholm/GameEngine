@@ -6,11 +6,17 @@ namespace GameEngine
 	void Material::use() const
 	{
 		glUseProgram(shaderProgramIndex);
+
+		if(texture != nullptr)
+		{
+			texture->bind();
+		}
 	}
 
 	Material::Material(const std::string &vertexShaderSource, const std::string &fragmentShaderSource) :
 		references(0),
-		uniformLocationCache(std::unordered_map<std::string, GLint>())
+		uniformLocationCache(std::unordered_map<std::string, GLint>()),
+		texture(nullptr)
 	{
 		GLuint vertexIndex = createShader(vertexShaderSource, GL_VERTEX_SHADER);
 		GLuint fragmentIndex = createShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
@@ -70,6 +76,11 @@ namespace GameEngine
 		{
 			glUniform3fv(location, dataLength, data);
 		}
+	}
+
+	void Material::assignTexture(std::shared_ptr<Texture> texture)
+	{
+		this->texture = texture;
 	}
 
 	void Material::incrementRefCount()

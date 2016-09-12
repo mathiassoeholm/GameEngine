@@ -20,7 +20,9 @@ std::string readFile(const std::string& fileName)
 
 void TestScene::initialize()
 {
-	Material material(readFile("Shaders/BasicVertexShader.vert"), readFile("Shaders/BasicFragmentShader.frag"));
+	Material material(readFile("Shaders/TexturedShader.vert"), readFile("Shaders/TexturedShader.frag"));
+	material.assignTexture(std::make_shared<Texture>("Images/bricks.jpg"));
+
 	Mesh cubeMesh = Primitives::createCube();
 	auto cubeGO = instantiateGameObject();
 
