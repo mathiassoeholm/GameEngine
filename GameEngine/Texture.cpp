@@ -8,6 +8,7 @@ namespace GameEngine
 	Texture::Texture(const std::string& path)
 	{
 		int x,y,n;
+		stbi_set_flip_vertically_on_load(true);
 		unsigned char *data = stbi_load(path.c_str(), &x, &y, &n, 0);
 		// NPOT Check
 		if((x & (x-1)) != 0 || (y & (y - 1)) != 0)
