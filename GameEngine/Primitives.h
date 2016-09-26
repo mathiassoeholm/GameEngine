@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "Mesh.h"
 
 namespace GameEngine
@@ -8,8 +9,8 @@ namespace GameEngine
 	class Primitives
 	{
 	public:
-		static Mesh createTriangle();
-		static Mesh createQuad();
-		static Mesh createCube();
+		static std::shared_ptr<Mesh> createTriangle();
+		static std::shared_ptr<Mesh> createQuad();
+		static std::shared_ptr<Mesh> createCube();
 	};
 }

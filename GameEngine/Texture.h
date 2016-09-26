@@ -2,6 +2,7 @@
 
 #include <GL/glew.h>
 #include <string>
+#include <iostream>
 
 namespace GameEngine
 {
@@ -11,5 +12,8 @@ namespace GameEngine
 	public:
 		Texture(const std::string& path);
 		void bind();
+		~Texture(){
+			std::cout << "Destroyed" << std::endl;
+		}
 	};
 }

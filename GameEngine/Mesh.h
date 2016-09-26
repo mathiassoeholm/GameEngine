@@ -11,14 +11,11 @@ namespace GameEngine
 		GLuint numVertices;
 		GLushort* indices;
 		GLuint numIndices;
-		GLuint references;
 
 		Mesh();
 		Mesh(const Mesh &source);
 		~Mesh();
 
-		void incrementRefCount();
-		void decrementRefCount();
 		void bind();
 		void sendToBuffer();
 		int getNumIndices() const;

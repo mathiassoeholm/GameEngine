@@ -19,8 +19,7 @@ namespace GameEngine
 		vertices(nullptr),
 		numVertices(0),
 		indices(nullptr),
-		numIndices(0),
-		references(0)
+		numIndices(0)
 	{
 
 	}
@@ -52,7 +51,6 @@ namespace GameEngine
 		vao = source.vao;
 		vbo = source.vbo;
 		ibo = source.ibo;
-		references = source.references;
 
 		if(source.vertices)
 		{
@@ -71,28 +69,13 @@ namespace GameEngine
 	{
 		numIndices = 0;
 		numVertices = 0;
-		references = 0;
 		vao = 0;
 		vbo = 0;
 		ibo = 0;
 		delete[] vertices;
 		delete[] indices;
-	}
-
-	void Mesh::incrementRefCount()
-	{
-		references++;
-	}
-
-	void Mesh::decrementRefCount()
-	{
-		references--;
-
-		if(references == 0)
-		{
-			glDeleteBuffers(1, &vbo);
-			glDeleteBuffers(1, &ibo);
-		}
+		glDeleteBuffers(1, &vbo);
+		glDeleteBuffers(1, &ibo);
 	}
 
 	GLsizeiptr Mesh::verticesBufferSize() const

@@ -10,10 +10,10 @@ namespace GameEngine
 	static const size_t VERTS_PER_CUBE = 6 * VERTS_PER_QUAD; // A cube has 6 sides
 	static const size_t INDICES_PER_CUBE = 6 * INDICES_PER_QUAD; // A cube has 6 sides
 
-	Mesh Primitives::createTriangle()
+	std::shared_ptr<Mesh> Primitives::createTriangle()
 	{
-		Mesh tri;
-		tri.numVertices = VERTS_PER_TRIANGLE;
+		auto tri = std::make_shared<Mesh>();
+		tri->numVertices = VERTS_PER_TRIANGLE;
 
 		Vertex vertices[] =
 		{
@@ -33,28 +33,28 @@ namespace GameEngine
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f)
 		};
 
-		tri.vertices = new Vertex[tri.numVertices];
-		memcpy(tri.vertices, vertices, sizeof(vertices));
+		tri->vertices = new Vertex[tri->numVertices];
+		memcpy(tri->vertices, vertices, sizeof(vertices));
 
-		tri.numIndices = INDICES_PER_TRIANGLE;
+		tri->numIndices = INDICES_PER_TRIANGLE;
 
 		GLushort indices[] =
 		{
 			0, 1, 2
 		};
 
-		tri.indices = new GLushort[tri.numIndices];
-		memcpy(tri.indices, indices, sizeof(indices));
+		tri->indices = new GLushort[tri->numIndices];
+		memcpy(tri->indices, indices, sizeof(indices));
 
-		tri.sendToBuffer();
+		tri->sendToBuffer();
 
 		return tri;
 	}
 
-	Mesh Primitives::createQuad()
+	std::shared_ptr<Mesh> Primitives::createQuad()
 	{
-		Mesh quad;
-		quad.numVertices = VERTS_PER_QUAD;
+		std::shared_ptr<Mesh> quad = std::make_shared<Mesh>();
+		quad->numVertices = VERTS_PER_QUAD;
 
 		Vertex vertices[] =
 		{
@@ -79,10 +79,10 @@ namespace GameEngine
 				glm::vec4(1.0f, 1.0f, 1.0f, 1.0f),
 		};
 
-		quad.vertices = new Vertex[quad.numVertices];
-		memcpy(quad.vertices, vertices, sizeof(vertices));
+		quad->vertices = new Vertex[quad->numVertices];
+		memcpy(quad->vertices, vertices, sizeof(vertices));
 
-		quad.numIndices = INDICES_PER_QUAD;
+		quad->numIndices = INDICES_PER_QUAD;
 
 		GLushort indices[] =
 		{
@@ -90,18 +90,18 @@ namespace GameEngine
 			1, 2, 3
 		};
 
-		quad.indices = new GLushort[quad.numIndices];
-		memcpy(quad.indices, indices, sizeof(indices));
+		quad->indices = new GLushort[quad->numIndices];
+		memcpy(quad->indices, indices, sizeof(indices));
 
-		quad.sendToBuffer();
+		quad->sendToBuffer();
 
 		return quad;
 	}
 
-	Mesh Primitives::createCube()
+	std::shared_ptr<Mesh> Primitives::createCube()
 	{
-		Mesh cube;
-		cube.numVertices = VERTS_PER_CUBE;
+		std::shared_ptr<Mesh> cube = std::make_shared<Mesh>();
+		cube->numVertices = VERTS_PER_CUBE;
 
 		Vertex vertices[] =
 		{
@@ -214,10 +214,10 @@ namespace GameEngine
 			glm::vec4(0, 0, 2.0f, 1.0f), // Color
 		};
 
-		cube.vertices = new Vertex[cube.numVertices];
-		memcpy(cube.vertices, vertices, sizeof(vertices));
+		cube->vertices = new Vertex[cube->numVertices];
+		memcpy(cube->vertices, vertices, sizeof(vertices));
 
-		cube.numIndices = INDICES_PER_CUBE;
+		cube->numIndices = INDICES_PER_CUBE;
 
 		GLushort indices[] =
 		{
@@ -229,10 +229,10 @@ namespace GameEngine
 				20, 22, 21, 20, 23, 22, // Bottom
 		};
 
-		cube.indices = new GLushort[cube.numIndices];
-		memcpy(cube.indices, indices, sizeof(indices));
+		cube->indices = new GLushort[cube->numIndices];
+		memcpy(cube->indices, indices, sizeof(indices));
 
-		cube.sendToBuffer();
+		cube->sendToBuffer();
 
 		return cube;
 	}

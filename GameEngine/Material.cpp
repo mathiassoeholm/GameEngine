@@ -14,7 +14,6 @@ namespace GameEngine
 	}
 
 	Material::Material(const std::string &vertexShaderSource, const std::string &fragmentShaderSource) :
-		references(0),
 		uniformLocationCache(std::unordered_map<std::string, GLint>()),
 		texture(nullptr)
 	{
@@ -80,23 +79,8 @@ namespace GameEngine
 
 	void Material::assignTexture(std::shared_ptr<Texture> texture)
 	{
+		std::cout << texture.use_count() << std::endl;
 		this->texture = texture;
-	}
-
-	void Material::incrementRefCount()
-	{
-		references++;
-	}
-
-	void Material::decrementRefCount()
-	{
-		references--;
-
-		if(references == 0)
-		{
-			glUseProgram(0);
-			glDeleteProgram(shaderProgramIndex);
-		}
 	}
 
 	GLint Material::getUniformLocation(const std::string &name)
@@ -115,5 +99,12 @@ namespace GameEngine
 		}
 
 		return location;
+	}
+
+	Material::~Material()
+	{
+		std::cout << "Mat delete" << std::endl;
+		std::cout << texture.use_count() << std::endl;
+		texture.reset();
 	}
 }

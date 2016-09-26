@@ -20,10 +20,10 @@ std::string readFile(const std::string& fileName)
 
 void TestScene::initialize()
 {
-	Material material(readFile("Shaders/TexturedShader.vert"), readFile("Shaders/TexturedShader.frag"));
-	material.assignTexture(std::make_shared<Texture>("Images/gaben.jpg"));
+	auto material = std::make_shared<Material>(readFile("Shaders/TexturedShader.vert"), readFile("Shaders/TexturedShader.frag"));
+	material->assignTexture(std::make_shared<Texture>("Images/gaben.jpg"));
 
-	Mesh cubeMesh = Primitives::createCube();
+	auto cubeMesh = Primitives::createCube();
 	auto cubeGO = instantiateGameObject();
 
 	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
@@ -33,6 +33,6 @@ void TestScene::initialize()
 	light->addComponent(new Light());
 
 	// Create secondary cube go, with same mesh
-	//cubeGO = instantiateGameObject();
-	//cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
+	cubeGO = instantiateGameObject();
+	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
 }
