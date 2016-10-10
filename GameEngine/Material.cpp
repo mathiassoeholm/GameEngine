@@ -103,8 +103,7 @@ namespace GameEngine
 
 	Material::~Material()
 	{
-		std::cout << "Mat delete" << std::endl;
-		std::cout << texture.use_count() << std::endl;
 		texture.reset();
+		glDeleteProgram(shaderProgramIndex);
 	}
 }
