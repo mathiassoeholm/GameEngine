@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component.h"
+#include "LightManager.h"
 
 namespace GameEngine
 {
@@ -11,6 +12,7 @@ namespace GameEngine
 	public:
 		Light(const glm::vec3& color);
 		Light();
+		~Light();
 	};
 }
 

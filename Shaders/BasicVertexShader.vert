@@ -5,7 +5,14 @@ layout(location = 1) in vec2 texcoord;
 layout(location = 2) in vec3 normal;
 layout(location = 3) in vec4 color;
 
+struct DirectionalLight
+{
+	vec3 color;
+	vec3 direction;
+};
+
 uniform mat4 mvpMatrix;
+uniform DirectionalLight[] dirLights;
 
 out vec4 tPos;
 out vec4 tNormal;

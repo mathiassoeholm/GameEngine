@@ -21,6 +21,12 @@ namespace GameEngine
 		GLuint fragmentIndex = createShader(fragmentShaderSource, GL_FRAGMENT_SHADER);
 
 		shaderProgramIndex = glCreateProgram();
+
+		if(shaderProgramIndex == 0)
+		{
+			std::cerr << "ERROR: Could not create shader program" << std::endl;
+		}
+
 		glAttachShader(shaderProgramIndex, vertexIndex);
 		glAttachShader(shaderProgramIndex, fragmentIndex);
 		glLinkProgram(shaderProgramIndex);
@@ -28,11 +34,12 @@ namespace GameEngine
 		int linkStatus = -1;
 		glGetProgramiv(shaderProgramIndex, GL_LINK_STATUS, &linkStatus);
 
-		if (linkStatus != GL_TRUE)
+		if (linkStatus == GL_FALSE)
 		{
 			std::cerr << "ERROR: Could not link shader GL index " << shaderProgramIndex << std::endl;
 		}
 
+		// We don't need these anymore
 		glDeleteShader(vertexIndex);
 		glDeleteShader(fragmentIndex);
 	}

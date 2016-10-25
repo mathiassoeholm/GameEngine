@@ -1,13 +1,14 @@
 #pragma once
 
-#include "Light.h"
-
 namespace GameEngine
 {
+	// Forward declaration, because of circular dependency
+	class Light;
+
 	class LightManager
 	{
 	private:
-		Light* lights;
+		std::vector<Light*> lights;
 		int lightCount;
 	public:
 		const static int MAX_LIGHT_COUNT = 10;
@@ -17,6 +18,9 @@ namespace GameEngine
 			static LightManager instance;
 			return instance;
 		}
+
+		void addLight(Light* light);
+		void removeLight(Light* light);
 	private:
 		LightManager();
 		LightManager(LightManager const&){} // Don't implement
