@@ -15,6 +15,3 @@ namespace GameEngine
 		~Light();
 	};
 }
-
-
-

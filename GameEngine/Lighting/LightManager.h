@@ -19,6 +19,11 @@ namespace GameEngine
 			return instance;
 		}
 
+        std::vector<Light*> getAllLights() const
+        {
+            return lights;
+        }
+
 		void addLight(Light* light);
 		void removeLight(Light* light);
 	private:

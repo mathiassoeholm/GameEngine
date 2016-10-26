@@ -5,7 +5,7 @@
 #include "../GameEngine/MeshRenderer.h"
 #include "../GameEngine/Lighting/Light.h"
 #include "CustomComponent.h"
-#include <iostream>
+#include "../GameEngine/Lighting/DirectionalLight.h"
 #include <fstream>
 #include <sstream>
 
@@ -29,8 +29,9 @@ void TestScene::initialize()
 	cubeGO->addComponent(new MeshRenderer(cubeMesh, material));
 	cubeGO->addComponent(new CustomComponent());
 
-	auto light = instantiateGameObject();
-	light->addComponent(new Light());
+	auto lightGo = instantiateGameObject();
+    auto dirLight = new DirectionalLight(glm::vec3(1,-0.5, 0), glm::vec3(0.5, 0.5, 0.5));
+    lightGo->addComponent(dirLight);
 
 	// Create secondary cube go, with same mesh
 	cubeGO = instantiateGameObject();
