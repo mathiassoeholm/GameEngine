@@ -26,16 +26,27 @@ namespace GameEngine
 		material->setUniform("mvpMatrix", proj * view * model);
 
 		auto lights = LightManager::getInstance().getAllLights();
+		int dirLightsCount = 0;
+
         for (int i = 0; i < lights.size(); ++i)
         {
             auto light = lights[i];
-            if (dynamic_cast<DirectionalLight*>(light))
+			auto dirLight = dynamic_cast<DirectionalLight*>(light);
+            if (dirLight)
             {
-                std::stringstream ss;
-                ss << "dirLights[" << i << "]";
-                material->setUniform(ss.str(), sizeof(DirectionalLight), reinterpret_cast<GLfloat*>(light));
+				std::stringstream colorName;
+				colorName << "dirLights[" << i << "].color";
+
+				std::stringstream dirName;
+				dirName << "dirLights[" << i << "].direction";
+
+                material->setUniform(colorName.str(), 1, reinterpret_cast<GLfloat*>(&light->color));
+                material->setUniform(dirName.str(), 1, reinterpret_cast<GLfloat*>(&dirLight->direction));
+				dirLightsCount++;
             }
         }
+
+		material->setUniform("dirLightsCount", dirLightsCount);
 
 		mesh->bind();
 		glDrawElements(GL_TRIANGLES, mesh->getNumIndices(), GL_UNSIGNED_SHORT, 0);

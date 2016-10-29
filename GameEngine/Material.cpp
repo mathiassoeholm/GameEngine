@@ -64,6 +64,16 @@ namespace GameEngine
 		return shaderIndex;
 	}
 
+	void Material::setUniform(const std::string &name, const GLint integer)
+	{
+		GLint location = getUniformLocation(name);
+
+		if(location != -1)
+		{
+			glUniform1i(location, integer);
+		}
+	}
+
 	void Material::setUniform(const std::string &name, const glm::mat4 &matrix)
 	{
 		GLint location = getUniformLocation(name);

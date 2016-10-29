@@ -7,11 +7,11 @@ namespace GameEngine
 {
 	class Light : public Component
 	{
-	private:
-		glm::vec3 color;
 	public:
+		glm::vec3 color;
 		Light(const glm::vec3& color);
 		Light();
+		glm::vec3 getColor() const;
 		~Light();
 	};
 }

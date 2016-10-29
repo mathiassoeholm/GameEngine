@@ -17,4 +17,9 @@ namespace GameEngine
 	{
 		LightManager::getInstance().removeLight(this);
 	}
+
+	glm::vec3 Light::getColor() const
+	{
+		return color;
+	}
 }

@@ -5,7 +5,15 @@ layout(location = 1) in vec2 texcoord;
 layout(location = 2) in vec3 normal;
 layout(location = 3) in vec4 color;
 
+struct DirectionalLight
+{
+	vec3 color;
+	vec3 direction;
+};
+
 uniform mat4 mvpMatrix;
+uniform DirectionalLight[10] dirLights;
+uniform int dirLightsCount;
 
 out vec4 tPos;
 out vec2 tTexcoord;
@@ -18,6 +26,12 @@ void main()
 	tTexcoord = texcoord;
 	tNormal = vec4(normal, 0.0);
 	tColor = color;
+
+	for(int i = 0; i < dirLightsCount; i++)
+	{
+		tColor = vec4(dirLights[i].color, tColor.a);
+		//tColor = vec4(1, 0, 0, 1);
+	}
 
 	gl_Position = tPos;
 }

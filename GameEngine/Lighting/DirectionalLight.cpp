@@ -7,4 +7,9 @@ namespace GameEngine
     {
 
     }
+
+	glm::vec3 DirectionalLight::getDirection() const
+	{
+		return direction;
+	}
 }
