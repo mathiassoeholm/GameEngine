@@ -6,10 +6,13 @@ namespace GameEngine
 {
 	LightManager::LightManager() :
 		lights(std::vector<Light*>()),
-		lightCount(0)
+		lightCount(0),
+		ambientColor(glm::vec3(0.5, 0.5, 0.5))
 	{
 
 	}
+
+
 
 	void LightManager::removeLight(Light *light)
 	{
@@ -26,5 +29,14 @@ namespace GameEngine
 
 		lights.push_back(light);
 	}
-}
 
+	glm::vec3 LightManager::getAmbientColor()
+	{
+		return ambientColor;
+	}
+
+	void LightManager::setAmbientColor(glm::vec3 color)
+	{
+		ambientColor = color;
+	}
+}

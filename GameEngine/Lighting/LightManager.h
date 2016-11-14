@@ -1,5 +1,7 @@
 #pragma once
 
+#include <glm/vec3.hpp>
+
 namespace GameEngine
 {
 	// Forward declaration, because of circular dependency
@@ -8,6 +10,7 @@ namespace GameEngine
 	class LightManager
 	{
 	private:
+		glm::vec3 ambientColor;
 		std::vector<Light*> lights;
 		int lightCount;
 	public:
@@ -26,6 +29,8 @@ namespace GameEngine
 
 		void addLight(Light* light);
 		void removeLight(Light* light);
+		glm::vec3 getAmbientColor();
+		void setAmbientColor(glm::vec3);
 	private:
 		LightManager();
 		LightManager(LightManager const&){} // Don't implement

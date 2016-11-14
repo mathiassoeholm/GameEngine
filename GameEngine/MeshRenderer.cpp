@@ -46,6 +46,8 @@ namespace GameEngine
             }
         }
 
+		auto ambientColor = LightManager::getInstance().getInstance().getAmbientColor();
+		material->setUniform("ambientColor", 1, reinterpret_cast<GLfloat*>(&ambientColor));
 		material->setUniform("dirLightsCount", dirLightsCount);
 
 		mesh->bind();
