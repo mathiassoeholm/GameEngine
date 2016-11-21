@@ -14,6 +14,7 @@ struct DirectionalLight
 uniform mat4 mvpMatrix;
 uniform DirectionalLight[] dirLights;
 uniform int dirLightsCount;
+uniform vec3 ambientColor;
 
 out vec4 tPos;
 out vec4 tNormal;
@@ -23,7 +24,7 @@ void main()
 {
 	tPos = mvpMatrix * vec4(pos, 1.0);
 	tNormal = vec4(normal, 0.0);
-	tColor = color;
+	tColor = color * vec4(ambientColor.r, ambientColor.g, ambientColor.b, 0);
 
 	for(int i = 0; i < dirLightsCount; i++)
 	{
