@@ -30,7 +30,7 @@ void TestScene::initialize()
 	cubeGO->addComponent(new CustomComponent());
 
 	auto lightGo = instantiateGameObject();
-    auto dirLight = new DirectionalLight(glm::vec3(1,-0.5, 0), glm::vec3(0.5, 0.5, 0.5));
+    auto dirLight = new DirectionalLight(glm::vec3(0,0, -1), glm::vec3(0.5, 0.5, 0.5));
     lightGo->addComponent(dirLight);
 
 	// Create secondary cube go, with same mesh

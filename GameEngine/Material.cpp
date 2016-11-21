@@ -84,6 +84,16 @@ namespace GameEngine
 		}
 	}
 
+	void Material::setUniform(const std::string &name, const glm::mat3 &matrix)
+	{
+		GLint location = getUniformLocation(name);
+
+		if(location != -1)
+		{
+			glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(matrix));
+		}
+	}
+
 	void Material::setUniform(const std::string &name, const GLint dataLength, const GLfloat* data)
 	{
 		GLint location = getUniformLocation(name);
