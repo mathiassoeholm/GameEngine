@@ -25,14 +25,9 @@ namespace GameEngine
 		material->setUniform("projMatrix", proj);
 		material->setUniform("mvpMatrix", proj * view * model);
 
-		glm::mat3 normalMatrix;
-		for (int c = 0; c < 3; ++c) {
-			for (int r = 0; r < 3; ++r) {
-				normalMatrix[c][r] = model[c][r];
-			}
-		}
-
-		material->setUniform("normalMatrix", glm::transpose(glm::inverse(normalMatrix)));
+		// TODO: I'm not at all sure if this is correct
+		glm::mat3 normalMatrix = glm::mat3(view * model);
+		material->setUniform("normalMatrix", glm::inverse(normalMatrix));
 
 		auto lights = LightManager::getInstance().getAllLights();
 		int dirLightsCount = 0;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 #include "Material.h"
 
 namespace GameEngine
@@ -59,6 +60,16 @@ namespace GameEngine
 		if (compileStatus != GL_TRUE)
 		{
 			std::cerr << "ERROR: GL shader index " << shaderIndex << " did not compile" << std::endl;
+
+			GLint maxLength = 0;
+			glGetShaderiv(shaderIndex, GL_INFO_LOG_LENGTH, &maxLength);
+
+			GLchar* log_string = new char[maxLength + 1];
+			glGetShaderInfoLog(shaderIndex, maxLength, 0, log_string);
+
+			std::cerr << log_string << std::endl;
+
+			delete log_string;
 		}
 
 		return shaderIndex;

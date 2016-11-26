@@ -126,7 +126,7 @@ namespace GameEngine
 			// Front
 			glm::vec3(-1.0f, 1.0f, -1.0f), // 4
 			glm::vec2(0.0f, 1.0f), // Tex coordinate
-			glm::vec3(0.0f, 1.0f, 1.0f), // Normal
+			glm::vec3(0.0f, 0.0f, 1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, 1.0f, -1.0f), // 5
 			glm::vec2(1.0f, 1.0f), // Tex coordinate
@@ -180,19 +180,19 @@ namespace GameEngine
 			// Back
 			glm::vec3(1.0f, 1.0f, 1.0f), // 16
 			glm::vec2(0.0f, 1.0f), // Tex coordinate
-			glm::vec3(0, 0, -0.1f), // Normal
+			glm::vec3(0, 0, -1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(-1.0f, 1.0f, 1.0f), // 17
 			glm::vec2(1.0f, 1.0f), // Tex coordinate
-			glm::vec3(0, 0, -0.1f), // Normal
+			glm::vec3(0, 0, -1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(-1.0f, -1.0f, 1.0f), // 18
 			glm::vec2(1.0f, 0.0f), // Tex coordinate
-			glm::vec3(0, 0, -0.1f), // Normal
+			glm::vec3(0, 0, -1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 			glm::vec3(1.0f, -1.0f, 1.0f), // 19
 			glm::vec2(0.0f, 0.0f), // Tex coordinate
-			glm::vec3(0, 0, -0.1f), // Normal
+			glm::vec3(0, 0, -1.0f), // Normal
 			glm::vec4(0, 0, 1.0f, 1.0f), // Color
 
 			// Bottom
